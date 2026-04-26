@@ -9,8 +9,11 @@ Team: 3 Developers
 
 import cv2
 import numpy as np
+import easyocr
+from PIL import Image, ImageDraw, ImageFont
 from flask import Flask, Response, render_template
 from ultralytics import YOLO
+from helmet_detector import HelmetDetector, draw_helmet_results
 
 app = Flask(__name__)
 
@@ -18,6 +21,34 @@ app = Flask(__name__)
 # Model Initialization
 # ---------------------------------------------------------------------------
 model = YOLO("yolov8n.pt")
+
+# Path to a YOLOv8 model trained to detect helmets (not included in COCO).
+# Download a custom model, e.g. from Roboflow Universe, and point this path
+# to the downloaded .pt file.  The detector is disabled gracefully if the
+# file is missing so the rest of the pipeline still runs.
+HELMET_MODEL_PATH = "helmet_model.pt"
+
+try:
+    _helmet_detector = HelmetDetector(HELMET_MODEL_PATH, helmet_class=0)
+except Exception as exc:
+    print(f"[helmet] model not loaded ({exc}); helmet detection disabled.")
+    _helmet_detector = None
+
+# License-plate detection model (custom YOLOv8, e.g. best.pt from Roboflow).
+PLATE_MODEL_PATH = "best.pt"
+
+try:
+    _plate_model = YOLO(PLATE_MODEL_PATH)
+except Exception as exc:
+    print(f"[plate] model not loaded ({exc}); plate detection disabled.")
+    _plate_model = None
+
+# EasyOCR reader — initialised once; downloads models (~300 MB) on first run.
+try:
+    _ocr_reader = easyocr.Reader(["en"], gpu=False, verbose=False)
+except Exception as exc:
+    print(f"[plate] EasyOCR not loaded ({exc}); OCR disabled.")
+    _ocr_reader = None
 
 # YOLO class IDs (COCO dataset)
 CLASS_PERSON     = 0
@@ -30,21 +61,21 @@ CLASS_CAR        = 2
 
 def detect_helmet(frame, persons):
     """
-    Detect whether riders are wearing helmets.
+    Detect whether each person is wearing a helmet.
 
     Args:
-        frame      (np.ndarray): Current video frame (BGR).
-        persons    (list[tuple]): Bounding boxes [(x1,y1,x2,y2), ...] of detected persons.
+        frame   (np.ndarray)  : Current video frame (BGR).
+        persons (list[tuple]) : Person bounding boxes [(x1,y1,x2,y2), ...].
 
     Returns:
-        bool: True if any person is detected without a helmet, False otherwise.
+        results       (list[dict]): Per-person dicts with keys
+                                    'id', 'box', 'has_helmet'.
+                                    Empty list when the model is unavailable.
+        any_violation (bool)      : True if at least one person has no helmet.
     """
-    # TODO (Developer 1): Implement helmet detection logic here.
-    # Suggested approach:
-    #   - Crop each person ROI from frame.
-    #   - Run a secondary classifier / YOLO model on the ROI.
-    #   - Return True if at least one person has no helmet.
-    return False
+    if _helmet_detector is None:
+        return [], False
+    return _helmet_detector.detect(frame, persons)
 
 
 # ---------------------------------------------------------------------------
@@ -59,16 +90,43 @@ def detect_number_plate(frame):
         frame (np.ndarray): Current video frame (BGR).
 
     Returns:
-        tuple:
-            plate_text (str | None): OCR-extracted plate text, or None if not found.
-            plate_box  (tuple | None): Bounding box (x1,y1,x2,y2) of the plate, or None.
+        plate_text (str | None): OCR-extracted plate text, or None if not found.
+        plate_box  (tuple | None): Bounding box (x1,y1,x2,y2) of the plate, or None.
     """
-    # TODO (Developer 1): Implement number plate detection + OCR here.
-    # Suggested approach:
-    #   - Use a plate-detection YOLO model or OpenCV contour methods.
-    #   - Run EasyOCR / pytesseract on the cropped plate ROI.
-    #   - Return the plate text and its bounding box.
-    return None, None
+    if _plate_model is None:
+        return None, None
+
+    # Step 1: Run plate detection model on the full frame
+    results = _plate_model(frame, verbose=False)[0]
+    if not results.boxes:
+        return None, None
+
+    # Step 2: Pick the single most-confident detection
+    best = max(results.boxes, key=lambda b: float(b.conf[0]))
+    if float(best.conf[0]) < 0.4:
+        return None, None
+
+    x1, y1, x2, y2 = map(int, best.xyxy[0])
+    plate_box = (x1, y1, x2, y2)
+
+    if _ocr_reader is None:
+        return None, plate_box
+
+    # Step 3: Crop the plate region from the frame
+    plate_crop = frame[y1:y2, x1:x2]
+    if plate_crop.size == 0:
+        return None, plate_box
+
+    # Step 4: Run EasyOCR on the cropped plate image
+    ocr_results = _ocr_reader.readtext(plate_crop)
+    if not ocr_results:
+        return None, plate_box
+
+    # Step 5: Return the text with the highest OCR confidence
+    best_ocr = max(ocr_results, key=lambda r: r[2])
+    plate_text = best_ocr[1].upper().strip()
+
+    return plate_text, plate_box
 
 
 # ---------------------------------------------------------------------------
@@ -164,37 +222,77 @@ def draw_boxes(frame, boxes, color, label=""):
                         cv2.FONT_HERSHEY_SIMPLEX, 0.55, color, 2)
 
 
+def _get_pil_font(size: int) -> ImageFont.FreeTypeFont:
+    """Return a TTF font that supports Unicode (₹, ❌). Falls back to default."""
+    candidates = [
+        "/System/Library/Fonts/Supplemental/Arial.ttf",   # macOS
+        "/System/Library/Fonts/Helvetica.ttc",             # macOS alt
+        "/Library/Fonts/Arial.ttf",                        # macOS user fonts
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",  # Linux
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+    ]
+    for path in candidates:
+        try:
+            return ImageFont.truetype(path, size)
+        except (IOError, OSError):
+            continue
+    return ImageFont.load_default()
+
+# Loaded once on first use to avoid repeated disk access
+_overlay_font: ImageFont.FreeTypeFont | None = None
+
+
 def draw_violation_overlay(frame, helmet_violation, triple_violation,
                            overspeed_violation, plate_text):
-    h, w = frame.shape[:2]
-    y_offset = 30
-    font      = cv2.FONT_HERSHEY_SIMPLEX
-    scale     = 0.75
-    thickness = 2
+    """
+    Draw a challan info box using PIL so Unicode characters (❌, ₹) render correctly.
+    Modifies *frame* in-place.
+    """
+    global _overlay_font
 
+    any_violation = helmet_violation or triple_violation or overspeed_violation
+    if not any_violation:
+        return
+
+    # Build lines: (text, RGB colour)
+    lines = []
     if helmet_violation:
-        cv2.putText(frame, "No Helmet X", (10, y_offset),
-                    font, scale, (0, 0, 255), thickness)
-        y_offset += 35
-
+        lines.append(("No Helmet ❌", (255, 80, 80)))      # ❌
     if triple_violation:
-        cv2.putText(frame, "Triple Riding !!!", (10, y_offset),
-                    font, scale, (0, 69, 255), thickness)
-        y_offset += 35
-
+        lines.append(("Triple Riding !!!", (255, 120, 0)))
     if overspeed_violation:
-        cv2.putText(frame, "Overspeed >>>", (10, y_offset),
-                    font, scale, (0, 165, 255), thickness)
-        y_offset += 35
+        lines.append(("Overspeed >>>", (255, 165, 0)))
 
-    if helmet_violation or triple_violation or overspeed_violation:
-        plate_display = plate_text if plate_text else "Detecting..."
-        cv2.putText(frame, f"Plate: {plate_display}", (10, y_offset),
-                    font, 0.65, (255, 255, 0), thickness)
-        y_offset += 30
-        fine = "Fine: Rs.1000" if (triple_violation or overspeed_violation) else "Fine: Rs.500"
-        cv2.putText(frame, fine, (10, y_offset),
-                    font, 0.65, (255, 255, 0), thickness)
+    plate_display = plate_text if plate_text else "Detecting..."
+    lines.append((f"Plate: {plate_display}", (255, 220, 0)))
+
+    fine_amt = "₹1000" if (triple_violation or overspeed_violation) else "₹500"  # ₹
+    lines.append((f"Fine: {fine_amt}", (255, 220, 0)))
+
+    # Lazy-load font
+    if _overlay_font is None:
+        _overlay_font = _get_pil_font(22)
+
+    padding, line_h = 10, 30
+    box_w = 280
+    box_h = len(lines) * line_h + padding * 2
+
+    # Convert BGR frame → PIL RGB
+    pil_img = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+    draw    = ImageDraw.Draw(pil_img)
+
+    # Dark background box
+    draw.rectangle([8, 8, 8 + box_w, 8 + box_h], fill=(15, 15, 15))
+
+    # Text lines
+    for i, (text, colour) in enumerate(lines):
+        draw.text(
+            (8 + padding, 8 + padding + i * line_h),
+            text, fill=colour, font=_overlay_font,
+        )
+
+    # Write result back into frame in-place
+    frame[:] = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
 
 
 # ---------------------------------------------------------------------------
@@ -212,7 +310,7 @@ def process_frame(frame):
     # --- Module Calls ---
 
     # Helmet Module (Dev 1)
-    helmet_violation = detect_helmet(frame, persons)
+    helmet_results, helmet_violation = detect_helmet(frame, persons)
 
     # Triple Riding Module (Dev 2)
     triple_violation = detect_triple_riding(frame, persons, motorcycles)
@@ -229,7 +327,12 @@ def process_frame(frame):
         plate_text, plate_box = detect_number_plate(frame)
 
     # --- Draw Bounding Boxes ---
-    draw_boxes(frame, persons,     color=(255, 200, 0),  label="Person")
+    # Person boxes: per-person Helmet / No Helmet label when detector is active,
+    # plain "Person" box otherwise.
+    if helmet_results:
+        draw_helmet_results(frame, helmet_results)
+    else:
+        draw_boxes(frame, persons, color=(255, 200, 0), label="Person")
     draw_boxes(frame, motorcycles, color=(0, 255, 100),  label="Motorcycle")
     draw_boxes(frame, cars,        color=(0, 180, 255),  label="Car")
     if plate_box:
@@ -299,4 +402,4 @@ def video():
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    app.run(host="0.0.0.0", port=8000, debug=False)
