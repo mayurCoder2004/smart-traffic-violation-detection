@@ -205,6 +205,49 @@
     <div class="stream-overlay" id="stream-overlay">LIVE</div>
   </div>
 
+  <!-- ── Live Detection Panel ── -->
+  <div id="detection-panel" style="
+    width:100%;max-width:860px;margin-top:16px;
+    background:#141414;border:1px solid #2a2a2a;border-radius:10px;
+    padding:16px 20px;">
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <span style="font-size:0.82rem;font-weight:600;color:#f0c040;letter-spacing:0.5px;">
+        LIVE DETECTION
+      </span>
+      <span id="det-pulse" style="
+        width:8px;height:8px;border-radius:50%;background:#555;
+        display:inline-block;transition:background 0.3s;">
+      </span>
+    </div>
+
+    <!-- Plate number -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:0.75rem;color:#666;width:110px;flex-shrink:0;">Number Plate</span>
+      <span id="det-plate" style="
+        font-family:monospace;font-size:1.1rem;font-weight:700;
+        letter-spacing:3px;color:#f0c040;
+        background:#1a1400;border:1px solid #3d3000;
+        border-radius:6px;padding:4px 14px;min-width:140px;text-align:center;">
+        —
+      </span>
+    </div>
+
+    <!-- Violation badges -->
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span style="font-size:0.75rem;color:#666;width:110px;flex-shrink:0;">Violations</span>
+      <div id="det-badges" style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span style="font-size:0.78rem;color:#555;font-style:italic;">None detected</span>
+      </div>
+    </div>
+
+    <!-- Fine amount -->
+    <div id="det-fine-row" style="display:none;margin-top:12px;border-top:1px solid #222;padding-top:12px;">
+      <span style="font-size:0.75rem;color:#666;width:110px;display:inline-block;">Estimated Fine</span>
+      <span id="det-fine" style="font-size:1rem;font-weight:700;color:#ff9800;">₹0</span>
+    </div>
+  </div>
+
   <!-- ── Legend ── -->
   <div class="legend">
     <div class="legend-item"><div class="dot" style="background:#ffc800;"></div> Person</div>
@@ -331,6 +374,71 @@
     fetch("/source_status")
       .then(r => r.json())
       .then(data => { sourceLabel.textContent = data.label; });
+
+    // ── Live detection polling ──────────────────────────────────────────────
+    const FINE_MAP    = { helmet: 500, triple: 1000, overspeed: 1000 };
+    const BADGE_STYLE = {
+      helmet:    "background:#3a0000;color:#ff5555;border:1px solid #7a0000",
+      triple:    "background:#3a1800;color:#ff8c00;border:1px solid #7a3800",
+      overspeed: "background:#2a2000;color:#f0c040;border:1px solid #6a5000",
+    };
+    const BADGE_LABEL = {
+      helmet:    "No Helmet",
+      triple:    "Triple Riding",
+      overspeed: "Overspeed",
+    };
+
+    const detPlate   = document.getElementById("det-plate");
+    const detBadges  = document.getElementById("det-badges");
+    const detPulse   = document.getElementById("det-pulse");
+    const detFineRow = document.getElementById("det-fine-row");
+    const detFine    = document.getElementById("det-fine");
+
+    let _lastTimestamp = 0;
+
+    function renderDetection(data) {
+      const hasViolation = data.violations_active && data.violations_active.length > 0;
+      const isNew        = data.timestamp > _lastTimestamp;
+
+      // Pulse indicator — green flash when new data arrives
+      detPulse.style.background = hasViolation ? "#ff4444" : (isNew ? "#44ff88" : "#555");
+      _lastTimestamp = data.timestamp;
+
+      // Plate number
+      detPlate.textContent = data.plate_number || "—";
+      detPlate.style.color  = data.plate_number ? "#f0c040" : "#444";
+
+      // Violation badges
+      if (hasViolation) {
+        detBadges.innerHTML = data.violations_active.map(v =>
+          `<span style="
+            font-size:0.78rem;font-weight:600;border-radius:5px;
+            padding:3px 10px;${BADGE_STYLE[v] || ''}">
+            ${BADGE_LABEL[v] || v}
+          </span>`
+        ).join("");
+
+        // Total fine
+        const total = data.violations_active.reduce((s, v) => s + (FINE_MAP[v] || 0), 0);
+        detFine.textContent = "₹" + total;
+        detFineRow.style.display = "block";
+      } else {
+        detBadges.innerHTML =
+          `<span style="font-size:0.78rem;color:#555;font-style:italic;">None detected</span>`;
+        detFineRow.style.display = "none";
+      }
+    }
+
+    function pollDetections() {
+      fetch("/detections")
+        .then(r => r.json())
+        .then(renderDetection)
+        .catch(() => { detPulse.style.background = "#333"; });   // grey = server unreachable
+    }
+
+    pollDetections();                        // immediate first call
+    setInterval(pollDetections, 1500);       // then every 1.5 seconds
+    // ── End detection polling ───────────────────────────────────────────────
   </script>
 
 </body>

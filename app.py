@@ -11,20 +11,52 @@ import os
 import re
 import time
 import math
+import queue
 import threading
 
 import cv2
 import numpy as np
 import easyocr
 from PIL import Image, ImageDraw, ImageFont
+from dotenv import load_dotenv
 
 from flask import Flask, Response, render_template, request, jsonify
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from ultralytics import YOLO
 
 from helmet_detector import HelmetDetector, draw_helmet_results
 
+load_dotenv()
+
 app = Flask(__name__)
+
+# ── CORS — applied unconditionally so /video, /detections etc always work ────
+# Must come BEFORE blueprint registration so Flask-CORS sees all routes.
+_CORS_ORIGINS = ["http://localhost:5173", "http://localhost:3000"]
+CORS(app, origins=_CORS_ORIGINS, supports_credentials=True,
+     allow_headers=["Content-Type", "Authorization"])
+
+# ── Database + Blueprint wiring ──────────────────────────────────────────────
+try:
+    from backend.config import Config
+    from backend.extensions import db
+    from backend.routes.users import users_bp
+    from backend.routes.violations import violations_bp
+    from backend.routes.payments import payments_bp
+
+    app.config.from_object(Config)
+    db.init_app(app)
+
+    app.register_blueprint(users_bp)
+    app.register_blueprint(violations_bp)
+    app.register_blueprint(payments_bp)
+
+    _DB_ENABLED = True
+    print("[DB] Backend modules loaded successfully.")
+except Exception as _db_err:
+    print(f"[DB] Backend modules not loaded ({_db_err}). Running without DB.")
+    _DB_ENABLED = False
 
 # ---------------------------------------------------------------------------
 # Upload Configuration
@@ -109,6 +141,56 @@ _RIDING_OVERLAP_THRESH = 0.15
 
 # Frame counter — incremented every process_frame call.
 _frame_count = 0
+
+# ── Async violation reporter ─────────────────────────────────────────────────
+# Violations detected by CV are queued here; a background thread writes to DB.
+_violation_q: queue.Queue = queue.Queue(maxsize=200)
+_plate_cooldowns: dict = {}          # (plate, vtype) -> monotonic timestamp
+VIOLATION_COOLDOWN_SECS = 10         # minimum seconds between same violation/plate
+_FINE_MAP = {"helmet": 500, "triple": 1000, "overspeed": 1000}
+
+
+def _queue_violation(plate_text: str, vtype: str):
+    """Non-blocking: add a violation to the queue if cooldown has elapsed."""
+    key = (plate_text, vtype)
+    now = time.monotonic()
+    if now - _plate_cooldowns.get(key, 0) >= VIOLATION_COOLDOWN_SECS:
+        _plate_cooldowns[key] = now
+        try:
+            _violation_q.put_nowait((plate_text, vtype))
+        except queue.Full:
+            pass
+
+
+def _violation_reporter_worker():
+    """Background daemon thread: drains the queue and writes to PostgreSQL."""
+    if not _DB_ENABLED:
+        return
+    with app.app_context():
+        from backend.models import User, Violation
+        from backend.extensions import db as _db
+        while True:
+            try:
+                plate, vtype = _violation_q.get(timeout=1)
+                user = User.query.filter_by(license_plate=plate).first()
+                v = Violation(
+                    user_id        = user.id if user else None,
+                    plate_number   = plate,
+                    violation_type = vtype,
+                    fine_amount    = _FINE_MAP.get(vtype, 500),
+                    status         = "PENDING",
+                )
+                _db.session.add(v)
+                _db.session.commit()
+                print(f"[DB] Violation saved: {vtype} | plate={plate}")
+            except queue.Empty:
+                continue
+            except Exception as exc:
+                print(f"[DB] Error saving violation: {exc}")
+                try:
+                    _db.session.rollback()
+                except Exception:
+                    pass
 
 
 def is_riding(person_box: tuple, motorcycle_boxes: list) -> bool:
@@ -290,6 +372,21 @@ _tracker = _MultiVehicleTracker()
 _latest_frame  = None
 _frame_lock    = threading.Lock()
 _worker_source = None           # sentinel: worker exits when this changes
+
+# ---------------------------------------------------------------------------
+# Shared Detection State  (process_frame writes, /detections reads)
+# ---------------------------------------------------------------------------
+# This is the missing link: detection results were only painted onto pixels
+# before; now they are also stored here so the frontend can fetch them as JSON.
+_latest_detection = {
+    "helmet_violation":   False,
+    "triple_violation":   False,
+    "overspeed_violation": False,
+    "plate_number":       None,
+    "violations_active":  [],      # list of active violation type strings
+    "timestamp":          0.0,
+}
+_detection_lock = threading.Lock()
 
 # ---------------------------------------------------------------------------
 # Helmet Module  (Dev 1)
@@ -766,6 +863,32 @@ def process_frame(frame):
     draw_violation_overlay(frame, helmet_violation, triple_violation,
                            overspeed_violation, overlay_plate)
 
+    # ── Publish detection state for /detections endpoint ─────────────────────
+    active = []
+    if helmet_violation:
+        active.append("helmet")
+    if triple_violation:
+        active.append("triple")
+    if overspeed_violation:
+        active.append("overspeed")
+
+    with _detection_lock:
+        _latest_detection["helmet_violation"]    = helmet_violation
+        _latest_detection["triple_violation"]    = triple_violation
+        _latest_detection["overspeed_violation"] = overspeed_violation
+        _latest_detection["plate_number"]        = overlay_plate
+        _latest_detection["violations_active"]   = active
+        _latest_detection["timestamp"]           = time.time()
+
+    # ── Queue detected violations for async DB recording ──────────────────────
+    if overlay_plate:
+        if helmet_violation:
+            _queue_violation(overlay_plate, "helmet")
+        if triple_violation:
+            _queue_violation(overlay_plate, "triple")
+        if overspeed_violation:
+            _queue_violation(overlay_plate, "overspeed")
+
     return frame
 
 
@@ -1011,10 +1134,45 @@ def source_status():
     return jsonify({"source": "file", "label": _uploaded_filename or "Uploaded Video"})
 
 
+@app.route("/detections")
+def detections():
+    """
+    Return the latest detection result as JSON.
+    The frontend polls this endpoint (every ~1.5 s) to render a live
+    violation panel alongside the MJPEG stream.
+
+    Response schema:
+    {
+        "helmet_violation":    bool,
+        "triple_violation":    bool,
+        "overspeed_violation": bool,
+        "plate_number":        str | null,
+        "violations_active":   list[str],   // e.g. ["helmet", "overspeed"]
+        "timestamp":           float        // unix epoch of last detection
+    }
+    """
+    with _detection_lock:
+        data = dict(_latest_detection)
+    return jsonify(data)
+
+
 # ---------------------------------------------------------------------------
 # Entry Point
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
+    # Initialise DB tables (no-op if they already exist)
+    if _DB_ENABLED:
+        with app.app_context():
+            try:
+                db.create_all()
+                print("[DB] Tables verified/created.")
+            except Exception as exc:
+                print(f"[DB] Could not create tables ({exc}). Is PostgreSQL running?")
+
+    # Start async violation reporter
+    _reporter = threading.Thread(target=_violation_reporter_worker, daemon=True)
+    _reporter.start()
+
     _start_capture(0)                               # start webcam worker on launch
     app.run(host="0.0.0.0", port=9000, debug=False, threaded=True)
