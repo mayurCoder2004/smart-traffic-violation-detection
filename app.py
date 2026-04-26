@@ -107,13 +107,8 @@ DETECTION_INTERVAL  = 0.25
 # for that person to be considered a rider.
 _RIDING_OVERLAP_THRESH = 0.15
 
-# Plate detection throttle: OCR runs at most once every N frames.
-_PLATE_REFRESH_INTERVAL = 10
-
-# Module-level state for plate caching and frame counting.
-_frame_count       = 0
-_cached_plate_text = None
-_cached_plate_box  = None
+# Frame counter — incremented every process_frame call.
+_frame_count = 0
 
 
 def is_riding(person_box: tuple, motorcycle_boxes: list) -> bool:
@@ -135,6 +130,73 @@ def is_riding(person_box: tuple, motorcycle_boxes: list) -> bool:
         if inter / person_area >= _RIDING_OVERLAP_THRESH:
             return True
     return False
+
+
+def find_motorcycle_for_rider(rider_box: tuple, motorcycles: list):
+    """
+    Return the motorcycle box that most overlaps rider_box, or None.
+    Used to spatially link a no-helmet rider back to their vehicle for
+    targeted plate detection.
+    """
+    px1, py1, px2, py2 = rider_box
+    best_box, best_inter = None, 0
+    for (mx1, my1, mx2, my2) in motorcycles:
+        ix1 = max(px1, mx1);  ix2 = min(px2, mx2)
+        iy1 = max(py1, my1);  iy2 = min(py2, my2)
+        if ix2 > ix1 and iy2 > iy1:
+            inter = (ix2 - ix1) * (iy2 - iy1)
+            if inter > best_inter:
+                best_inter = inter
+                best_box   = (mx1, my1, mx2, my2)
+    return best_box
+
+
+# ---------------------------------------------------------------------------
+# Per-Vehicle Plate Cache
+# ---------------------------------------------------------------------------
+
+class _VehiclePlateCache:
+    """
+    Caches plate detection results per vehicle position to avoid running
+    OCR on every frame for every violating vehicle.
+
+    Vehicles are identified by snapping their centroid to a coarse grid
+    (GRID px × GRID px cells), which tolerates small box jitter between
+    frames while treating spatially distinct vehicles as separate entries.
+    Entries older than MAX_AGE frames are re-queried automatically.
+    """
+
+    GRID    = 60   # pixel grid for centroid snapping
+    MAX_AGE = 10   # frames before re-running plate OCR for this position
+
+    def __init__(self):
+        # grid_key -> (last_frame_count, plate_text, plate_box)
+        self._data: dict = {}
+
+    def get_or_refresh(self, vehicle_box: tuple, frame, frame_count: int):
+        """
+        Return cached (plate_text, plate_box) for vehicle_box, refreshing
+        via detect_number_plate if the entry is absent or stale.
+        """
+        x1, y1, x2, y2 = vehicle_box
+        gkey = ((x1 + x2) // 2 // self.GRID,
+                (y1 + y2) // 2 // self.GRID)
+
+        entry = self._data.get(gkey)
+        if entry is not None:
+            last_fc, plate_text, plate_box = entry
+            if frame_count - last_fc < self.MAX_AGE:
+                return plate_text, plate_box
+
+        plate_text, plate_box = detect_number_plate(frame, region=vehicle_box)
+        self._data[gkey] = (frame_count, plate_text, plate_box)
+        return plate_text, plate_box
+
+    def clear(self):
+        self._data.clear()
+
+
+_plate_cache = _VehiclePlateCache()
 
 # ---------------------------------------------------------------------------
 # Overspeed Constants  (Dev 3)
@@ -250,18 +312,45 @@ def detect_helmet(frame, persons):
 # Plate Module  (Dev 1)
 # ---------------------------------------------------------------------------
 
-def detect_number_plate(frame):
+def detect_number_plate(frame, region=None):
     """
-    Detect and read the number plate from the frame.
+    Detect and read the number plate closest to *region*.
+
+    Args:
+        frame  (np.ndarray): Full BGR video frame.
+        region (tuple|None): (x1,y1,x2,y2) bounding box of the violating
+                             vehicle.  When given, the plate model searches
+                             only within that area (+ 20 % padding), which
+                             greatly reduces false positives from unrelated
+                             plates elsewhere in the frame.  When None the
+                             entire frame is searched (legacy behaviour).
 
     Returns:
-        plate_text (str | None): OCR-extracted plate text, or None if not found.
-        plate_box  (tuple | None): Bounding box (x1,y1,x2,y2), or None.
+        plate_text (str | None): OCR-extracted plate text, or None.
+        plate_box  (tuple | None): Bounding box in full-frame coordinates.
     """
     if _plate_model is None:
         return None, None
 
-    results = _plate_model(frame, verbose=False)[0]
+    fh, fw = frame.shape[:2]
+
+    if region is not None:
+        rx1, ry1, rx2, ry2 = region
+        # 20 % padding so the plate is not clipped at vehicle edges
+        pad_x = max(10, int((rx2 - rx1) * 0.20))
+        pad_y = max(10, int((ry2 - ry1) * 0.20))
+        rx1 = max(0,  rx1 - pad_x);  rx2 = min(fw, rx2 + pad_x)
+        ry1 = max(0,  ry1 - pad_y);  ry2 = min(fh, ry2 + pad_y)
+        search = frame[ry1:ry2, rx1:rx2]
+        offset = (rx1, ry1)
+    else:
+        search = frame
+        offset = (0, 0)
+
+    if search.size == 0:
+        return None, None
+
+    results = _plate_model(search, verbose=False)[0]
     if not results.boxes:
         return None, None
 
@@ -269,13 +358,16 @@ def detect_number_plate(frame):
     if float(best.conf[0]) < 0.4:
         return None, None
 
-    x1, y1, x2, y2 = map(int, best.xyxy[0])
-    plate_box = (x1, y1, x2, y2)
+    lx1, ly1, lx2, ly2 = map(int, best.xyxy[0])
+    ox, oy   = offset
+    plate_box = (lx1 + ox, ly1 + oy, lx2 + ox, ly2 + oy)
 
     if _ocr_reader is None:
         return None, plate_box
 
-    plate_crop = frame[y1:y2, x1:x2]
+    # Crop plate from the original full-resolution frame for best OCR quality
+    px1, py1, px2, py2 = plate_box
+    plate_crop = frame[py1:py2, px1:px2]
     if plate_crop.size == 0:
         return None, plate_box
 
@@ -322,18 +414,18 @@ def detect_triple_riding(frame, persons, motorcycles):
     a synthetic motorcycle box is derived from the person cluster.
 
     Returns:
-        bool: True if triple riding is detected on any motorcycle.
+        any_triple     (bool):        True if a violation was found.
+        violating_boxes (list[tuple]): Bounding boxes of motorcycles with
+                                       3+ riders — used for plate targeting.
     """
-    # Synthesize a motorcycle box from person cluster when none is detected
     effective_motos = list(motorcycles)
     if not effective_motos and len(persons) >= TRIPLE_THRESHOLD:
-        sx1 = min(p[0] for p in persons)
-        sy1 = min(p[1] for p in persons)
-        sx2 = max(p[2] for p in persons)
-        sy2 = max(p[3] for p in persons)
+        sx1 = min(p[0] for p in persons);  sx2 = max(p[2] for p in persons)
+        sy1 = min(p[1] for p in persons);  sy2 = max(p[3] for p in persons)
         effective_motos = [(sx1, sy1, sx2, sy2)]
 
-    any_triple = False
+    any_triple      = False
+    violating_boxes = []
 
     for (mx1, my1, mx2, my2) in effective_motos:
         rider_count = sum(
@@ -344,6 +436,7 @@ def detect_triple_riding(frame, persons, motorcycles):
 
         if triple:
             any_triple = True
+            violating_boxes.append((mx1, my1, mx2, my2))
             cv2.rectangle(frame, (mx1, my1), (mx2, my2), COLOR_MOTO_ALERT, 3)
             cv2.putText(frame, "Triple Riding Detected!",
                         (mx1, my1 - 28), cv2.FONT_HERSHEY_SIMPLEX, 0.65, COLOR_MOTO_ALERT, 2)
@@ -361,7 +454,7 @@ def detect_triple_riding(frame, persons, motorcycles):
         cv2.putText(frame, "Fine: Rs.1000", (8, 50),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.62, (0, 255, 255), 2)
 
-    return any_triple
+    return any_triple, violating_boxes
 
 
 # ---------------------------------------------------------------------------
@@ -375,7 +468,9 @@ def detect_overspeed(frame, vehicles):
     Side-effects: draws trip lines and per-vehicle speed labels onto frame.
 
     Returns:
-        bool: True if ANY tracked vehicle exceeded OVERSPEED_LIMIT_KMPH.
+        any_overspeed   (bool):        True if ANY vehicle exceeded the limit.
+        violating_boxes (list[tuple]): Bounding boxes of currently overspeeding
+                                       vehicles — used for plate targeting.
     """
     w = frame.shape[1]
 
@@ -386,8 +481,9 @@ def detect_overspeed(frame, vehicles):
     cv2.putText(frame, "LINE 2", (10, OVERSPEED_LINE2_Y - 8),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 200, 0), 2)
 
-    matched       = _tracker.update(vehicles)
-    any_overspeed = False
+    matched         = _tracker.update(vehicles)
+    any_overspeed   = False
+    violating_boxes = []
 
     for box, track in matched:
         x1, y1, x2, y2 = box
@@ -411,6 +507,7 @@ def detect_overspeed(frame, vehicles):
 
         if track.overspeeding:
             any_overspeed = True
+            violating_boxes.append(box)
 
         if track.speed_kmph is not None:
             color = (0, 0, 255) if track.overspeeding else (0, 220, 0)
@@ -421,7 +518,7 @@ def detect_overspeed(frame, vehicles):
             cv2.putText(frame, f"T{track.id}: {elapsed:.1f}s",
                         (x1, y2 + 18), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 165, 0), 2)
 
-    return any_overspeed
+    return any_overspeed, violating_boxes
 
 
 # ---------------------------------------------------------------------------
@@ -544,6 +641,45 @@ def draw_violation_overlay(frame, helmet_violation, triple_violation,
 
 
 # ---------------------------------------------------------------------------
+# Unified Violation Handler
+# ---------------------------------------------------------------------------
+
+def process_violation(frame, vehicle_box: tuple, frame_count: int):
+    """
+    Detect, cache, and annotate the number plate for a single violating vehicle.
+
+    This is the single entry-point for all plate-detection work regardless of
+    violation type (helmet, triple riding, overspeed).  It delegates caching
+    and throttling to _VehiclePlateCache so each vehicle position is only
+    re-queried every MAX_AGE frames, even when multiple violation types fire
+    simultaneously on the same vehicle.
+
+    Args:
+        frame       : BGR numpy array (modified in-place with plate annotations).
+        vehicle_box : (x1,y1,x2,y2) bounding box of the violating vehicle.
+        frame_count : Current global frame counter (used for cache expiry).
+
+    Returns:
+        plate_text (str | None): OCR result for the caller to include in the
+                                 summary overlay, or None if not detected.
+    """
+    plate_text, plate_box = _plate_cache.get_or_refresh(
+        vehicle_box, frame, frame_count
+    )
+
+    if plate_box:
+        px1, py1, px2, py2 = plate_box
+        cv2.rectangle(frame, (px1, py1), (px2, py2), (0, 255, 255), 2)
+        cv2.putText(frame, "Plate", (px1, py1 - 6),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 255, 255), 2)
+        if plate_text:
+            cv2.putText(frame, plate_text, (px1, py2 + 18),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 255), 2)
+
+    return plate_text
+
+
+# ---------------------------------------------------------------------------
 # Main Frame-Processing Pipeline  (all three detections in one pass)
 # ---------------------------------------------------------------------------
 
@@ -557,49 +693,65 @@ def resize_for_processing(frame, target_width=PROCESS_WIDTH):
 
 def process_frame(frame):
     """
-    Full detection pipeline:
+    Full detection pipeline — all three violation types in one pass.
+
       Dev 1 — Helmet detection + Number plate OCR
       Dev 2 — Triple riding detection
       Dev 3 — Overspeed detection
 
+    Number plate detection is triggered by ANY violation, always targeted at
+    the specific violating vehicle's bounding box via process_violation().
     Modifies frame in-place with annotations and returns it.
     """
-    global _frame_count, _cached_plate_text, _cached_plate_box
+    global _frame_count
     _frame_count += 1
 
-    # --- YOLO Detection (persons, motorcycles, cars) ---
+    # ── YOLO: persons, motorcycles, cars ─────────────────────────────────────
     persons, motorcycles, cars = run_yolo_detection(frame)
-    vehicles = motorcycles + cars
-
-    # --- Filter: only persons overlapping a motorcycle are checked for helmets ---
+    vehicles   = motorcycles + cars
     riders     = [p for p in persons if is_riding(p, motorcycles)]
-    non_riders = [p for p in persons if not is_riding(p, motorcycles)]
+    non_riders = [p for p in persons if p not in riders]
 
-    # --- Dev 1: Helmet detection (riders only) ---
+    # ── Dev 1: Helmet detection (riders only) ────────────────────────────────
     helmet_results, helmet_violation = detect_helmet(frame, riders)
 
-    # --- Dev 2: Triple riding detection ---
-    triple_violation = detect_triple_riding(frame, persons, motorcycles)
+    # ── Dev 2: Triple riding detection ───────────────────────────────────────
+    triple_violation, triple_boxes = detect_triple_riding(frame, persons, motorcycles)
 
-    # --- Dev 3: Overspeed detection ---
-    overspeed_violation = detect_overspeed(frame, vehicles)
+    # ── Dev 3: Overspeed detection ───────────────────────────────────────────
+    overspeed_violation, speed_boxes = detect_overspeed(frame, vehicles)
 
-    # --- Unified violation flag ---
-    violation = helmet_violation or triple_violation or overspeed_violation
+    # ── Collect (vehicle_box, label) for every active violation ──────────────
+    # Each entry will be processed by process_violation() below.
+    plate_targets = []
 
-    # --- Dev 1: Plate detection (only when there is a violation, throttled) ---
-    if violation:
-        if _frame_count % _PLATE_REFRESH_INTERVAL == 0:
-            _cached_plate_text, _cached_plate_box = detect_number_plate(frame)
-        plate_text = _cached_plate_text
-        plate_box  = _cached_plate_box
-    else:
-        _cached_plate_text = None
-        _cached_plate_box  = None
-        plate_text = None
-        plate_box  = None
+    # Helmet — map each no-helmet rider back to their motorcycle
+    if helmet_violation:
+        for r in helmet_results:
+            if not r["has_helmet"]:
+                moto = find_motorcycle_for_rider(r["box"], motorcycles)
+                if moto:
+                    plate_targets.append(moto)
 
-    # --- Draw bounding boxes ---
+    # Triple riding — motorcycle boxes already returned by detector
+    plate_targets.extend(triple_boxes)
+
+    # Overspeed — vehicle boxes already returned by detector
+    plate_targets.extend(speed_boxes)
+
+    # ── Plate detection: one call per unique vehicle position, all violations ─
+    # process_violation deduplicates via _VehiclePlateCache, so overlapping
+    # violations on the same vehicle never trigger redundant OCR inference.
+    plate_texts = []
+    for vbox in plate_targets:
+        text = process_violation(frame, vbox, _frame_count)
+        if text:
+            plate_texts.append(text)
+
+    # First detected plate is shown in the challan overlay.
+    overlay_plate = plate_texts[0] if plate_texts else None
+
+    # ── Draw bounding boxes ───────────────────────────────────────────────────
     draw_boxes(frame, non_riders, color=COLOR_PERSON, label="Person")
 
     if helmet_results:
@@ -607,20 +759,12 @@ def process_frame(frame):
     else:
         draw_boxes(frame, riders, color=COLOR_PERSON, label="Rider")
 
-    # Motorcycles are drawn by detect_triple_riding; draw cars separately.
+    # Motorcycles drawn by detect_triple_riding; draw cars separately.
     draw_boxes(frame, cars, color=(0, 180, 255), label="Car")
 
-    if plate_box:
-        draw_boxes(frame, [plate_box], color=(0, 255, 255), label="Plate")
-        if plate_text:
-            x1, y1, _, _ = plate_box
-            cv2.putText(frame, f"Plate: {plate_text}",
-                        (x1, max(0, y1 - 10)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
-
-    # --- Violation overlay (challan box) ---
+    # ── Violation overlay (challan summary box) ───────────────────────────────
     draw_violation_overlay(frame, helmet_violation, triple_violation,
-                           overspeed_violation, plate_text)
+                           overspeed_violation, overlay_plate)
 
     return frame
 
@@ -675,6 +819,7 @@ def _start_capture(source):
     global _worker_source, _latest_frame
 
     _worker_source = source
+    _plate_cache.clear()        # discard stale plates from the previous source
     with _frame_lock:
         _latest_frame = None
 
