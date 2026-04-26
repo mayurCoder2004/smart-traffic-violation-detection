@@ -1,8 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ── Scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #f0c040; }
+
+/* ── Base ──────────────────────────────────────── */
 body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  background-color: #0d0d0d;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #050508;
+  color: #f0f0f0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* ── Animated grid background ──────────────────── */
+.bg-grid {
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(240,192,64,0.07) 0%, transparent 65%),
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 100% 100%, 44px 44px, 44px 44px;
+}
+
+/* ── Glassmorphism card ────────────────────────── */
+.glass {
+  background: rgba(12, 12, 18, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+/* ── Glow shadows ──────────────────────────────── */
+.glow-yellow { box-shadow: 0 0 28px rgba(240,192,64,0.28), 0 8px 40px rgba(0,0,0,0.55); }
+.glow-red    { box-shadow: 0 0 22px rgba(239,68,68,0.28); }
+.glow-green  { box-shadow: 0 0 22px rgba(34,197,94,0.28); }
+.glow-orange { box-shadow: 0 0 22px rgba(249,115,22,0.28); }
+
+/* ── Plate font ────────────────────────────────── */
+.font-plate {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+}
+
+/* ── Scan line animation ───────────────────────── */
+.scan-container { position: relative; overflow: hidden; }
+.scan-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(240,192,64,0.6), transparent);
+  animation: scan 2.4s linear infinite;
+  pointer-events: none;
+}
+
+/* ── Corner markers (cyberpunk UI) ─────────────── */
+.corner-mark {
+  position: absolute;
+  width: 14px; height: 14px;
+  border-color: rgba(240,192,64,0.5);
+  border-style: solid;
+}
+.corner-mark.tl { top: 8px;  left: 8px;  border-width: 2px 0 0 2px; }
+.corner-mark.tr { top: 8px;  right: 8px; border-width: 2px 2px 0 0; }
+.corner-mark.bl { bottom: 8px; left: 8px;  border-width: 0 0 2px 2px; }
+.corner-mark.br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+/* ── Table row hover ───────────────────────────── */
+.table-row-hover:hover { background: rgba(255,255,255,0.025); }

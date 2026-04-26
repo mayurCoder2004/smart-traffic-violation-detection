@@ -1,19 +1,25 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Login from './components/Login'
 import UserDashboard from './components/UserDashboard'
 import PoliceDashboard from './components/PoliceDashboard'
 
 export default function App() {
+  const location = useLocation()
+
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-gray-100">
+    <div className="min-h-screen bg-grid text-gray-100">
       <Navbar />
-      <Routes>
-        <Route path="/"        element={<Navigate to="/login" replace />} />
-        <Route path="/login"   element={<Login />} />
-        <Route path="/dashboard" element={<UserDashboard />} />
-        <Route path="/police"  element={<PoliceDashboard />} />
-      </Routes>
+      {/* AnimatePresence enables exit animations when routes change */}
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/"          element={<Navigate to="/login" replace />} />
+          <Route path="/login"     element={<Login />} />
+          <Route path="/dashboard" element={<UserDashboard />} />
+          <Route path="/police"    element={<PoliceDashboard />} />
+        </Routes>
+      </AnimatePresence>
     </div>
   )
 }
