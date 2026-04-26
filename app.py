@@ -7,6 +7,7 @@ Team: 3 Developers
 - Developer 3: Overspeed Detection
 """
 
+import time
 import cv2
 import numpy as np
 from flask import Flask, Response, render_template
@@ -23,6 +24,37 @@ model = YOLO("yolov8n.pt")
 CLASS_PERSON     = 0
 CLASS_MOTORCYCLE = 3
 CLASS_CAR        = 2
+
+# ---------------------------------------------------------------------------
+# Overspeed Constants (Dev 3)
+# ---------------------------------------------------------------------------
+OVERSPEED_LINE1_Y      = 160    # upper trip line y-coordinate
+OVERSPEED_LINE2_Y      = 420    # lower trip line y-coordinate
+OVERSPEED_REAL_DIST    = 10.0   # real-world distance between lines (metres)
+OVERSPEED_LIMIT_KMPH   = 40.0   # speed threshold in km/h
+OVERSPEED_MISSING_MAX  = 15     # frames before state auto-resets
+OVERSPEED_MAX_JUMP     = 150    # max centroid pixel shift still considered same vehicle
+
+
+class _SpeedState:
+    """Persistent single-vehicle tracking + timing state for the overspeed module."""
+
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.locked_on     = False  # True once a vehicle is locked
+        self.last_cx       = None   # centroid x from previous frame
+        self.last_cy       = None   # centroid y from previous frame
+        self.start_time    = None
+        self.crossed_line1 = False
+        self.crossed_line2 = False
+        self.speed_kmph    = None
+        self.overspeeding  = False
+        self.missing_count = 0
+
+
+_speed_state = _SpeedState()
 
 # ---------------------------------------------------------------------------
 # Helmet Module (Dev 1)
@@ -100,21 +132,112 @@ def detect_triple_riding(frame, persons, motorcycles):
 
 def detect_overspeed(frame, vehicles):
     """
-    Detect vehicles exceeding the speed threshold.
+    Detect a single vehicle exceeding OVERSPEED_LIMIT_KMPH using two trip lines.
+
+    Single-vehicle guarantee
+    ------------------------
+    The function locks onto the first vehicle it sees and tracks only that
+    vehicle across frames using nearest-centroid matching.  Other vehicles
+    detected in the same frame are completely ignored until the current
+    measurement cycle ends and the state resets.
+
+    Side-effects: draws trip lines and a speed HUD directly onto `frame`.
 
     Args:
         frame    (np.ndarray): Current video frame (BGR).
-        vehicles (list[tuple]): Bounding boxes of detected vehicles (motorcycles + cars).
+        vehicles (list[tuple]): Bounding boxes [(x1,y1,x2,y2), ...].
 
     Returns:
-        bool: True if any vehicle is over the speed limit, False otherwise.
+        bool: True if the tracked vehicle exceeded the speed limit.
     """
-    # TODO (Developer 3): Implement overspeed detection logic here.
-    # Suggested approach:
-    #   - Track vehicle centroids across frames (e.g., using a simple centroid tracker).
-    #   - Estimate pixel displacement per frame and convert to km/h using a known scale factor.
-    #   - Return True if any vehicle's estimated speed exceeds the threshold.
-    return False
+    import math
+    state = _speed_state
+    w     = frame.shape[1]
+
+    # ── Trip lines (always drawn) ──────────────────────────────────────────────
+    cv2.line(frame, (0, OVERSPEED_LINE1_Y), (w, OVERSPEED_LINE1_Y), (0, 200, 255), 2)
+    cv2.putText(frame, "LINE 1", (10, OVERSPEED_LINE1_Y - 8),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 200, 255), 2)
+    cv2.line(frame, (0, OVERSPEED_LINE2_Y), (w, OVERSPEED_LINE2_Y), (255, 200, 0), 2)
+    cv2.putText(frame, "LINE 2", (10, OVERSPEED_LINE2_Y - 8),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 200, 0), 2)
+
+    # ── Find the tracked vehicle from the bounding-box list ───────────────────
+    tracked_box = None
+
+    if vehicles:
+        if not state.locked_on:
+            # IDLE → lock onto whichever vehicle appears first
+            tracked_box     = vehicles[0]
+            x1, y1, x2, y2 = tracked_box
+            state.locked_on = True
+            state.last_cx   = (x1 + x2) // 2
+            state.last_cy   = (y1 + y2) // 2
+        else:
+            # Already locked — find the box closest to last known centroid
+            best_box  = None
+            best_dist = float("inf")
+            for box in vehicles:
+                x1, y1, x2, y2 = box
+                cx = (x1 + x2) // 2
+                cy = (y1 + y2) // 2
+                d  = math.hypot(cx - state.last_cx, cy - state.last_cy)
+                if d < best_dist:
+                    best_dist = d
+                    best_box  = box
+
+            # Accept only if it didn't teleport (different vehicle)
+            if best_dist <= OVERSPEED_MAX_JUMP:
+                tracked_box = best_box
+
+    # ── Handle tracking result ─────────────────────────────────────────────────
+    if tracked_box is None:
+        state.missing_count += 1
+        if state.missing_count >= OVERSPEED_MISSING_MAX:
+            if state.locked_on:
+                print("[Overspeed] Vehicle lost — state reset.")
+            state.reset()
+        return state.overspeeding
+
+    # Vehicle found — update centroid and reset missing counter
+    state.missing_count = 0
+    x1, y1, x2, y2     = tracked_box
+    cx                  = (x1 + x2) // 2
+    cy                  = (y1 + y2) // 2
+    state.last_cx       = cx
+    state.last_cy       = cy
+
+    # Centroid marker
+    cv2.circle(frame, (cx, cy), 5, (0, 255, 255), -1)
+
+    # ── Timing (frozen once LINE2 is crossed) ──────────────────────────────────
+    if not state.crossed_line2:
+
+        if not state.crossed_line1 and cy >= OVERSPEED_LINE1_Y:
+            state.start_time    = time.time()
+            state.crossed_line1 = True
+            print("[Overspeed] Started timing.")
+
+        elif state.crossed_line1 and cy >= OVERSPEED_LINE2_Y:
+            elapsed             = time.time() - state.start_time
+            speed_mps           = OVERSPEED_REAL_DIST / elapsed
+            state.speed_kmph    = round(speed_mps * 3.6, 2)
+            state.overspeeding  = state.speed_kmph > OVERSPEED_LIMIT_KMPH
+            state.crossed_line2 = True
+            print(f"[Overspeed] {state.speed_kmph} km/h — "
+                  f"{'OVERSPEEDING' if state.overspeeding else 'OK'}")
+
+    # ── Per-vehicle speed label ────────────────────────────────────────────────
+    if state.speed_kmph is not None:
+        color = (0, 0, 255) if state.overspeeding else (0, 220, 0)
+        cv2.putText(frame, f"{state.speed_kmph:.1f} km/h",
+                    (x1, y2 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.65, color, 2)
+    elif state.crossed_line1:
+        elapsed = time.time() - state.start_time
+        cv2.putText(frame, f"Timing {elapsed:.1f}s",
+                    (x1, y2 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 165, 0), 2)
+
+    return state.overspeeding
 
 
 # ---------------------------------------------------------------------------
