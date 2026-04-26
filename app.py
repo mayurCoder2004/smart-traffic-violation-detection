@@ -9,6 +9,7 @@ Team: 3 Developers
 
 import os
 import time
+import math
 import threading
 import cv2
 import numpy as np
@@ -56,38 +57,89 @@ OVERSPEED_MISSING_MAX  = 30     # frames before state auto-resets (higher = more
 OVERSPEED_MAX_JUMP     = 220    # max centroid pixel shift still considered same vehicle
 
 
-class _SpeedState:
-    """Persistent single-vehicle tracking + timing state for the overspeed module."""
+class _VehicleTrack:
+    """Per-vehicle timing state — one instance per tracked vehicle."""
 
-    def __init__(self):
-        self.reset()
-
-    def reset(self):
-        """Full reset — clears timing and tracking completely."""
-        self.locked_on     = False
-        self.last_cx       = None
-        self.last_cy       = None
+    def __init__(self, tid, cx, cy):
+        self.id            = tid
+        self.last_cx       = cx
+        self.last_cy       = cy
+        self.missing       = 0
         self.start_time    = None
         self.crossed_line1 = False
         self.crossed_line2 = False
         self.speed_kmph    = None
         self.overspeeding  = False
-        self.missing_count = 0
 
-    def soft_reset(self):
+
+class _MultiVehicleTracker:
+    """
+    Centroid-based multi-vehicle tracker.
+    Each detected vehicle gets its own _VehicleTrack with an independent timer.
+    """
+
+    def __init__(self):
+        self.tracks   = {}   # track_id -> _VehicleTrack
+        self._next_id = 0
+
+    def reset(self):
+        self.tracks   = {}
+        self._next_id = 0
+
+    def update(self, boxes):
         """
-        Tracking lost mid-measurement — unlock the vehicle so we can re-lock
-        onto it when it reappears, but keep start_time and crossed_line1 alive.
-        The timer keeps running across the gap.
+        Match boxes to existing tracks by nearest centroid.
+        Create new tracks for unmatched boxes.
+        Evict tracks that have been missing too long.
+
+        Args:
+            boxes: [(x1,y1,x2,y2), ...]
+
+        Returns:
+            [(box, track), ...] for every currently active detection.
         """
-        self.locked_on     = False
-        self.last_cx       = None
-        self.last_cy       = None
-        self.missing_count = 0
-        # start_time, crossed_line1, crossed_line2, speed_kmph preserved
+        centroids    = [((x1+x2)//2, (y1+y2)//2) for x1,y1,x2,y2 in boxes]
+        box_to_track = {}
+        used_boxes   = set()
+
+        # ── Match existing tracks to nearest unmatched detection ──────────────
+        for tid in list(self.tracks):
+            track = self.tracks.get(tid)
+            if track is None:
+                continue
+
+            best_i, best_d = -1, float("inf")
+            for i, (cx, cy) in enumerate(centroids):
+                if i in used_boxes:
+                    continue
+                d = math.hypot(cx - track.last_cx, cy - track.last_cy)
+                if d < best_d:
+                    best_d, best_i = d, i
+
+            if best_i >= 0 and best_d <= OVERSPEED_MAX_JUMP:
+                track.last_cx = centroids[best_i][0]
+                track.last_cy = centroids[best_i][1]
+                track.missing = 0
+                used_boxes.add(best_i)
+                box_to_track[best_i] = track
+            else:
+                track.missing += 1
+                if track.missing > OVERSPEED_MISSING_MAX:
+                    del self.tracks[tid]
+
+        # ── Create new tracks for unmatched detections ────────────────────────
+        for i, (cx, cy) in enumerate(centroids):
+            if i not in used_boxes:
+                tid   = self._next_id
+                self._next_id += 1
+                track = _VehicleTrack(tid, cx, cy)
+                self.tracks[tid] = track
+                box_to_track[i]  = track
+
+        return [(boxes[i], track) for i, track in sorted(box_to_track.items())]
 
 
-_speed_state = _SpeedState()
+_tracker = _MultiVehicleTracker()
 
 # ---------------------------------------------------------------------------
 # Shared Frame Buffer (background capture thread writes, Flask thread reads)
@@ -172,27 +224,24 @@ def detect_triple_riding(frame, persons, motorcycles):
 
 def detect_overspeed(frame, vehicles):
     """
-    Detect a single vehicle exceeding OVERSPEED_LIMIT_KMPH using two trip lines.
+    Detect ALL visible vehicles exceeding OVERSPEED_LIMIT_KMPH using two trip lines.
 
-    Single-vehicle guarantee
-    ------------------------
-    The function locks onto the first vehicle it sees and tracks only that
-    vehicle across frames using nearest-centroid matching.  Other vehicles
-    detected in the same frame are completely ignored until the current
-    measurement cycle ends and the state resets.
+    Multi-vehicle tracking
+    ----------------------
+    Every detected vehicle gets its own independent timer via _MultiVehicleTracker.
+    Nearest-centroid matching associates each box to its track across frames.
+    Speed is computed per-vehicle when its centroid crosses LINE2.
 
-    Side-effects: draws trip lines and a speed HUD directly onto `frame`.
+    Side-effects: draws trip lines and per-vehicle speed labels onto `frame`.
 
     Args:
         frame    (np.ndarray): Current video frame (BGR).
         vehicles (list[tuple]): Bounding boxes [(x1,y1,x2,y2), ...].
 
     Returns:
-        bool: True if the tracked vehicle exceeded the speed limit.
+        bool: True if ANY tracked vehicle exceeded OVERSPEED_LIMIT_KMPH.
     """
-    import math
-    state = _speed_state
-    w     = frame.shape[1]
+    w = frame.shape[1]
 
     # ── Trip lines (always drawn) ──────────────────────────────────────────────
     cv2.line(frame, (0, OVERSPEED_LINE1_Y), (w, OVERSPEED_LINE1_Y), (0, 200, 255), 2)
@@ -202,88 +251,46 @@ def detect_overspeed(frame, vehicles):
     cv2.putText(frame, "LINE 2", (10, OVERSPEED_LINE2_Y - 8),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 200, 0), 2)
 
-    # ── Find the tracked vehicle from the bounding-box list ───────────────────
-    tracked_box = None
+    # ── Update multi-vehicle tracker ──────────────────────────────────────────
+    matched      = _tracker.update(vehicles)
+    any_overspeed = False
 
-    if vehicles:
-        if not state.locked_on:
-            # IDLE → lock onto whichever vehicle appears first
-            tracked_box     = vehicles[0]
-            x1, y1, x2, y2 = tracked_box
-            state.locked_on = True
-            state.last_cx   = (x1 + x2) // 2
-            state.last_cy   = (y1 + y2) // 2
-        else:
-            # Already locked — find the box closest to last known centroid
-            best_box  = None
-            best_dist = float("inf")
-            for box in vehicles:
-                x1, y1, x2, y2 = box
-                cx = (x1 + x2) // 2
-                cy = (y1 + y2) // 2
-                d  = math.hypot(cx - state.last_cx, cy - state.last_cy)
-                if d < best_dist:
-                    best_dist = d
-                    best_box  = box
+    for box, track in matched:
+        x1, y1, x2, y2 = box
+        cx, cy          = track.last_cx, track.last_cy
 
-            # Accept only if it didn't teleport (different vehicle)
-            if best_dist <= OVERSPEED_MAX_JUMP:
-                tracked_box = best_box
+        # Centroid dot
+        cv2.circle(frame, (cx, cy), 5, (0, 255, 255), -1)
 
-    # ── Handle tracking result ─────────────────────────────────────────────────
-    if tracked_box is None:
-        state.missing_count += 1
-        if state.missing_count >= OVERSPEED_MISSING_MAX:
-            if state.crossed_line1 and not state.crossed_line2:
-                # Timer is running — soft reset: keep start_time, just re-lock
-                state.soft_reset()
-                print("[Overspeed] Vehicle lost mid-measurement — timer preserved, waiting to re-lock.")
-            else:
-                # Not timing yet, or result already frozen — full reset
-                if state.locked_on:
-                    print("[Overspeed] Vehicle lost — full reset.")
-                state.reset()
-        return state.overspeeding
+        # ── Per-track timing ──────────────────────────────────────────────────
+        if not track.crossed_line2:
+            if not track.crossed_line1 and cy >= OVERSPEED_LINE1_Y:
+                track.start_time    = time.time()
+                track.crossed_line1 = True
+                print(f"[Track {track.id}] Started timing.")
 
-    # Vehicle found — update centroid and reset missing counter
-    state.missing_count = 0
-    x1, y1, x2, y2     = tracked_box
-    cx                  = (x1 + x2) // 2
-    cy                  = (y1 + y2) // 2
-    state.last_cx       = cx
-    state.last_cy       = cy
+            elif track.crossed_line1 and cy >= OVERSPEED_LINE2_Y:
+                elapsed              = time.time() - track.start_time
+                track.speed_kmph     = round((OVERSPEED_REAL_DIST / elapsed) * 3.6, 2)
+                track.overspeeding   = track.speed_kmph > OVERSPEED_LIMIT_KMPH
+                track.crossed_line2  = True
+                print(f"[Track {track.id}] {track.speed_kmph} km/h — "
+                      f"{'OVERSPEEDING' if track.overspeeding else 'OK'}")
 
-    # Centroid marker
-    cv2.circle(frame, (cx, cy), 5, (0, 255, 255), -1)
+        if track.overspeeding:
+            any_overspeed = True
 
-    # ── Timing (frozen once LINE2 is crossed) ──────────────────────────────────
-    if not state.crossed_line2:
+        # ── Per-vehicle speed label ───────────────────────────────────────────
+        if track.speed_kmph is not None:
+            color = (0, 0, 255) if track.overspeeding else (0, 220, 0)
+            cv2.putText(frame, f"{track.speed_kmph:.1f} km/h",
+                        (x1, y2 + 18), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+        elif track.crossed_line1:
+            elapsed = time.time() - track.start_time
+            cv2.putText(frame, f"T{track.id}: {elapsed:.1f}s",
+                        (x1, y2 + 18), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 165, 0), 2)
 
-        if not state.crossed_line1 and cy >= OVERSPEED_LINE1_Y:
-            state.start_time    = time.time()
-            state.crossed_line1 = True
-            print("[Overspeed] Started timing.")
-
-        elif state.crossed_line1 and cy >= OVERSPEED_LINE2_Y:
-            elapsed             = time.time() - state.start_time
-            speed_mps           = OVERSPEED_REAL_DIST / elapsed
-            state.speed_kmph    = round(speed_mps * 3.6, 2)
-            state.overspeeding  = state.speed_kmph > OVERSPEED_LIMIT_KMPH
-            state.crossed_line2 = True
-            print(f"[Overspeed] {state.speed_kmph} km/h — "
-                  f"{'OVERSPEEDING' if state.overspeeding else 'OK'}")
-
-    # ── Per-vehicle speed label ────────────────────────────────────────────────
-    if state.speed_kmph is not None:
-        color = (0, 0, 255) if state.overspeeding else (0, 220, 0)
-        cv2.putText(frame, f"{state.speed_kmph:.1f} km/h",
-                    (x1, y2 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.65, color, 2)
-    elif state.crossed_line1:
-        elapsed = time.time() - state.start_time
-        cv2.putText(frame, f"Timing {elapsed:.1f}s",
-                    (x1, y2 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 165, 0), 2)
-
-    return state.overspeeding
+    return any_overspeed
 
 
 # ---------------------------------------------------------------------------
@@ -436,7 +443,7 @@ def _capture_worker(source):
             if not ret:
                 if isinstance(source, str):     # video file ended → loop
                     cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
-                    _speed_state.reset()
+                    _tracker.reset()
                     consecutive_errors = 0
                     continue
                 # Webcam MSMF transient error — retry instead of killing the stream
@@ -543,7 +550,7 @@ def upload_video():
 
     _video_source      = save_path
     _uploaded_filename = original_name
-    _speed_state.reset()
+    _tracker.reset()
     _start_capture(save_path)
 
     return jsonify({"success": True, "filename": original_name})
@@ -556,7 +563,7 @@ def use_webcam():
 
     _video_source      = 0
     _uploaded_filename = None
-    _speed_state.reset()
+    _tracker.reset()
     _start_capture(0)
 
     return jsonify({"success": True})
