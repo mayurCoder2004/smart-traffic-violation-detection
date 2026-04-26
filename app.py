@@ -87,10 +87,39 @@ def detect_triple_riding(frame, persons, motorcycles):
     Returns:
         bool: True if triple riding is detected, False otherwise.
     """
-    # TODO (Developer 2): Implement triple riding detection logic here.
-    # Suggested approach:
-    #   - For each motorcycle box, count how many person boxes overlap (IoU / containment).
-    #   - If overlap count >= 3 for any motorcycle, return True.
+    for (mx1, my1, mx2, my2) in motorcycles:
+        moto_height = my2 - my1
+        moto_width  = mx2 - mx1
+        upper_limit = my1 - 0.25 * moto_height
+
+        rider_count = 0
+        for (px1, py1, px2, py2) in persons:
+            p_w = px2 - px1
+            p_h = py2 - py1
+
+            # Reject vehicle-like boxes: real persons are taller than wide
+            if p_w >= p_h:
+                continue
+            # Reject boxes much wider than the motorcycle (e.g. a passing car)
+            if p_w > moto_width * 0.80:
+                continue
+            # Must overlap horizontally with the motorcycle
+            if not (px1 < mx2 and px2 > mx1):
+                continue
+            # Must be positioned above or overlapping (not fully below the motorcycle)
+            if py1 <= my2 and py2 >= upper_limit:
+                rider_count += 1
+
+        if rider_count >= 3:
+            # Draw red box + alert text directly onto frame for this motorcycle
+            cv2.rectangle(frame, (mx1, my1), (mx2, my2), (0, 0, 255), 3)
+            cv2.putText(frame, "Triple Riding!", (mx1, my1 - 28),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 0, 255), 2)
+            cv2.putText(frame, f"Riders: {rider_count}  |  Fine: Rs.1000",
+                        (mx1, my1 - 8),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 255), 2)
+            return True
+
     return False
 
 
