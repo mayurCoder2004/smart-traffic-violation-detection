@@ -1017,4 +1017,4 @@ def source_status():
 
 if __name__ == "__main__":
     _start_capture(0)                               # start webcam worker on launch
-    app.run(host="0.0.0.0", port=5000, debug=False, threaded=True)
+    app.run(host="0.0.0.0", port=9000, debug=False, threaded=True)
