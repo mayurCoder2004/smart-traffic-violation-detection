@@ -7,13 +7,33 @@ Team: 3 Developers
 - Developer 3: Overspeed Detection
 """
 
+import os
 import time
+import threading
 import cv2
 import numpy as np
-from flask import Flask, Response, render_template
+from flask import Flask, Response, render_template, request, jsonify
+from werkzeug.utils import secure_filename
 from ultralytics import YOLO
 
 app = Flask(__name__)
+
+# ---------------------------------------------------------------------------
+# Upload Configuration
+# ---------------------------------------------------------------------------
+UPLOAD_FOLDER      = "uploads"
+ALLOWED_EXTENSIONS = {"mp4", "avi", "mov", "mkv", "webm"}
+app.config["MAX_CONTENT_LENGTH"] = 500 * 1024 * 1024   # 500 MB limit
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# Current video source: 0 = webcam, string = uploaded file path
+_video_source      = 0
+_uploaded_filename = None          # original filename shown in the UI
+
+
+def allowed_file(filename):
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # ---------------------------------------------------------------------------
 # Model Initialization
@@ -32,8 +52,8 @@ OVERSPEED_LINE1_Y      = 160    # upper trip line y-coordinate
 OVERSPEED_LINE2_Y      = 420    # lower trip line y-coordinate
 OVERSPEED_REAL_DIST    = 10.0   # real-world distance between lines (metres)
 OVERSPEED_LIMIT_KMPH   = 40.0   # speed threshold in km/h
-OVERSPEED_MISSING_MAX  = 15     # frames before state auto-resets
-OVERSPEED_MAX_JUMP     = 150    # max centroid pixel shift still considered same vehicle
+OVERSPEED_MISSING_MAX  = 30     # frames before state auto-resets (higher = more tolerant)
+OVERSPEED_MAX_JUMP     = 220    # max centroid pixel shift still considered same vehicle
 
 
 class _SpeedState:
@@ -43,9 +63,10 @@ class _SpeedState:
         self.reset()
 
     def reset(self):
-        self.locked_on     = False  # True once a vehicle is locked
-        self.last_cx       = None   # centroid x from previous frame
-        self.last_cy       = None   # centroid y from previous frame
+        """Full reset — clears timing and tracking completely."""
+        self.locked_on     = False
+        self.last_cx       = None
+        self.last_cy       = None
         self.start_time    = None
         self.crossed_line1 = False
         self.crossed_line2 = False
@@ -53,8 +74,27 @@ class _SpeedState:
         self.overspeeding  = False
         self.missing_count = 0
 
+    def soft_reset(self):
+        """
+        Tracking lost mid-measurement — unlock the vehicle so we can re-lock
+        onto it when it reappears, but keep start_time and crossed_line1 alive.
+        The timer keeps running across the gap.
+        """
+        self.locked_on     = False
+        self.last_cx       = None
+        self.last_cy       = None
+        self.missing_count = 0
+        # start_time, crossed_line1, crossed_line2, speed_kmph preserved
+
 
 _speed_state = _SpeedState()
+
+# ---------------------------------------------------------------------------
+# Shared Frame Buffer (background capture thread writes, Flask thread reads)
+# ---------------------------------------------------------------------------
+_latest_frame  = None           # most recent processed frame
+_frame_lock    = threading.Lock()
+_worker_source = None           # sentinel: worker exits when this changes
 
 # ---------------------------------------------------------------------------
 # Helmet Module (Dev 1)
@@ -194,9 +234,15 @@ def detect_overspeed(frame, vehicles):
     if tracked_box is None:
         state.missing_count += 1
         if state.missing_count >= OVERSPEED_MISSING_MAX:
-            if state.locked_on:
-                print("[Overspeed] Vehicle lost — state reset.")
-            state.reset()
+            if state.crossed_line1 and not state.crossed_line2:
+                # Timer is running — soft reset: keep start_time, just re-lock
+                state.soft_reset()
+                print("[Overspeed] Vehicle lost mid-measurement — timer preserved, waiting to re-lock.")
+            else:
+                # Not timing yet, or result already frozen — full reset
+                if state.locked_on:
+                    print("[Overspeed] Vehicle lost — full reset.")
+                state.reset()
         return state.overspeeding
 
     # Vehicle found — update centroid and reset missing counter
@@ -260,7 +306,7 @@ def run_yolo_detection(frame):
     for box in results.boxes:
         cls  = int(box.cls[0])
         conf = float(box.conf[0])
-        if conf < 0.4:
+        if conf < 0.25:
             continue
         x1, y1, x2, y2 = map(int, box.xyxy[0])
         coords = (x1, y1, x2, y2)
@@ -366,38 +412,87 @@ def process_frame(frame):
 
 
 # ---------------------------------------------------------------------------
-# Video Source & Flask Streaming
+# Background Capture Worker
 # ---------------------------------------------------------------------------
 
-def get_video_source():
+def _capture_worker(source):
     """
-    Returns a cv2.VideoCapture object.
-    Change argument to a video file path for offline testing, e.g. "test.mp4".
+    Runs in a daemon thread. Captures frames, runs the full YOLO pipeline,
+    and stores the latest result in _latest_frame.
+
+    Exits automatically when _worker_source changes (i.e. source switches).
     """
-    return cv2.VideoCapture(0)
+    global _latest_frame
 
-
-def generate_frames():
-    cap = get_video_source()
+    cap = cv2.VideoCapture(source)
     if not cap.isOpened():
-        raise RuntimeError("Cannot open video source.")
+        return
 
+    consecutive_errors = 0
     try:
-        while True:
-            success, frame = cap.read()
-            if not success:
-                break
+        while _worker_source == source:         # exit when source is swapped
+            ret, frame = cap.read()
 
-            frame = process_frame(frame)
-
-            ret, buffer = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 85])
             if not ret:
+                if isinstance(source, str):     # video file ended → loop
+                    cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+                    _speed_state.reset()
+                    consecutive_errors = 0
+                    continue
+                # Webcam MSMF transient error — retry instead of killing the stream
+                consecutive_errors += 1
+                if consecutive_errors > 60:     # ~2 s of continuous failure
+                    break
+                time.sleep(0.033)
                 continue
 
-            yield (b"--frame\r\n"
-                   b"Content-Type: image/jpeg\r\n\r\n" + buffer.tobytes() + b"\r\n")
+            consecutive_errors = 0              # successful read — clear error count
+
+            # Resize before YOLO — faster inference, same line positions
+            frame = cv2.resize(frame, (854, 480))
+            frame = process_frame(frame)
+
+            with _frame_lock:
+                _latest_frame = frame
     finally:
         cap.release()
+
+
+def _start_capture(source):
+    """Switch to a new source: update the sentinel and spawn a fresh daemon thread."""
+    global _worker_source, _latest_frame
+
+    _worker_source = source             # old worker sees mismatch → exits
+    with _frame_lock:
+        _latest_frame = None            # clear stale frame while new thread warms up
+
+    t = threading.Thread(target=_capture_worker, args=(source,), daemon=True)
+    t.start()
+
+
+# ---------------------------------------------------------------------------
+# Flask Streaming
+# ---------------------------------------------------------------------------
+
+def generate_frames():
+    """
+    Read the latest processed frame from the shared buffer and yield it as
+    MJPEG. Decoupled from YOLO — runs at up to 30 fps regardless of inference speed.
+    """
+    while True:
+        with _frame_lock:
+            frame = _latest_frame
+
+        if frame is None:
+            time.sleep(0.02)
+            continue
+
+        ret, buffer = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 65])
+        if ret:
+            yield (b"--frame\r\n"
+                   b"Content-Type: image/jpeg\r\n\r\n" + buffer.tobytes() + b"\r\n")
+
+        time.sleep(0.033)               # cap stream at ~30 fps
 
 
 # ---------------------------------------------------------------------------
@@ -413,8 +508,66 @@ def index():
 def video():
     return Response(
         generate_frames(),
-        mimetype="multipart/x-mixed-replace; boundary=frame"
+        mimetype="multipart/x-mixed-replace; boundary=frame",
+        headers={
+            "Cache-Control":    "no-cache, no-store, must-revalidate",
+            "Pragma":           "no-cache",
+            "X-Accel-Buffering":"no",   # disable Nginx/proxy buffering
+        }
     )
+
+
+@app.route("/upload", methods=["POST"])
+def upload_video():
+    """Accept a video file, save it, and switch the stream to that file."""
+    global _video_source, _uploaded_filename
+
+    if "video" not in request.files:
+        return jsonify({"success": False, "error": "No file in request."}), 400
+
+    file = request.files["video"]
+    if file.filename == "":
+        return jsonify({"success": False, "error": "No file selected."}), 400
+
+    if not allowed_file(file.filename):
+        return jsonify({
+            "success": False,
+            "error": f"Unsupported format. Allowed: {', '.join(ALLOWED_EXTENSIONS).upper()}"
+        }), 400
+
+    original_name = secure_filename(file.filename)
+    ext           = original_name.rsplit(".", 1)[1].lower()
+    save_path     = os.path.join(UPLOAD_FOLDER, f"current_video.{ext}")
+
+    file.save(save_path)
+
+    _video_source      = save_path
+    _uploaded_filename = original_name
+    _speed_state.reset()
+    _start_capture(save_path)
+
+    return jsonify({"success": True, "filename": original_name})
+
+
+@app.route("/use_webcam", methods=["POST"])
+def use_webcam():
+    """Switch back to the live webcam feed."""
+    global _video_source, _uploaded_filename
+
+    _video_source      = 0
+    _uploaded_filename = None
+    _speed_state.reset()
+    _start_capture(0)
+
+    return jsonify({"success": True})
+
+
+@app.route("/source_status")
+def source_status():
+    """Return the current source label so the UI can show it."""
+    if _video_source == 0:
+        return jsonify({"source": "webcam", "label": "Live Webcam"})
+    return jsonify({"source": "file", "label": _uploaded_filename or "Uploaded Video"})
 
 
 # ---------------------------------------------------------------------------
@@ -422,4 +575,5 @@ def video():
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    _start_capture(0)                               # start webcam worker on launch
+    app.run(host="0.0.0.0", port=5000, debug=False, threaded=True)

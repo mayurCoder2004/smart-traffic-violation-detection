@@ -76,23 +76,30 @@ class SpeedState:
         self.reset()
 
     def reset(self):
-        # tracking
+        """Full reset — clears timing and tracking completely."""
         self.locked_on     = False
-        self.last_cx       = None   # centroid x of the tracked vehicle last frame
-        self.last_cy       = None   # centroid y of the tracked vehicle last frame
-        self.label         = ""     # class label of the locked vehicle
-
-        # timing
+        self.last_cx       = None
+        self.last_cy       = None
+        self.label         = ""
         self.start_time    = None
         self.crossed_line1 = False
         self.crossed_line2 = False
-
-        # result (frozen after LINE2)
         self.speed_kmph    = None
         self.overspeeding  = False
-
-        # housekeeping
         self.missing_count = 0
+
+    def soft_reset(self):
+        """
+        Vehicle lost mid-measurement — unlock tracker so we can re-lock
+        when the vehicle reappears, but keep start_time and crossed_line1
+        so the timer keeps running across the detection gap.
+        """
+        self.locked_on     = False
+        self.last_cx       = None
+        self.last_cy       = None
+        self.label         = ""
+        self.missing_count = 0
+        # start_time, crossed_line1, crossed_line2, speed_kmph preserved
 
     @property
     def phase(self):
@@ -300,11 +307,18 @@ def main(video_source=0):
           f"Distance={REAL_DISTANCE}m  |  Limit={SPEED_LIMIT}km/h")
     print("[INFO] Press Q to quit, R to reset.\n")
 
+    consecutive_errors = 0
     while True:
         ret, frame = cap.read()
         if not ret:
-            print("[ERROR] Frame read failed — exiting.")
-            break
+            # Transient MSMF/driver error — retry instead of quitting
+            consecutive_errors += 1
+            if consecutive_errors > 60:         # ~2 s of continuous failure
+                print("[ERROR] Too many consecutive frame errors — exiting.")
+                break
+            time.sleep(0.033)
+            continue
+        consecutive_errors = 0
 
         detections = get_all_vehicles(frame)
         tracked    = find_tracked_vehicle(state, detections)
@@ -314,11 +328,14 @@ def main(video_source=0):
             state.missing_count += 1
 
             if state.missing_count >= MISSING_FRAMES:
-                # Only log the reset if we had actually started tracking
-                if state.locked_on:
-                    print(f"[INFO] Vehicle lost for {MISSING_FRAMES} frames "
-                          f"— resetting.\n")
-                state.reset()
+                if state.crossed_line1 and not state.crossed_line2:
+                    # Timer is running — soft reset: keep start_time, re-lock
+                    state.soft_reset()
+                    print("[INFO] Vehicle lost mid-measurement — timer preserved, re-locking.\n")
+                else:
+                    if state.locked_on:
+                        print(f"[INFO] Vehicle lost — full reset.\n")
+                    state.reset()
 
         # ── Vehicle found ─────────────────────────────────────────────────────
         else:

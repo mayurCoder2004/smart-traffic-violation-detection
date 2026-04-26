@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smart Traffic Violation Detection</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: #0d0d0d;
@@ -15,109 +15,323 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 24px 16px;
+      padding: 24px 16px 40px;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 24px;
+    /* ── Header ── */
+    header { text-align: center; margin-bottom: 20px; }
+    header h1 { font-size: 1.8rem; color: #f0c040; letter-spacing: 1px; }
+    header p  { font-size: 0.85rem; color: #888; margin-top: 4px; }
+
+    /* ── Upload Panel ── */
+    .upload-panel {
+      width: 100%;
+      max-width: 860px;
+      background: #141414;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
     }
 
-    header h1 {
-      font-size: 1.8rem;
-      color: #f0c040;
-      letter-spacing: 1px;
+    .source-badge {
+      font-size: 0.78rem;
+      background: #1f1f1f;
+      border: 1px solid #333;
+      border-radius: 20px;
+      padding: 4px 12px;
+      color: #aaa;
+      white-space: nowrap;
+    }
+    .source-badge span { color: #f0c040; font-weight: 600; }
+
+    .file-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #1e1e1e;
+      border: 1px dashed #444;
+      border-radius: 7px;
+      padding: 7px 14px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      color: #bbb;
+      flex: 1;
+      min-width: 180px;
+      transition: border-color 0.2s;
+    }
+    .file-label:hover { border-color: #f0c040; color: #f0c040; }
+    .file-label input[type="file"] { display: none; }
+    #file-name { font-style: italic; color: #777; font-size: 0.78rem; }
+
+    .btn {
+      padding: 8px 18px;
+      border: none;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+    .btn:hover   { opacity: 0.85; }
+    .btn:active  { transform: scale(0.97); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-upload  { background: #f0c040; color: #111; }
+    .btn-webcam  { background: #1e1e1e; color: #e0e0e0; border: 1px solid #444; }
+
+    /* Progress bar */
+    .progress-wrap {
+      width: 100%;
+      height: 4px;
+      background: #222;
+      border-radius: 2px;
+      overflow: hidden;
+      display: none;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #f0c040;
+      transition: width 0.2s;
     }
 
-    header p {
-      font-size: 0.85rem;
+    /* Status message */
+    .status-msg {
+      width: 100%;
+      font-size: 0.78rem;
+      min-height: 16px;
       color: #888;
-      margin-top: 4px;
     }
+    .status-msg.ok  { color: #4caf50; }
+    .status-msg.err { color: #f44336; }
 
+    /* ── Stream ── */
     .stream-container {
-      border: 2px solid #333;
+      border: 2px solid #2a2a2a;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 0 24px rgba(240, 192, 64, 0.15);
+      box-shadow: 0 0 24px rgba(240, 192, 64, 0.12);
       max-width: 860px;
       width: 100%;
+      background: #111;
+      position: relative;
     }
-
     .stream-container img {
       width: 100%;
       display: block;
     }
+    .stream-overlay {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      font-size: 0.7rem;
+      color: #555;
+      pointer-events: none;
+    }
 
+    /* ── Legend ── */
     .legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 10px;
+      margin-top: 16px;
       justify-content: center;
+      max-width: 860px;
     }
-
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: #1a1a1a;
-      border: 1px solid #2a2a2a;
+      gap: 7px;
+      background: #141414;
+      border: 1px solid #222;
       border-radius: 6px;
-      padding: 6px 14px;
-      font-size: 0.82rem;
+      padding: 5px 12px;
+      font-size: 0.8rem;
     }
-
     .dot {
-      width: 12px;
-      height: 12px;
+      width: 11px; height: 11px;
       border-radius: 50%;
       flex-shrink: 0;
     }
 
-    footer {
-      margin-top: 32px;
-      font-size: 0.75rem;
-      color: #444;
-    }
+    footer { margin-top: 28px; font-size: 0.72rem; color: #333; }
   </style>
 </head>
 <body>
 
   <header>
     <h1>Smart Traffic Violation Detection</h1>
-    <p>Live feed — YOLOv8 powered detection pipeline</p>
+    <p>YOLOv8 real-time detection pipeline</p>
   </header>
 
-  <div class="stream-container">
-    <img src="/video" alt="Live video stream" />
+  <!-- ── Upload Panel ── -->
+  <div class="upload-panel">
+
+    <div class="source-badge">
+      Source: <span id="source-label">Live Webcam</span>
+    </div>
+
+    <label class="file-label">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+      Choose video file
+      <span id="file-name">No file chosen</span>
+      <input type="file" id="video-input" accept=".mp4,.avi,.mov,.mkv,.webm" />
+    </label>
+
+    <button class="btn btn-upload" id="btn-upload" disabled>Upload &amp; Stream</button>
+    <button class="btn btn-webcam" id="btn-webcam">Use Webcam</button>
+
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <div class="status-msg" id="status-msg"></div>
+
   </div>
 
+  <!-- ── Video Stream ── -->
+  <div class="stream-container">
+    <img id="stream-img" src="/video" alt="Live stream" />
+    <div class="stream-overlay" id="stream-overlay">LIVE</div>
+  </div>
+
+  <!-- ── Legend ── -->
   <div class="legend">
-    <div class="legend-item">
-      <div class="dot" style="background:#ffc800;"></div> Person
-    </div>
-    <div class="legend-item">
-      <div class="dot" style="background:#00ff64;"></div> Motorcycle
-    </div>
-    <div class="legend-item">
-      <div class="dot" style="background:#00b4ff;"></div> Car
-    </div>
-    <div class="legend-item">
-      <div class="dot" style="background:#ff0000;"></div> No Helmet
-    </div>
-    <div class="legend-item">
-      <div class="dot" style="background:#ff4500;"></div> Triple Riding
-    </div>
-    <div class="legend-item">
-      <div class="dot" style="background:#ffa500;"></div> Overspeed
-    </div>
-    <div class="legend-item">
-      <div class="dot" style="background:#ffff00;"></div> Plate Detected
-    </div>
+    <div class="legend-item"><div class="dot" style="background:#ffc800;"></div> Person</div>
+    <div class="legend-item"><div class="dot" style="background:#00ff64;"></div> Motorcycle</div>
+    <div class="legend-item"><div class="dot" style="background:#00b4ff;"></div> Car</div>
+    <div class="legend-item"><div class="dot" style="background:#ff2222;"></div> No Helmet</div>
+    <div class="legend-item"><div class="dot" style="background:#ff4500;"></div> Triple Riding</div>
+    <div class="legend-item"><div class="dot" style="background:#ffa500;"></div> Overspeed</div>
+    <div class="legend-item"><div class="dot" style="background:#ffff00;"></div> Plate Detected</div>
   </div>
 
   <footer>Smart Traffic Violation Detection System &mdash; Hackathon Build</footer>
+
+  <script>
+    const videoInput  = document.getElementById("video-input");
+    const fileName    = document.getElementById("file-name");
+    const btnUpload   = document.getElementById("btn-upload");
+    const btnWebcam   = document.getElementById("btn-webcam");
+    const progressWrap= document.getElementById("progress-wrap");
+    const progressBar = document.getElementById("progress-bar");
+    const statusMsg   = document.getElementById("status-msg");
+    const streamImg   = document.getElementById("stream-img");
+    const sourceLabel = document.getElementById("source-label");
+    const streamOverlay = document.getElementById("stream-overlay");
+
+    // Show chosen filename and enable upload button
+    videoInput.addEventListener("change", () => {
+      if (videoInput.files.length > 0) {
+        fileName.textContent = videoInput.files[0].name;
+        btnUpload.disabled = false;
+        setStatus("", "");
+      } else {
+        fileName.textContent = "No file chosen";
+        btnUpload.disabled = true;
+      }
+    });
+
+    // Upload button
+    btnUpload.addEventListener("click", () => {
+      const file = videoInput.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append("video", file);
+
+      // Show progress bar
+      progressWrap.style.display = "block";
+      progressBar.style.width = "0%";
+      btnUpload.disabled = true;
+      btnWebcam.disabled = true;
+      setStatus("Uploading...", "");
+
+      const xhr = new XMLHttpRequest();
+
+      xhr.upload.addEventListener("progress", (e) => {
+        if (e.lengthComputable) {
+          const pct = Math.round((e.loaded / e.total) * 100);
+          progressBar.style.width = pct + "%";
+        }
+      });
+
+      xhr.addEventListener("load", () => {
+        progressWrap.style.display = "none";
+        btnWebcam.disabled = false;
+
+        let data;
+        try { data = JSON.parse(xhr.responseText); } catch { data = { success: false, error: "Invalid server response." }; }
+
+        if (xhr.status === 200 && data.success) {
+          setStatus("Streaming: " + data.filename, "ok");
+          sourceLabel.textContent = data.filename;
+          streamOverlay.textContent = "VIDEO";
+          reloadStream();
+        } else {
+          setStatus(data.error || "Upload failed.", "err");
+          btnUpload.disabled = false;
+        }
+      });
+
+      xhr.addEventListener("error", () => {
+        progressWrap.style.display = "none";
+        btnUpload.disabled = false;
+        btnWebcam.disabled = false;
+        setStatus("Network error during upload.", "err");
+      });
+
+      xhr.open("POST", "/upload");
+      xhr.send(formData);
+    });
+
+    // Switch to webcam
+    btnWebcam.addEventListener("click", () => {
+      btnWebcam.disabled = true;
+      setStatus("Switching to webcam...", "");
+
+      fetch("/use_webcam", { method: "POST" })
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            sourceLabel.textContent = "Live Webcam";
+            streamOverlay.textContent = "LIVE";
+            fileName.textContent = "No file chosen";
+            videoInput.value = "";
+            btnUpload.disabled = true;
+            setStatus("", "");
+            reloadStream();
+          }
+        })
+        .catch(() => setStatus("Failed to switch source.", "err"))
+        .finally(() => { btnWebcam.disabled = false; });
+    });
+
+    // Bust the /video cache so the browser opens a fresh MJPEG connection
+    function reloadStream() {
+      streamImg.src = "/video?t=" + Date.now();
+    }
+
+    function setStatus(msg, type) {
+      statusMsg.textContent = msg;
+      statusMsg.className = "status-msg" + (type ? " " + type : "");
+    }
+
+    // Sync source badge on page load
+    fetch("/source_status")
+      .then(r => r.json())
+      .then(data => { sourceLabel.textContent = data.label; });
+  </script>
 
 </body>
 </html>
