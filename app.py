@@ -7,6 +7,7 @@ Team: 3 Developers
 - Developer 3: Overspeed Detection
 """
 
+import re
 import cv2
 import numpy as np
 import easyocr
@@ -37,7 +38,7 @@ except Exception as exc:
     _helmet_detector = None
 
 # License-plate detection model (custom YOLOv8, e.g. best.pt from Roboflow).
-PLATE_MODEL_PATH = "best.pt"
+PLATE_MODEL_PATH = "license_plate_detector.pt"
 
 try:
     _plate_model = YOLO(PLATE_MODEL_PATH)
@@ -56,6 +57,43 @@ except Exception as exc:
 CLASS_PERSON     = 0
 CLASS_MOTORCYCLE = 3
 CLASS_CAR        = 2
+
+# Minimum fraction of a person's area that must overlap a motorcycle box
+# for that person to be considered a rider (~15% overlap is enough).
+_RIDING_OVERLAP_THRESH = 0.15
+
+# Plate detection is throttled: OCR runs at most once every N frames.
+_PLATE_REFRESH_INTERVAL = 10
+
+# Module-level state for plate caching and frame counting.
+_frame_count       = 0
+_cached_plate_text = None
+_cached_plate_box  = None
+
+
+def is_riding(person_box: tuple, motorcycle_boxes: list) -> bool:
+    """
+    Return True if *person_box* overlaps a motorcycle by at least
+    _RIDING_OVERLAP_THRESH of the person's own area.
+
+    We compare intersection / person_area (not IoU) because a rider's
+    body extends well above the motorcycle, so the union is large and
+    IoU stays deceptively low even for a clear spatial match.
+    """
+    px1, py1, px2, py2 = person_box
+    person_area = max(1, (px2 - px1) * (py2 - py1))
+
+    for mx1, my1, mx2, my2 in motorcycle_boxes:
+        ix1 = max(px1, mx1)
+        iy1 = max(py1, my1)
+        ix2 = min(px2, mx2)
+        iy2 = min(py2, my2)
+        if ix2 <= ix1 or iy2 <= iy1:
+            continue
+        inter = (ix2 - ix1) * (iy2 - iy1)
+        if inter / person_area >= _RIDING_OVERLAP_THRESH:
+            return True
+    return False
 
 # ---------------------------------------------------------------------------
 # Helmet Module (Dev 1)
@@ -124,9 +162,10 @@ def detect_number_plate(frame):
     if not ocr_results:
         return None, plate_box
 
-    # Step 5: Return the text with the highest OCR confidence
+    # Step 5: Return the text with the highest OCR confidence, stripped of
+    # spaces and non-alphanumeric characters so the display is clean.
     best_ocr = max(ocr_results, key=lambda r: r[2])
-    plate_text = best_ocr[1].upper().strip()
+    plate_text = re.sub(r"[^A-Z0-9]", "", best_ocr[1].upper())
 
     return plate_text, plate_box
 
@@ -305,14 +344,20 @@ def process_frame(frame):
     """
     Full pipeline executed for every captured frame.
     """
+    global _frame_count, _cached_plate_text, _cached_plate_box
+    _frame_count += 1
+
     # --- YOLO Detection ---
     persons, motorcycles, cars = run_yolo_detection(frame)
     vehicles = motorcycles + cars
 
+    # --- Filter: only persons overlapping a motorcycle are checked for helmets ---
+    riders = [p for p in persons if is_riding(p, motorcycles)]
+
     # --- Module Calls ---
 
-    # Helmet Module (Dev 1)
-    helmet_results, helmet_violation = detect_helmet(frame, persons)
+    # Helmet Module (Dev 1) — riders only, not all pedestrians
+    helmet_results, helmet_violation = detect_helmet(frame, riders)
 
     # Triple Riding Module (Dev 2)
     triple_violation = detect_triple_riding(frame, persons, motorcycles)
@@ -323,22 +368,40 @@ def process_frame(frame):
     # --- Unified Violation Flag ---
     violation = helmet_violation or triple_violation or overspeed_violation
 
-    # --- Plate Detection (only on violation) ---
-    plate_text, plate_box = None, None
+    # --- Plate Detection (only on violation, throttled to every N frames) ---
     if violation:
-        plate_text, plate_box = detect_number_plate(frame)
+        if _frame_count % _PLATE_REFRESH_INTERVAL == 0:
+            _cached_plate_text, _cached_plate_box = detect_number_plate(frame)
+        plate_text = _cached_plate_text
+        plate_box  = _cached_plate_box
+    else:
+        # Clear cache when no violation so stale data never bleeds into the
+        # next violation window.
+        _cached_plate_text = None
+        _cached_plate_box  = None
+        plate_text = None
+        plate_box  = None
 
     # --- Draw Bounding Boxes ---
-    # Person boxes: per-person Helmet / No Helmet label when detector is active,
-    # plain "Person" box otherwise.
+    # Non-rider persons get a plain yellow box; riders get Helmet/No Helmet label.
+    non_riders = [p for p in persons if not is_riding(p, motorcycles)]
+    draw_boxes(frame, non_riders, color=(255, 200, 0), label="Person")
+
     if helmet_results:
         draw_helmet_results(frame, helmet_results)
     else:
-        draw_boxes(frame, persons, color=(255, 200, 0), label="Person")
+        draw_boxes(frame, riders, color=(255, 200, 0), label="Rider")
+
     draw_boxes(frame, motorcycles, color=(0, 255, 100),  label="Motorcycle")
     draw_boxes(frame, cars,        color=(0, 180, 255),  label="Car")
+
     if plate_box:
         draw_boxes(frame, [plate_box], color=(0, 255, 255), label="Plate")
+        if plate_text:
+            x1, y1, _, _ = plate_box
+            cv2.putText(frame, f"Plate: {plate_text}",
+                        (x1, max(0, y1 - 10)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
 
     # --- Violation Overlay ---
     draw_violation_overlay(frame, helmet_violation, triple_violation,
