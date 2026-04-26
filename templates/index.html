@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Traffic Violation Detection</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d0d0d;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: #f0c040;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .stream-container {
+      border: 2px solid #333;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 24px rgba(240, 192, 64, 0.15);
+      max-width: 860px;
+      width: 100%;
+    }
+
+    .stream-container img {
+      width: 100%;
+      display: block;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    footer {
+      margin-top: 32px;
+      font-size: 0.75rem;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Smart Traffic Violation Detection</h1>
+    <p>Live feed — YOLOv8 powered detection pipeline</p>
+  </header>
+
+  <div class="stream-container">
+    <img src="/video" alt="Live video stream" />
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="dot" style="background:#ffc800;"></div> Person
+    </div>
+    <div class="legend-item">
+      <div class="dot" style="background:#00ff64;"></div> Motorcycle
+    </div>
+    <div class="legend-item">
+      <div class="dot" style="background:#00b4ff;"></div> Car
+    </div>
+    <div class="legend-item">
+      <div class="dot" style="background:#ff0000;"></div> No Helmet
+    </div>
+    <div class="legend-item">
+      <div class="dot" style="background:#ff4500;"></div> Triple Riding
+    </div>
+    <div class="legend-item">
+      <div class="dot" style="background:#ffa500;"></div> Overspeed
+    </div>
+    <div class="legend-item">
+      <div class="dot" style="background:#ffff00;"></div> Plate Detected
+    </div>
+  </div>
+
+  <footer>Smart Traffic Violation Detection System &mdash; Hackathon Build</footer>
+
+</body>
+</html>
