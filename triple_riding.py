@@ -12,6 +12,8 @@ Usage:
 """
 
 import sys
+import time
+import threading
 import cv2
 from ultralytics import YOLO
 
@@ -22,10 +24,15 @@ from ultralytics import YOLO
 MODEL_PATH = "yolov8n.pt"
 CONF_THRESHOLD = 0.40          # minimum detection confidence
 TRIPLE_RIDING_THRESHOLD = 3    # persons per motorcycle to trigger alert
+YOLO_IMGSZ = 256               # smaller input keeps webcam inference responsive
+YOLO_EVERY_N = 8               # reuse detections between YOLO passes
+PROCESS_WIDTH = 426            # downscale camera frames before inference/display
+DETECTION_INTERVAL = 0.25
 
 # COCO class IDs
 CLASS_PERSON     = 0
 CLASS_MOTORCYCLE = 3
+YOLO_CLASSES = [CLASS_PERSON, CLASS_MOTORCYCLE]
 
 # Colors (BGR)
 COLOR_PERSON        = (255, 200, 0)    # gold
@@ -81,28 +88,59 @@ def is_person_on_motorcycle(person_box, moto_box, vertical_margin=0.25):
 # Per-Frame Detection
 # ---------------------------------------------------------------------------
 
-def process_frame(frame, model):
+def resize_frame(frame, target_width=PROCESS_WIDTH):
+    h, w = frame.shape[:2]
+    if w <= target_width:
+        return frame
+    scale = target_width / w
+    return cv2.resize(frame, (target_width, int(h * scale)), interpolation=cv2.INTER_AREA)
+
+
+def process_frame(frame, model, state=None):
     """
     Run YOLO, evaluate triple-riding for each motorcycle, draw results.
 
     Returns the annotated frame.
     """
-    results = model(frame, verbose=False)[0]
+    if state is None:
+        state = {}
 
-    persons     = []
-    motorcycles = []
+    state["frame_count"] = state.get("frame_count", 0) + 1
+    should_detect = (
+        state["frame_count"] == 1
+        or state["frame_count"] % YOLO_EVERY_N == 0
+        or "persons" not in state
+    )
 
-    # --- Parse YOLO detections ---
-    for box in results.boxes:
-        cls  = int(box.cls[0])
-        conf = float(box.conf[0])
-        if conf < CONF_THRESHOLD:
-            continue
-        x1, y1, x2, y2 = map(int, box.xyxy[0])
-        if cls == CLASS_PERSON:
-            persons.append((x1, y1, x2, y2))
-        elif cls == CLASS_MOTORCYCLE:
-            motorcycles.append((x1, y1, x2, y2))
+    if should_detect:
+        results = model(
+            frame,
+            verbose=False,
+            imgsz=YOLO_IMGSZ,
+            classes=YOLO_CLASSES,
+            conf=CONF_THRESHOLD,
+        )[0]
+
+        persons     = []
+        motorcycles = []
+
+        # --- Parse YOLO detections ---
+        for box in results.boxes:
+            cls  = int(box.cls[0])
+            conf = float(box.conf[0])
+            if conf < CONF_THRESHOLD:
+                continue
+            x1, y1, x2, y2 = map(int, box.xyxy[0])
+            if cls == CLASS_PERSON:
+                persons.append((x1, y1, x2, y2))
+            elif cls == CLASS_MOTORCYCLE:
+                motorcycles.append((x1, y1, x2, y2))
+
+        state["persons"] = persons
+        state["motorcycles"] = motorcycles
+    else:
+        persons = state.get("persons", [])
+        motorcycles = state.get("motorcycles", [])
 
     # --- Draw all person boxes ---
     for (x1, y1, x2, y2) in persons:
@@ -151,9 +189,133 @@ def process_frame(frame, model):
     return frame
 
 
+def draw_cached_detection(frame, persons, motorcycles):
+    for (x1, y1, x2, y2) in persons:
+        cv2.rectangle(frame, (x1, y1), (x2, y2), COLOR_PERSON, 2)
+        cv2.putText(frame, "Person", (x1, y1 - 6),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLOR_PERSON, 2)
+
+    any_triple = False
+    for (mx1, my1, mx2, my2) in motorcycles:
+        rider_count = sum(
+            1 for p in persons if is_person_on_motorcycle(p, (mx1, my1, mx2, my2))
+        )
+        triple = rider_count >= TRIPLE_RIDING_THRESHOLD
+        color = COLOR_MOTO_ALERT if triple else COLOR_MOTO_NORMAL
+        if triple:
+            any_triple = True
+
+        cv2.rectangle(frame, (mx1, my1), (mx2, my2), color, 3 if triple else 2)
+        label = (
+            f"Riders: {rider_count}  |  Fine: Rs.1000"
+            if triple
+            else f"Motorcycle  Riders: {rider_count}"
+        )
+        cv2.putText(frame, label, (mx1, my1 - 6),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.55, color, 2)
+
+    if any_triple:
+        cv2.rectangle(frame, (0, 0), (360, 60), (0, 0, 200), -1)
+        cv2.putText(frame, "TRIPLE RIDING DETECTED", (8, 25),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.72, COLOR_TEXT, 2)
+        cv2.putText(frame, "Fine: Rs.1000", (8, 50),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.62, (0, 255, 255), 2)
+
+    return frame
+
+
 # ---------------------------------------------------------------------------
 # Entry Point
 # ---------------------------------------------------------------------------
+
+class LatestFrameCapture:
+    def __init__(self, cap):
+        self.cap = cap
+        self.frame = None
+        self.ok = cap.isOpened()
+        self.lock = threading.Lock()
+        self.stopped = False
+        self.thread = threading.Thread(target=self._reader, daemon=True)
+        self.thread.start()
+
+    def _reader(self):
+        while not self.stopped:
+            ok, frame = self.cap.read()
+            if not ok:
+                self.ok = False
+                time.sleep(0.01)
+                continue
+            with self.lock:
+                self.ok = True
+                self.frame = frame
+
+    def read(self):
+        with self.lock:
+            if self.frame is None:
+                return False, None
+            return self.ok, self.frame.copy()
+
+    def release(self):
+        self.stopped = True
+        self.thread.join(timeout=1)
+        self.cap.release()
+
+
+class AsyncYoloDetector:
+    def __init__(self, model):
+        self.model = model
+        self.input_frame = None
+        self.persons = []
+        self.motorcycles = []
+        self.lock = threading.Lock()
+        self.stopped = False
+        self.thread = threading.Thread(target=self._worker, daemon=True)
+        self.thread.start()
+
+    def submit(self, frame):
+        with self.lock:
+            self.input_frame = frame.copy()
+
+    def get_result(self):
+        with self.lock:
+            return list(self.persons), list(self.motorcycles)
+
+    def _worker(self):
+        while not self.stopped:
+            with self.lock:
+                frame = None if self.input_frame is None else self.input_frame.copy()
+
+            if frame is None:
+                time.sleep(0.01)
+                continue
+
+            results = self.model(
+                frame,
+                verbose=False,
+                imgsz=YOLO_IMGSZ,
+                classes=YOLO_CLASSES,
+                conf=CONF_THRESHOLD,
+            )[0]
+
+            persons, motorcycles = [], []
+            for box in results.boxes:
+                cls = int(box.cls[0])
+                x1, y1, x2, y2 = map(int, box.xyxy[0])
+                if cls == CLASS_PERSON:
+                    persons.append((x1, y1, x2, y2))
+                elif cls == CLASS_MOTORCYCLE:
+                    motorcycles.append((x1, y1, x2, y2))
+
+            with self.lock:
+                self.persons = persons
+                self.motorcycles = motorcycles
+
+            time.sleep(DETECTION_INTERVAL)
+
+    def release(self):
+        self.stopped = True
+        self.thread.join(timeout=1)
+
 
 def main():
     source = sys.argv[1] if len(sys.argv) > 1 else 0  # 0 = default webcam
@@ -162,28 +324,49 @@ def main():
     model = YOLO(MODEL_PATH)
 
     print(f"[INFO] Opening video source: {source}")
-    cap = cv2.VideoCapture(source)
+    raw_cap = cv2.VideoCapture(source, cv2.CAP_DSHOW) if source == 0 else cv2.VideoCapture(source)
 
-    if not cap.isOpened():
+    if not raw_cap.isOpened():
         print("[ERROR] Cannot open video source.")
         sys.exit(1)
 
+    raw_cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+    raw_cap.set(cv2.CAP_PROP_FRAME_WIDTH, PROCESS_WIDTH)
+    raw_cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
+    cap = LatestFrameCapture(raw_cap) if source == 0 else raw_cap
+
     print("[INFO] Press 'q' to quit.")
 
-    while True:
-        ret, frame = cap.read()
-        if not ret:
-            print("[INFO] End of stream.")
-            break
+    state = {}
+    detector = AsyncYoloDetector(model) if source == 0 else None
 
-        frame = process_frame(frame, model)
-        cv2.imshow("Triple Riding Detection", frame)
+    try:
+        while True:
+            ret, frame = cap.read()
+            if not ret:
+                if source == 0:
+                    time.sleep(0.01)
+                    continue
+                print("[INFO] End of stream.")
+                break
 
-        if cv2.waitKey(1) & 0xFF == ord("q"):
-            break
+            frame = resize_frame(frame)
+            if detector is not None:
+                detector.submit(frame)
+                persons, motorcycles = detector.get_result()
+                frame = draw_cached_detection(frame, persons, motorcycles)
+            else:
+                frame = process_frame(frame, model, state)
+            cv2.imshow("Triple Riding Detection", frame)
 
-    cap.release()
-    cv2.destroyAllWindows()
+            if cv2.waitKey(1) & 0xFF == ord("q"):
+                break
+
+    finally:
+        if detector is not None:
+            detector.release()
+        cap.release()
+        cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":

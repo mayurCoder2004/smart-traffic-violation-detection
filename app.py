@@ -7,8 +7,9 @@ Team: 3 Developers
 - Developer 3: Overspeed Detection
 """
 
+import time
+import threading
 import cv2
-import numpy as np
 from flask import Flask, Response, render_template
 from ultralytics import YOLO
 
@@ -22,7 +23,19 @@ model = YOLO("yolov8n.pt")
 # YOLO class IDs (COCO dataset)
 CLASS_PERSON     = 0
 CLASS_MOTORCYCLE = 3
-CLASS_CAR        = 2
+TRIPLE_THRESHOLD = 3
+
+COLOR_PERSON      = (255, 200,   0)
+COLOR_MOTO_NORMAL = (  0, 255, 100)
+COLOR_MOTO_ALERT  = (  0,   0, 255)
+
+YOLO_IMGSZ = 256
+YOLO_EVERY_N = 8
+PROCESS_WIDTH = 426
+JPEG_QUALITY = 50
+TARGET_FPS = 30
+DETECTION_INTERVAL = 0.25
+YOLO_CLASSES = [CLASS_PERSON, CLASS_MOTORCYCLE]
 
 # ---------------------------------------------------------------------------
 # Helmet Module (Dev 1)
@@ -152,16 +165,21 @@ def detect_overspeed(frame, vehicles):
 
 def run_yolo_detection(frame):
     """
-    Run YOLOv8 on a frame and extract persons, motorcycles, and cars.
+    Run YOLOv8 on a frame and extract persons and motorcycles.
 
     Returns:
         persons     (list[tuple]): [(x1,y1,x2,y2), ...]
         motorcycles (list[tuple]): [(x1,y1,x2,y2), ...]
-        cars        (list[tuple]): [(x1,y1,x2,y2), ...]
     """
-    results = model(frame, verbose=False)[0]
+    results = model(
+        frame,
+        verbose=False,
+        imgsz=YOLO_IMGSZ,
+        classes=YOLO_CLASSES,
+        conf=0.4,
+    )[0]
 
-    persons, motorcycles, cars = [], [], []
+    persons, motorcycles = [], []
 
     for box in results.boxes:
         cls  = int(box.cls[0])
@@ -175,10 +193,28 @@ def run_yolo_detection(frame):
             persons.append(coords)
         elif cls == CLASS_MOTORCYCLE:
             motorcycles.append(coords)
-        elif cls == CLASS_CAR:
-            cars.append(coords)
 
-    return persons, motorcycles, cars
+    return persons, motorcycles
+
+
+def is_person_on_motorcycle(person_box, moto_box, vertical_margin=0.25):
+    px1, py1, px2, py2 = person_box
+    mx1, my1, mx2, my2 = moto_box
+
+    p_w = px2 - px1
+    p_h = py2 - py1
+    m_w = mx2 - mx1
+
+    if p_w >= p_h:
+        return False
+    if p_w > m_w * 0.80:
+        return False
+    if not (px1 < mx2 and px2 > mx1):
+        return False
+
+    moto_height = my2 - my1
+    upper_limit = my1 - vertical_margin * moto_height
+    return py1 <= my2 and py2 >= upper_limit
 
 
 # ---------------------------------------------------------------------------
@@ -230,45 +266,37 @@ def draw_violation_overlay(frame, helmet_violation, triple_violation,
 # Main Frame-Processing Pipeline
 # ---------------------------------------------------------------------------
 
-def process_frame(frame):
+def resize_for_processing(frame, target_width=PROCESS_WIDTH):
+    h, w = frame.shape[:2]
+    if w <= target_width:
+        return frame
+    scale = target_width / w
+    return cv2.resize(frame, (target_width, int(h * scale)), interpolation=cv2.INTER_AREA)
+
+
+def process_frame(frame, state=None):
     """
-    Full pipeline executed for every captured frame.
+    Streamlit-style triple-riding pipeline for compatibility with non-async use.
     """
-    # --- YOLO Detection ---
-    persons, motorcycles, cars = run_yolo_detection(frame)
-    vehicles = motorcycles + cars
+    if state is None:
+        state = {}
 
-    # --- Module Calls ---
+    state["frame_count"] = state.get("frame_count", 0) + 1
+    should_detect = (
+        state["frame_count"] == 1
+        or state["frame_count"] % YOLO_EVERY_N == 0
+        or "persons" not in state
+    )
 
-    # Helmet Module (Dev 1)
-    helmet_violation = detect_helmet(frame, persons)
+    if should_detect:
+        persons, motorcycles = run_yolo_detection(frame)
+        state["persons"] = persons
+        state["motorcycles"] = motorcycles
+    else:
+        persons = state.get("persons", [])
+        motorcycles = state.get("motorcycles", [])
 
-    # Triple Riding Module (Dev 2)
-    triple_violation = detect_triple_riding(frame, persons, motorcycles)
-
-    # Overspeed Module (Dev 3)
-    overspeed_violation = detect_overspeed(frame, vehicles)
-
-    # --- Unified Violation Flag ---
-    violation = helmet_violation or triple_violation or overspeed_violation
-
-    # --- Plate Detection (only on violation) ---
-    plate_text, plate_box = None, None
-    if violation:
-        plate_text, plate_box = detect_number_plate(frame)
-
-    # --- Draw Bounding Boxes ---
-    draw_boxes(frame, persons,     color=(255, 200, 0),  label="Person")
-    draw_boxes(frame, motorcycles, color=(0, 255, 100),  label="Motorcycle")
-    draw_boxes(frame, cars,        color=(0, 180, 255),  label="Car")
-    if plate_box:
-        draw_boxes(frame, [plate_box], color=(0, 255, 255), label="Plate")
-
-    # --- Violation Overlay ---
-    draw_violation_overlay(frame, helmet_violation, triple_violation,
-                           overspeed_violation, plate_text)
-
-    return frame
+    return draw_streamlit_logic(frame, persons, motorcycles)
 
 
 # ---------------------------------------------------------------------------
@@ -280,29 +308,161 @@ def get_video_source():
     Returns a cv2.VideoCapture object.
     Change argument to a video file path for offline testing, e.g. "test.mp4".
     """
-    return cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, PROCESS_WIDTH)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+    cap.set(cv2.CAP_PROP_FPS, TARGET_FPS)
+    return cap
+
+
+class LatestFrameCapture:
+    def __init__(self, cap):
+        self.cap = cap
+        self.frame = None
+        self.ok = cap.isOpened()
+        self.lock = threading.Lock()
+        self.stopped = False
+        self.thread = threading.Thread(target=self._reader, daemon=True)
+        self.thread.start()
+
+    def _reader(self):
+        while not self.stopped:
+            ok, frame = self.cap.read()
+            if not ok:
+                self.ok = False
+                time.sleep(0.01)
+                continue
+            with self.lock:
+                self.ok = True
+                self.frame = frame
+
+    def read(self):
+        with self.lock:
+            if self.frame is None:
+                return False, None
+            return self.ok, self.frame.copy()
+
+    def release(self):
+        self.stopped = True
+        self.thread.join(timeout=1)
+        self.cap.release()
+
+
+class AsyncYoloDetector:
+    def __init__(self):
+        self.input_frame = None
+        self.persons = []
+        self.motorcycles = []
+        self.lock = threading.Lock()
+        self.stopped = False
+        self.thread = threading.Thread(target=self._worker, daemon=True)
+        self.thread.start()
+
+    def submit(self, frame):
+        with self.lock:
+            self.input_frame = frame.copy()
+
+    def get_result(self):
+        with self.lock:
+            return list(self.persons), list(self.motorcycles)
+
+    def _worker(self):
+        while not self.stopped:
+            with self.lock:
+                frame = None if self.input_frame is None else self.input_frame.copy()
+
+            if frame is None:
+                time.sleep(0.01)
+                continue
+
+            persons, motorcycles = run_yolo_detection(frame)
+            with self.lock:
+                self.persons = persons
+                self.motorcycles = motorcycles
+
+            time.sleep(DETECTION_INTERVAL)
+
+    def release(self):
+        self.stopped = True
+        self.thread.join(timeout=1)
+
+
+def draw_streamlit_logic(frame, persons, motorcycles):
+    for (x1, y1, x2, y2) in persons:
+        cv2.rectangle(frame, (x1, y1), (x2, y2), COLOR_PERSON, 2)
+        cv2.putText(frame, "Person", (x1, y1 - 6),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLOR_PERSON, 2)
+
+    # Fallback: YOLO sometimes misses the motorcycle at lower confidence.
+    # If 3+ persons are detected but no motorcycle, synthesize a motorcycle
+    # bounding box from the person cluster so triple-riding can still trigger.
+    if not motorcycles and len(persons) >= TRIPLE_THRESHOLD:
+        sx1 = min(p[0] for p in persons)
+        sy1 = min(p[1] for p in persons)
+        sx2 = max(p[2] for p in persons)
+        sy2 = max(p[3] for p in persons)
+        motorcycles = [(sx1, sy1, sx2, sy2)]
+
+    any_triple = False
+
+    for (mx1, my1, mx2, my2) in motorcycles:
+        rider_count = sum(
+            1 for p in persons
+            if is_person_on_motorcycle(p, (mx1, my1, mx2, my2))
+        )
+        triple = rider_count >= TRIPLE_THRESHOLD
+
+        if triple:
+            any_triple = True
+            cv2.rectangle(frame, (mx1, my1), (mx2, my2), COLOR_MOTO_ALERT, 3)
+            cv2.putText(frame, "Triple Riding Detected!",
+                        (mx1, my1 - 28), cv2.FONT_HERSHEY_SIMPLEX, 0.65, COLOR_MOTO_ALERT, 2)
+            cv2.putText(frame, f"Riders: {rider_count}  |  Fine: Rs.1000",
+                        (mx1, my1 - 8),  cv2.FONT_HERSHEY_SIMPLEX, 0.55, COLOR_MOTO_ALERT, 2)
+        else:
+            cv2.rectangle(frame, (mx1, my1), (mx2, my2), COLOR_MOTO_NORMAL, 2)
+            cv2.putText(frame, f"Motorcycle  Riders: {rider_count}",
+                        (mx1, my1 - 6),  cv2.FONT_HERSHEY_SIMPLEX, 0.55, COLOR_MOTO_NORMAL, 2)
+
+    if any_triple:
+        cv2.rectangle(frame, (0, 0), (360, 60), (0, 0, 200), -1)
+        cv2.putText(frame, "TRIPLE RIDING DETECTED", (8, 25),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.72, (255, 255, 255), 2)
+        cv2.putText(frame, "Fine: Rs.1000", (8, 50),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.62, (0, 255, 255), 2)
+
+    return frame
 
 
 def generate_frames():
-    cap = get_video_source()
-    if not cap.isOpened():
+    raw_cap = get_video_source()
+    if not raw_cap.isOpened():
         raise RuntimeError("Cannot open video source.")
+
+    cap = LatestFrameCapture(raw_cap)
+    detector = AsyncYoloDetector()
 
     try:
         while True:
             success, frame = cap.read()
             if not success:
-                break
+                time.sleep(0.01)
+                continue
 
-            frame = process_frame(frame)
+            frame = resize_for_processing(frame)
+            detector.submit(frame)
+            persons, motorcycles = detector.get_result()
+            frame = draw_streamlit_logic(frame, persons, motorcycles)
 
-            ret, buffer = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 85])
+            ret, buffer = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, JPEG_QUALITY])
             if not ret:
                 continue
 
             yield (b"--frame\r\n"
                    b"Content-Type: image/jpeg\r\n\r\n" + buffer.tobytes() + b"\r\n")
     finally:
+        detector.release()
         cap.release()
 
 
@@ -317,10 +477,14 @@ def index():
 
 @app.route("/video")
 def video():
-    return Response(
+    response = Response(
         generate_frames(),
         mimetype="multipart/x-mixed-replace; boundary=frame"
     )
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["X-Accel-Buffering"] = "no"
+    return response
 
 
 # ---------------------------------------------------------------------------
