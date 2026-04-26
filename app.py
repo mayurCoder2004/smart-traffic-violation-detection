@@ -22,16 +22,18 @@ app = Flask(__name__)
 # ---------------------------------------------------------------------------
 model = YOLO("yolov8n.pt")
 
-# Path to a YOLOv8 model trained to detect helmets (not included in COCO).
-# Download a custom model, e.g. from Roboflow Universe, and point this path
-# to the downloaded .pt file.  The detector is disabled gracefully if the
-# file is missing so the rest of the pipeline still runs.
+# Helmet detection model (custom YOLOv8 trained for helmet detection)
 HELMET_MODEL_PATH = "helmet_model.pt"
 
 try:
     _helmet_detector = HelmetDetector(HELMET_MODEL_PATH, helmet_class=0)
+    print(f"[helmet] ✓ Model loaded successfully from {HELMET_MODEL_PATH}")
+    print(f"[helmet] Using class index 0 for 'helmet' detection")
+except FileNotFoundError:
+    print(f"[helmet] ✗ Model file not found at {HELMET_MODEL_PATH}; helmet detection disabled.")
+    _helmet_detector = None
 except Exception as exc:
-    print(f"[helmet] model not loaded ({exc}); helmet detection disabled.")
+    print(f"[helmet] ✗ Model failed to load ({exc}); helmet detection disabled.")
     _helmet_detector = None
 
 # License-plate detection model (custom YOLOv8, e.g. best.pt from Roboflow).
@@ -239,7 +241,7 @@ def _get_pil_font(size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.load_default()
 
 # Loaded once on first use to avoid repeated disk access
-_overlay_font: ImageFont.FreeTypeFont | None = None
+_overlay_font = None
 
 
 def draw_violation_overlay(frame, helmet_violation, triple_violation,

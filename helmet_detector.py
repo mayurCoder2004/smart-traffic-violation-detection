@@ -161,12 +161,19 @@ class HelmetDetector:
         helmet_class: int = 0,
         history_len:  int = HISTORY_LEN,
     ):
+        import os
+        if not os.path.exists(model_path):
+            raise FileNotFoundError(f"Model file not found: {model_path}")
+        
         self.model        = YOLO(model_path)
         self.helmet_class = helmet_class
         self.tracker      = CentroidTracker()
         self.history: dict[int, deque] = defaultdict(
             lambda: deque(maxlen=history_len)
         )
+        
+        print(f"[HelmetDetector] Model initialized from: {model_path}")
+        print(f"[HelmetDetector] Helmet class index: {helmet_class}")
 
     # ── private ───────────────────────────────────────────────────────────────
 
@@ -231,9 +238,20 @@ def draw_helmet_results(frame, results: list):
     """
     for r in results:
         x1, y1, x2, y2 = r['box']
-        color = (0, 200, 0) if r['has_helmet'] else (0, 0, 255)
-        label = "Helmet"    if r['has_helmet'] else "No Helmet"
+        has_helmet = r['has_helmet']
+        
+        # Green for helmet, Red for no helmet
+        color = (0, 255, 0) if has_helmet else (0, 0, 255)
+        label = "Helmet" if has_helmet else "No Helmet"
+        
+        # Draw bounding box
         cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+        
+        # Draw label with background for better visibility
+        label_size, _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)
+        cv2.rectangle(frame, (x1, y1 - label_size[1] - 10), 
+                     (x1 + label_size[0], y1), color, -1)
         cv2.putText(frame, label, (x1, y1 - 6),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+    
     return frame
