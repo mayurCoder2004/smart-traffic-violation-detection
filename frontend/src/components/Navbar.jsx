@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, User, ClipboardList, BarChart2, Menu, X } from 'lucide-react'
+import { Shield, User, ClipboardList, BarChart2, Menu, X, TrafficCone } from 'lucide-react'
 
 const NAV_ITEMS = [
   { to: '/login',     label: 'User Login',      Icon: User },
   { to: '/dashboard', label: 'My Challans',      Icon: ClipboardList },
   { to: '/police',    label: 'Police Dashboard', Icon: BarChart2 },
+  { to: '/signal',    label: 'Traffic Signal',   Icon: TrafficCone },
 ]
 
 export default function Navbar() {

@@ -80,6 +80,10 @@ def allowed_file(filename):
 # ---------------------------------------------------------------------------
 model = YOLO("yolov8n.pt")
 
+# Traffic signal system (loaded once, shared across signal routes)
+from traffic_signal import TrafficSignalSystem as _TrafficSignalSystem
+_signal_system = _TrafficSignalSystem("yolov8n.pt")
+
 # Helmet detection model (custom YOLOv8 trained for helmet detection)
 HELMET_MODEL_PATH = "helmet_model.pt"
 
@@ -1157,6 +1161,100 @@ def detections():
 
 
 # ---------------------------------------------------------------------------
+# Smart Traffic Signal System — separate capture pipeline
+# ---------------------------------------------------------------------------
+_signal_latest_frame  = None
+_signal_frame_lock    = threading.Lock()
+_signal_worker_source = None   # sentinel: worker exits when this changes
+
+
+def _signal_capture_worker(source):
+    global _signal_latest_frame
+    cap = cv2.VideoCapture(source)
+    if not cap.isOpened():
+        return
+    try:
+        while _signal_worker_source == source:
+            ret, frame = cap.read()
+            if not ret:
+                if isinstance(source, str):
+                    cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+                    continue
+                time.sleep(0.033)
+                continue
+            frame = cv2.resize(frame, (854, 480))
+            frame = _signal_system.process_frame(frame)
+            with _signal_frame_lock:
+                _signal_latest_frame = frame
+    finally:
+        cap.release()
+
+
+def _start_signal_capture(source):
+    global _signal_worker_source, _signal_latest_frame
+    _signal_worker_source = source
+    with _signal_frame_lock:
+        _signal_latest_frame = None
+    t = threading.Thread(target=_signal_capture_worker, args=(source,), daemon=True)
+    t.start()
+
+
+def _generate_signal_frames():
+    while True:
+        with _signal_frame_lock:
+            frame = _signal_latest_frame
+        if frame is None:
+            time.sleep(0.02)
+            continue
+        ret, buf = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 65])
+        if ret:
+            yield (b"--frame\r\n"
+                   b"Content-Type: image/jpeg\r\n\r\n" + buf.tobytes() + b"\r\n")
+        time.sleep(0.033)
+
+
+@app.route("/signal_video")
+def signal_video():
+    return Response(
+        _generate_signal_frames(),
+        mimetype="multipart/x-mixed-replace; boundary=frame",
+        headers={
+            "Cache-Control":     "no-cache, no-store, must-revalidate",
+            "Pragma":            "no-cache",
+            "X-Accel-Buffering": "no",
+        },
+    )
+
+
+@app.route("/signal_status")
+def signal_status_route():
+    return jsonify(_signal_system.state)
+
+
+@app.route("/signal_use_webcam", methods=["POST"])
+def signal_use_webcam():
+    _start_signal_capture(0)
+    return jsonify({"success": True})
+
+
+@app.route("/signal_upload", methods=["POST"])
+def signal_upload():
+    if "video" not in request.files:
+        return jsonify({"success": False, "error": "No file in request."}), 400
+    file = request.files["video"]
+    if file.filename == "":
+        return jsonify({"success": False, "error": "No file selected."}), 400
+    if not allowed_file(file.filename):
+        return jsonify({"success": False, "error": "Unsupported format."}), 400
+    original = secure_filename(file.filename)
+    ext      = original.rsplit(".", 1)[1].lower()
+    path     = os.path.join(UPLOAD_FOLDER, f"signal_video.{ext}")
+    file.save(path)
+    _start_signal_capture(path)
+    return jsonify({"success": True, "filename": original})
+
+
+# ---------------------------------------------------------------------------
 # Entry Point
 # ---------------------------------------------------------------------------
 
@@ -1174,5 +1272,6 @@ if __name__ == "__main__":
     _reporter = threading.Thread(target=_violation_reporter_worker, daemon=True)
     _reporter.start()
 
-    _start_capture(0)                               # start webcam worker on launch
+    _start_capture(0)                               # violation detection — webcam
+    _start_signal_capture(0)                        # signal system — webcam
     app.run(host="0.0.0.0", port=9000, debug=False, threaded=True)
