@@ -1,257 +1,338 @@
-# Smart Traffic Violation Detection System
+# Smart Traffic Violation Detection
 
-A real-time traffic violation detection system built with Python, YOLOv8, OpenCV, and Flask. Designed for a 3-developer team with a clean modular architecture so each developer can work independently and integrate seamlessly.
+Real-time traffic violation detection and challan management system built with Flask, YOLOv8, OpenCV, PostgreSQL, Razorpay, and a React dashboard.
 
----
+The app detects traffic violations from webcam/video feeds, records violations and scanner challans, lets police issue challans manually, and lets users view and pay challans for their vehicle.
 
-## Team Responsibilities
+## Features
 
-| Developer | Module | Functions |
-|-----------|--------|-----------|
-| Developer 1 | Helmet Detection + Number Plate OCR | `detect_helmet()`, `detect_number_plate()` |
-| Developer 2 | Triple Riding Detection | `detect_triple_riding()` |
-| Developer 3 | Overspeed Detection | `detect_overspeed()` |
-
----
+- Live violation detection stream for helmet, triple riding, and overspeed checks.
+- Smart police scanner for vehicle lookup, document verification, and challan issuing.
+- User challan dashboard with Razorpay checkout for payments.
+- Police dashboard for viewing all detected violations.
+- Traffic signal simulation/monitoring with its own video feed and status API.
+- PostgreSQL-backed users, violations, scanner challans, challan items, and payments.
+- `users.json` mock vehicle dataset with seeding support.
+- 24-hour duplicate rule: one challan per vehicle per violation type within 24 hours.
+- IST timestamps in API responses.
 
 ## Tech Stack
 
-| Tool | Purpose |
-|------|---------|
-| Python 3.10+ | Core language |
-| YOLOv8 (`yolov8n.pt`) | Object detection (person, motorcycle, car) |
-| OpenCV | Frame capture and drawing |
-| Flask | Web server + live video streaming |
-| EasyOCR / pytesseract | *(Dev 1)* Number plate text extraction |
-
----
+| Layer | Tools |
+| --- | --- |
+| Backend | Python, Flask, Flask-CORS, Flask-SQLAlchemy |
+| CV/ML | OpenCV, Ultralytics YOLOv8, EasyOCR, Pillow |
+| Frontend | React, Vite, Tailwind CSS, Framer Motion, Lucide React |
+| Database | PostgreSQL, psycopg2 |
+| Payments | Razorpay |
+| Utilities | Docker Compose, python-dotenv |
 
 ## Project Structure
 
-```
+```text
 smart-traffic-violation-detection/
-├── app.py                  # Main pipeline — all modules integrated here
-├── requirements.txt        # Python dependencies
-├── README.md
+├── app.py                         # Main Flask app, CV streams, scanner APIs, payment APIs
+├── helmet_detector.py             # Helmet detector wrapper
+├── overspeed_detector.py          # Overspeed logic/helpers
+├── triple_riding.py               # Triple-riding detection module
+├── traffic_signal.py              # Traffic signal processing system
+├── streamlit_app.py               # Optional Streamlit entry point
+├── generate_mock_data.py          # Generates users.json vehicle records
+├── seed_db.py                     # Seeds PostgreSQL from users.json
+├── migrate_docker_to_neon.py      # Helper for migrating local DB data to Neon
+├── users.json                     # Mock vehicle registry dataset
+├── requirements.txt               # Python dependencies
+├── docker-compose.yml             # Local PostgreSQL service
+├── .env.example                   # Environment variable template
+├── backend/
+│   ├── config.py                  # Flask config
+│   ├── extensions.py              # SQLAlchemy instance
+│   ├── models.py                  # User, Violation, ScannerChallan, Payment models
+│   └── routes/
+│       ├── users.py               # /users APIs
+│       ├── violations.py          # /violations APIs
+│       └── payments.py            # Razorpay APIs for legacy violations
+├── frontend/
+│   ├── package.json               # React app dependencies/scripts
+│   ├── vite.config.js             # Vite dev server and proxy config
+│   └── src/
+│       ├── App.jsx                # React routes
+│       ├── api/index.js           # Axios helpers
+│       └── components/
+│           ├── Login.jsx
+│           ├── ChallanUser.jsx
+│           ├── ChallanPolice.jsx
+│           ├── PoliceDashboard.jsx
+│           ├── TrafficSignal.jsx
+│           ├── PaymentButton.jsx
+│           └── Navbar.jsx
 └── templates/
-    └── index.html          # Live stream frontend (Flask)
+    └── index.html                 # Basic Flask stream page
 ```
 
----
+## Prerequisites
 
-## Setup & Installation
+- Python 3.9+.
+- Node.js 18+.
+- PostgreSQL, either local via Docker Compose or hosted, such as Neon.
+- Razorpay test keys if payment windows should open.
+- Model files where used by the app:
+  - `yolov8n.pt` is downloaded by Ultralytics if missing.
+  - `helmet_model.pt` is expected locally for helmet detection.
+  - `license_plate_detector.pt` is expected locally for plate detection.
 
-### 1. Clone the repository
+## Environment
+
+Create `.env` from the example:
 
 ```bash
-git clone https://github.com/your-org/smart-traffic-violation-detection.git
-cd smart-traffic-violation-detection
+cp .env.example .env
 ```
 
-### 2. Create a virtual environment (recommended)
+Required variables:
+
+```env
+DATABASE_URL=postgresql://traffic_user:traffic_pass@localhost:5432/traffic_violations
+RAZORPAY_KEY_ID=your_razorpay_key_id_here
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret_here
+SECRET_KEY=change-this-to-a-random-secret-key
+FLASK_ENV=development
+```
+
+Do not commit real `.env` secrets.
+
+## Backend Setup
+
+Create and activate a virtual environment:
 
 ```bash
 python -m venv venv
-
-# Windows
-venv\Scripts\activate
-
-# macOS / Linux
 source venv/bin/activate
 ```
 
-### 3. Install dependencies
+Install Python dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-> YOLOv8 will automatically download `yolov8n.pt` on first run.
+Start local PostgreSQL if you are not using a hosted database:
 
-### 4. Run the app
+```bash
+docker compose up -d db
+```
+
+Generate mock vehicle data if needed:
+
+```bash
+python generate_mock_data.py
+```
+
+Seed the database:
+
+```bash
+python seed_db.py
+```
+
+Useful seeding commands:
+
+```bash
+python seed_db.py --check
+python seed_db.py --reset
+```
+
+Start Flask:
 
 ```bash
 python app.py
 ```
 
-Open your browser at `http://localhost:5000`
+The backend runs on:
 
----
-
-## Pipeline Overview
-
-```
-Webcam / Video File
-        │
-        ▼
- run_yolo_detection()
-        │
-        ├──► persons       (list of bounding boxes)
-        ├──► motorcycles   (list of bounding boxes)
-        └──► vehicles      (motorcycles + cars)
-        │
-        ├──► detect_helmet(frame, persons)            → helmet_violation
-        ├──► detect_triple_riding(frame, persons, motorcycles) → triple_violation
-        └──► detect_overspeed(frame, vehicles)        → overspeed_violation
-        │
-        violation = helmet_violation OR triple_violation OR overspeed_violation
-        │
-        if violation:
-            detect_number_plate(frame)  →  plate_text, plate_box
-        │
-        Draw boxes + overlay text on frame
-        │
-        Flask /video  →  Browser
+```text
+http://localhost:9000
 ```
 
----
+## Frontend Setup
 
-## Module Guide for Developers
+In a second terminal:
 
-### Developer 1 — Helmet Detection + Number Plate
-
-**File:** `app.py`
-**Functions to implement:** `detect_helmet()` and `detect_number_plate()`
-
-```python
-def detect_helmet(frame, persons):
-    # persons: list of (x1, y1, x2, y2) bounding boxes
-    # Return True if any person is detected WITHOUT a helmet
-    pass
-
-def detect_number_plate(frame):
-    # Return (plate_text, plate_box) or (None, None) if not found
-    pass
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
-**Suggested approach:**
-- Crop each person ROI from the frame using the bounding box
-- Run a helmet classifier (secondary YOLO or CNN) on each ROI
-- For plates: use a plate-detection model or OpenCV contour methods, then run EasyOCR on the cropped plate region
+Open:
 
-**Extra dependency to add:**
-```
-easyocr
+```text
+http://localhost:5173
 ```
 
----
+Build production assets:
 
-### Developer 2 — Triple Riding Detection
-
-**File:** `app.py`
-**Function to implement:** `detect_triple_riding()`
-
-```python
-def detect_triple_riding(frame, persons, motorcycles):
-    # persons: list of (x1, y1, x2, y2)
-    # motorcycles: list of (x1, y1, x2, y2)
-    # Return True if 3 or more persons are detected on a single motorcycle
-    pass
+```bash
+cd frontend
+npm run build
 ```
 
-**Suggested approach:**
-- For each motorcycle bounding box, count how many person boxes overlap with it (using IoU or containment check)
-- If any motorcycle has 3 or more overlapping persons → return `True`
+## Main App Pages
 
-**Overlap helper snippet:**
-```python
-def boxes_overlap(box_a, box_b):
-    ax1, ay1, ax2, ay2 = box_a
-    bx1, by1, bx2, by2 = box_b
-    return ax1 < bx2 and ax2 > bx1 and ay1 < by2 and ay2 > by1
+| Page | Route | Purpose |
+| --- | --- | --- |
+| Login | `/login` | Vehicle plate login |
+| My Challans | `/dashboard` | User challan list and Razorpay payment |
+| Police Dashboard | `/police` | All detected violations |
+| Traffic Signal | `/signal` | Signal video/status UI |
+| Police Scanner | `/scanner` | Scan plate, verify documents, issue challans |
+
+## Backend APIs
+
+### Core Video and Detection
+
+| Method | Route | Description |
+| --- | --- | --- |
+| `GET` | `/` | Basic Flask stream page |
+| `GET` | `/video` | Main MJPEG violation detection stream |
+| `POST` | `/upload` | Upload a video for detection |
+| `POST` | `/use_webcam` | Switch main detection source to webcam |
+| `GET` | `/source_status` | Current video source metadata |
+| `GET` | `/detections` | Latest detection status |
+
+### Traffic Signal
+
+| Method | Route | Description |
+| --- | --- | --- |
+| `GET` | `/signal_video` | Traffic signal MJPEG stream |
+| `GET` | `/signal_status` | Signal counts, current green lane, countdown |
+| `POST` | `/signal_use_webcam` | Switch signal source to webcam |
+| `POST` | `/signal_upload` | Upload a signal video |
+
+### Users and Violations
+
+| Method | Route | Description |
+| --- | --- | --- |
+| `POST` | `/users` | Create a user |
+| `POST` | `/users/login` | Plate-based login |
+| `GET` | `/users` | List users |
+| `GET` | `/users/<plate>` | Get user by plate |
+| `POST` | `/violations` | Create a legacy violation |
+| `GET` | `/violations` | List all violations |
+| `GET` | `/violations/user/<user_id>` | List violations for one user |
+| `GET` | `/violations/<violation_id>` | Get one violation |
+
+### Scanner and Challans
+
+| Method | Route | Description |
+| --- | --- | --- |
+| `GET` | `/scan/<plate>` | Lookup vehicle from `users.json`, then PostgreSQL fallback |
+| `GET` | `/user/<plate>` | User profile plus scanner challans |
+| `POST` | `/create-challan` | Issue scanner challan |
+| `POST` | `/pay/<challan_id>` | Mark challan paid, kept for fallback/manual flows |
+| `GET` | `/all-challans` | List scanner challans |
+| `GET` | `/sample-plates` | Get sample plates for scanner quick-fill |
+
+### Payments
+
+| Method | Route | Description |
+| --- | --- | --- |
+| `POST` | `/payments/create-order` | Create Razorpay order for legacy violations |
+| `POST` | `/payments/verify` | Verify Razorpay payment for legacy violations |
+| `POST` | `/payments/create-scanner-order` | Create Razorpay order for scanner challans |
+| `POST` | `/payments/verify-scanner` | Verify scanner challan payment |
+
+## Data Model Summary
+
+- `User`: owner, phone, license plate, vehicle type, RC/insurance/PUC status.
+- `Violation`: CV/legacy violation row with status and fine.
+- `ScannerChallan`: challan issued from scanner or CV pipeline.
+- `ScannerChallanItem`: individual violation/document item inside a challan.
+- `Payment`: Razorpay order/payment record for legacy violations.
+
+## Violation Types and Fines
+
+| Violation | Fine |
+| --- | ---: |
+| No Helmet | Rs. 500 |
+| Triple Riding | Rs. 1000 |
+| Overspeed | Rs. 1000 |
+| No Insurance | Rs. 1000 |
+| No PUC | Rs. 500 |
+
+Scanner challans enforce one challan item per vehicle per violation type in a rolling 24-hour window.
+
+## Common Workflows
+
+### Register and seed vehicles
+
+```bash
+python generate_mock_data.py 1000
+python seed_db.py
 ```
 
----
+### Check if DB has records
 
-### Developer 3 — Overspeed Detection
-
-**File:** `app.py`
-**Function to implement:** `detect_overspeed()`
-
-```python
-def detect_overspeed(frame, vehicles):
-    # vehicles: list of (x1, y1, x2, y2)
-    # Return True if any vehicle is estimated to be over the speed limit
-    pass
+```bash
+python seed_db.py --check
 ```
 
-**Suggested approach:**
-- Track vehicle centroids across frames using a simple dictionary keyed by vehicle ID
-- Calculate pixel displacement per frame
-- Convert to km/h using a known scale factor (pixels per meter)
-- Set a threshold (e.g. 60 km/h) and return `True` if any vehicle exceeds it
+### Run the full app locally
 
----
+Terminal 1:
 
-## Function Contracts (Quick Reference)
-
-| Function | Input | Output |
-|----------|-------|--------|
-| `detect_helmet(frame, persons)` | BGR frame, list of person boxes | `bool` |
-| `detect_number_plate(frame)` | BGR frame | `(str \| None, tuple \| None)` |
-| `detect_triple_riding(frame, persons, motorcycles)` | BGR frame, person boxes, motorcycle boxes | `bool` |
-| `detect_overspeed(frame, vehicles)` | BGR frame, vehicle boxes | `bool` |
-
-> **Rule:** Each developer only modifies their own function(s). The `process_frame()` loop and all other code remains unchanged.
-
----
-
-## Testing with a Video File
-
-To test without a live webcam, edit `get_video_source()` in `app.py`:
-
-```python
-def get_video_source():
-    return cv2.VideoCapture("test.mp4")   # replace with your video path
+```bash
+source venv/bin/activate
+python app.py
 ```
 
----
+Terminal 2:
 
-## Violation Logic & Fines
-
-| Violation | Display Message | Fine |
-|-----------|----------------|------|
-| No Helmet | `No Helmet X` | ₹500 |
-| Triple Riding | `Triple Riding !!!` | ₹1000 |
-| Overspeed | `Overspeed >>>` | ₹1000 |
-
-Number plate is detected and displayed **only when a violation is triggered** — avoiding unnecessary processing on clean frames.
-
----
-
-## Git Workflow (Recommended)
-
-```
-main
- ├── feature/helmet-detection     ← Developer 1
- ├── feature/triple-riding        ← Developer 2
- └── feature/overspeed            ← Developer 3
+```bash
+cd frontend
+npm run dev
 ```
 
-Each developer works on their own branch and submits a PR. Since all functions have isolated signatures, merges should be conflict-free.
+### Use Police Scanner
 
----
+1. Open `http://localhost:5173/scanner`.
+2. Enter or quick-fill a plate number.
+3. Scan/verify the registered owner and documents.
+4. Select violation types.
+5. Issue challan.
+6. User can view/pay it from `/dashboard`.
 
-## Flask Endpoints
+## Notes
 
-| Route | Description |
-|-------|-------------|
-| `GET /` | Web UI with live stream |
-| `GET /video` | MJPEG stream (used by the `<img>` tag in the UI) |
+- The frontend is configured to talk to `http://localhost:9000`.
+- Some frontend API helpers use Vite proxies, while scanner pages call the backend directly.
+- If backend code changes, restart `python app.py`.
+- If the payment window does not open, confirm Razorpay keys are present and the checkout script is loaded from `frontend/index.html`.
+- If a DB-only plate scans correctly but challan issuing fails, restart Flask so the latest backend lookup code is loaded.
 
----
+## Troubleshooting
 
-## Requirements
+### `NotOpenSSLWarning` on macOS
 
+This warning comes from urllib3 with Python builds linked against LibreSSL. The app can still run. Using a Python.org/Homebrew Python linked with OpenSSL removes the warning.
+
+### Camera is busy or blank
+
+Close other apps using the webcam, then restart Flask. You can also upload a video from the UI.
+
+### Tables missing columns
+
+Run:
+
+```bash
+python seed_db.py
 ```
-flask>=3.0
-opencv-python>=4.9
-ultralytics>=8.0
-numpy>=1.24
-```
 
----
+The seeder applies missing scanner columns before inserting rows.
+
+### Duplicate challan skipped
+
+This is intentional. The scanner blocks duplicate challan items for the same vehicle and violation type within 24 hours.
 
 ## License
 
-MIT — built for hackathon use.
+MIT.

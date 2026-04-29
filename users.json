@@ -1,0 +1,9002 @@
+{
+  "KA43MS8905": {
+    "owner": "Sneha Gupta",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA28QL4371": {
+    "owner": "Aditya Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA58XF7372": {
+    "owner": "Aditya Saxena",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA76XV5458": {
+    "owner": "Sunil Kapoor",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA64VJ9150": {
+    "owner": "Meera Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA79MU8532": {
+    "owner": "Sunita Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA45ZB0428": {
+    "owner": "Manish Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA32UU1569": {
+    "owner": "Sneha Bose",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA88MH5968": {
+    "owner": "Sanjay Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94RL9614": {
+    "owner": "Suresh Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA32UJ9690": {
+    "owner": "Deepak Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA04AT0497": {
+    "owner": "Rajesh Iyer",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA75AE4629": {
+    "owner": "Venkat Malhotra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA56HJ9709": {
+    "owner": "Karthik Nair",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA72GI9640": {
+    "owner": "Geeta Kapoor",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA38TD3614": {
+    "owner": "Rajesh Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA53LR7886": {
+    "owner": "Prasad Malhotra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA51XL3551": {
+    "owner": "Usha Dubey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA08AN6409": {
+    "owner": "Ananya Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA05CI0825": {
+    "owner": "Rajesh Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA61LC0788": {
+    "owner": "Priya Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA04EC2723": {
+    "owner": "Sunita Nair",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA13AI4494": {
+    "owner": "Sunil Sharma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA52OV0495": {
+    "owner": "Sunil Anand",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA45IC0388": {
+    "owner": "Neha Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA47CW7306": {
+    "owner": "Meera Mehta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA39DI0655": {
+    "owner": "Rohan Mishra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA89SM2777": {
+    "owner": "Ganesh Gupta",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA67WX0266": {
+    "owner": "Raghav Malhotra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA96BQ3928": {
+    "owner": "Ananya Verma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA01BA6401": {
+    "owner": "Amit Khanna",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA09FU7533": {
+    "owner": "Manish Srivastava",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA37FW6692": {
+    "owner": "Nikhil Kapoor",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA76MJ8958": {
+    "owner": "Sanjay Dubey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA14MQ0489": {
+    "owner": "Meera Nair",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA92OP4777": {
+    "owner": "Sunita Sharma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94CB1764": {
+    "owner": "Nikhil Menon",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA38QJ7482": {
+    "owner": "Sanjay Dhingra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA02JK9517": {
+    "owner": "Aditya Pandey",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA38VO8229": {
+    "owner": "Sunil Krishnan",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA12VW7838": {
+    "owner": "Mohan Anand",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA12BZ1525": {
+    "owner": "Manish Srivastava",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA36QO6287": {
+    "owner": "Ravi Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA07TW9930": {
+    "owner": "Ananya Shukla",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA84YE3140": {
+    "owner": "Priya Bansal",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA35PT9413": {
+    "owner": "Manish Menon",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA90TX8235": {
+    "owner": "Sneha Roy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA23QS8038": {
+    "owner": "Kavya Mishra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA94LJ7086": {
+    "owner": "Karthik Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA17ZR9668": {
+    "owner": "Vijay Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA70RK4060": {
+    "owner": "Lakshmi Khanna",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA56EK1097": {
+    "owner": "Vijay Singh",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA12PD8510": {
+    "owner": "Vikram Khanna",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA19YG8391": {
+    "owner": "Neha Agarwal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA14VY2412": {
+    "owner": "Sunil Khanna",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA01SN4754": {
+    "owner": "Nikhil Patel",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA04YF1105": {
+    "owner": "Nikhil Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA30BV3288": {
+    "owner": "Deepak Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA27MD6847": {
+    "owner": "Rajesh Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA22SF3417": {
+    "owner": "Raghav Dubey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA50VW8723": {
+    "owner": "Rahul Malhotra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA64ON6249": {
+    "owner": "Prasad Das",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA72BK8671": {
+    "owner": "Priya Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA32MC2602": {
+    "owner": "Vikram Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA75ZJ9125": {
+    "owner": "Priya Srivastava",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA33PG1647": {
+    "owner": "Nikhil Kapoor",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA85TH2344": {
+    "owner": "Nikhil Srivastava",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA89ST1029": {
+    "owner": "Neha Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA70JJ4747": {
+    "owner": "Nikhil Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA72AG5122": {
+    "owner": "Divya Sharma",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA73YR6893": {
+    "owner": "Geeta Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA74QC0753": {
+    "owner": "Priya Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA37OY2558": {
+    "owner": "Sunita Dhingra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA38IG5868": {
+    "owner": "Meera Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA78SY5618": {
+    "owner": "Divya Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA26OE5122": {
+    "owner": "Rahul Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA93SF3336": {
+    "owner": "Prasad Malhotra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA72XB2942": {
+    "owner": "Lakshmi Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA34QW1921": {
+    "owner": "Priya Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA79VW2709": {
+    "owner": "Ramesh Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA71EF2395": {
+    "owner": "Sanjay Tiwari",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA21MA6876": {
+    "owner": "Karthik Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA82YZ9662": {
+    "owner": "Vikram Pillai",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA85VE5403": {
+    "owner": "Nikhil Nair",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52AM0181": {
+    "owner": "Suresh Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA55ZE2018": {
+    "owner": "Gopal Rao",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA73NQ1806": {
+    "owner": "Rohan Nair",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA58PQ9509": {
+    "owner": "Ramesh Bhatia",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA28AZ2590": {
+    "owner": "Lakshmi Pillai",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA88AP0492": {
+    "owner": "Usha Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA42ZT7794": {
+    "owner": "Harish Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA19IC2353": {
+    "owner": "Geeta Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA88KC3099": {
+    "owner": "Neha Kumar",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA72YI2476": {
+    "owner": "Prasad Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA62JT7108": {
+    "owner": "Deepak Verma",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA32ZZ6458": {
+    "owner": "Suresh Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA01PA5606": {
+    "owner": "Rekha Verma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA01XM9260": {
+    "owner": "Shanta Joshi",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA40LM7869": {
+    "owner": "Ganesh Verma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA86TK1805": {
+    "owner": "Arjun Agarwal",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA30FA1877": {
+    "owner": "Mohan Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA89FQ5428": {
+    "owner": "Rahul Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA21ZM4442": {
+    "owner": "Aarav Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA33VQ6670": {
+    "owner": "Sanjay Malhotra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA76FZ5368": {
+    "owner": "Suresh Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA17DQ1085": {
+    "owner": "Rekha Bhatia",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA80BW2065": {
+    "owner": "Raghav Dhingra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA83MY3867": {
+    "owner": "Divya Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA07XB1964": {
+    "owner": "Ganesh Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA67MH6917": {
+    "owner": "Shreya Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA36KC2671": {
+    "owner": "Pooja Krishnan",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA41SC1027": {
+    "owner": "Manish Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA07OA5921": {
+    "owner": "Harish Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA84LG3472": {
+    "owner": "Rohan Chatterjee",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA47CN0323": {
+    "owner": "Lakshmi Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA18CY1987": {
+    "owner": "Geeta Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA91DR2707": {
+    "owner": "Ravi Pandey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA76KZ8790": {
+    "owner": "Rohan Mukherjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA46HG5234": {
+    "owner": "Geeta Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA23FG2963": {
+    "owner": "Sunil Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA43BP1499": {
+    "owner": "Arjun Mehta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52HW2744": {
+    "owner": "Gopal Singh",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA62WZ6753": {
+    "owner": "Raghav Mehta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA16ZU8089": {
+    "owner": "Usha Joshi",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA33OH4212": {
+    "owner": "Meera Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA12BI7138": {
+    "owner": "Raghav Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA09LO8420": {
+    "owner": "Venkat Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA81HF3991": {
+    "owner": "Vikram Nair",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA29KA2159": {
+    "owner": "Divya Anand",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA15TR4569": {
+    "owner": "Divya Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA29XU4088": {
+    "owner": "Karthik Verma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA41HN9212": {
+    "owner": "Sanjay Pandey",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA24HD1116": {
+    "owner": "Vikram Pillai",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA78FD7679": {
+    "owner": "Priya Mehta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA46BL7039": {
+    "owner": "Arjun Sharma",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA23BF8694": {
+    "owner": "Sunil Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA29MW9460": {
+    "owner": "Venkat Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA88LZ7667": {
+    "owner": "Ananya Bansal",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA41RL0446": {
+    "owner": "Gopal Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA01CU9306": {
+    "owner": "Karthik Rao",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA98MJ8819": {
+    "owner": "Deepak Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA32NE2841": {
+    "owner": "Usha Singh",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA20FC8959": {
+    "owner": "Suresh Agarwal",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA49KX5386": {
+    "owner": "Ananya Iyer",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA55CY3842": {
+    "owner": "Geeta Roy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA92DP3771": {
+    "owner": "Meera Bhatia",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA05LY7601": {
+    "owner": "Prasad Roy",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA88NR8193": {
+    "owner": "Sunita Pillai",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA58ZJ0334": {
+    "owner": "Priya Kumar",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA97TL4686": {
+    "owner": "Rajesh Bose",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA30ST6250": {
+    "owner": "Suresh Sharma",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA19SG3342": {
+    "owner": "Neha Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA27AJ6448": {
+    "owner": "Amit Shukla",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA94FS3598": {
+    "owner": "Rekha Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA80EJ7032": {
+    "owner": "Shreya Khanna",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA50PE7702": {
+    "owner": "Pooja Khanna",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA57QH2636": {
+    "owner": "Raghav Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA63HI4428": {
+    "owner": "Shreya Mishra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA17LZ5400": {
+    "owner": "Neha Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA12WB2042": {
+    "owner": "Sunil Anand",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA82MK9227": {
+    "owner": "Rajesh Nair",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA06ZB2745": {
+    "owner": "Kavya Kapoor",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA55EY8629": {
+    "owner": "Ravi Pillai",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA78SQ0791": {
+    "owner": "Meera Saxena",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA09FJ5563": {
+    "owner": "Mohan Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA42TG0780": {
+    "owner": "Shanta Mishra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA24ZR8982": {
+    "owner": "Shanta Tiwari",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA91VS7645": {
+    "owner": "Usha Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA10EY3610": {
+    "owner": "Amit Anand",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA86ZE0069": {
+    "owner": "Priya Dhingra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA57BL0900": {
+    "owner": "Priya Rao",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA72LO3998": {
+    "owner": "Divya Dhingra",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA46YO8145": {
+    "owner": "Divya Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA44YY2474": {
+    "owner": "Priya Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA18ZA1196": {
+    "owner": "Lakshmi Khanna",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA43CZ9227": {
+    "owner": "Sunil Agarwal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA92WP8011": {
+    "owner": "Manish Shukla",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA62NK8991": {
+    "owner": "Mohan Pandey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA83KD0179": {
+    "owner": "Arjun Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA91SL6993": {
+    "owner": "Shanta Pillai",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA20DZ2010": {
+    "owner": "Aarav Singh",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA15AG5921": {
+    "owner": "Vijay Kapoor",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA71BI8083": {
+    "owner": "Ananya Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA51MA0813": {
+    "owner": "Vikram Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA54KK5495": {
+    "owner": "Aarav Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA98EZ0223": {
+    "owner": "Divya Mehta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA94YF6472": {
+    "owner": "Neha Verma",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA37CK6332": {
+    "owner": "Suresh Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA54CQ0011": {
+    "owner": "Rekha Das",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA93ZR0473": {
+    "owner": "Vijay Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA82HM4736": {
+    "owner": "Suresh Roy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA53AK4989": {
+    "owner": "Vijay Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA09DG4645": {
+    "owner": "Meera Chatterjee",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA84YY1081": {
+    "owner": "Raghav Malhotra",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA70OT0927": {
+    "owner": "Meera Gupta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA11VM3722": {
+    "owner": "Raghav Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA40GL3774": {
+    "owner": "Ananya Menon",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA61LS1768": {
+    "owner": "Raghav Nair",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA45PU0422": {
+    "owner": "Amit Krishnan",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA75CQ2437": {
+    "owner": "Manish Nair",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA43KU7449": {
+    "owner": "Nikhil Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA68MW1248": {
+    "owner": "Shanta Rao",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA06XJ8150": {
+    "owner": "Prasad Iyer",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA41AQ3474": {
+    "owner": "Sneha Verma",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA45CQ6439": {
+    "owner": "Suresh Pandey",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA91BH2791": {
+    "owner": "Ananya Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA18LT6536": {
+    "owner": "Vijay Chatterjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA78CQ2453": {
+    "owner": "Priya Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA86QH0695": {
+    "owner": "Manish Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA64LB1431": {
+    "owner": "Pooja Mehta",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA76WC7669": {
+    "owner": "Rahul Mishra",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA79GV0034": {
+    "owner": "Gopal Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA42VV9763": {
+    "owner": "Arjun Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA85KK1129": {
+    "owner": "Lakshmi Mehta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA04RZ7108": {
+    "owner": "Pooja Bose",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA30AR3441": {
+    "owner": "Sanjay Khanna",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA51WR1051": {
+    "owner": "Harish Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA34HF5555": {
+    "owner": "Ganesh Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA96EV6171": {
+    "owner": "Harish Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA03LJ4948": {
+    "owner": "Harish Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA41ZN9427": {
+    "owner": "Nikhil Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA60PK2250": {
+    "owner": "Amit Menon",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA47CT6023": {
+    "owner": "Geeta Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA68AN0178": {
+    "owner": "Karthik Mehta",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA37ZW2027": {
+    "owner": "Venkat Saxena",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA49CP0220": {
+    "owner": "Manish Reddy",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA39UR0492": {
+    "owner": "Karthik Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA58CT4002": {
+    "owner": "Nikhil Gupta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA09ML1732": {
+    "owner": "Amit Mishra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA98AD5139": {
+    "owner": "Rahul Malhotra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA69JV1900": {
+    "owner": "Aarav Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA06HS7065": {
+    "owner": "Vikram Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA53GN2311": {
+    "owner": "Kavya Patel",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA71RZ1359": {
+    "owner": "Karthik Bhatia",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA59BK7946": {
+    "owner": "Rekha Roy",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA69NF3614": {
+    "owner": "Ananya Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA35SN9410": {
+    "owner": "Sanjay Anand",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA87TD0127": {
+    "owner": "Mohan Mukherjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA73KN4712": {
+    "owner": "Geeta Shukla",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA75WB0504": {
+    "owner": "Prasad Saxena",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94PH8340": {
+    "owner": "Karthik Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA09RD8839": {
+    "owner": "Gopal Agarwal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA90SQ8482": {
+    "owner": "Venkat Dubey",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA22QA3431": {
+    "owner": "Raghav Bose",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA33CS1485": {
+    "owner": "Sanjay Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52MI2844": {
+    "owner": "Prasad Joshi",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA20VS8576": {
+    "owner": "Aditya Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA02BD2966": {
+    "owner": "Rekha Srivastava",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA75HA8186": {
+    "owner": "Rekha Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA68KB8707": {
+    "owner": "Ananya Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA78CA6671": {
+    "owner": "Meera Joshi",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA60DA6721": {
+    "owner": "Karthik Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA40TR0566": {
+    "owner": "Pooja Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA70TL5265": {
+    "owner": "Sanjay Chatterjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA43AL4106": {
+    "owner": "Sunita Kumar",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA91YI8268": {
+    "owner": "Geeta Kumar",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA57AY5038": {
+    "owner": "Ravi Iyer",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA53VS3961": {
+    "owner": "Sneha Anand",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA56VE2067": {
+    "owner": "Raghav Pillai",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA30ZF8629": {
+    "owner": "Arjun Rao",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA99QY2478": {
+    "owner": "Geeta Kapoor",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA35LR4780": {
+    "owner": "Neha Rao",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA15FB4811": {
+    "owner": "Meera Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA59EM9934": {
+    "owner": "Geeta Dhingra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA69ES8663": {
+    "owner": "Karthik Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA64EP2165": {
+    "owner": "Vikram Das",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA58RN4506": {
+    "owner": "Sunil Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA68OW1139": {
+    "owner": "Aarav Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA75VN0879": {
+    "owner": "Rajesh Malhotra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA40AV6061": {
+    "owner": "Deepak Verma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA96BX5129": {
+    "owner": "Gopal Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA33HF1591": {
+    "owner": "Gopal Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA43PF9971": {
+    "owner": "Priya Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA96OQ7959": {
+    "owner": "Manish Saxena",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA59BC9832": {
+    "owner": "Vijay Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA27ZL2153": {
+    "owner": "Aarav Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA57XH2876": {
+    "owner": "Rohan Agarwal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA07ZO1326": {
+    "owner": "Sanjay Dhingra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA93CR3271": {
+    "owner": "Ramesh Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA74SW8520": {
+    "owner": "Deepak Gupta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA74UO5232": {
+    "owner": "Venkat Joshi",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA85AI1145": {
+    "owner": "Venkat Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA60WU6184": {
+    "owner": "Ravi Sharma",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA08UT1954": {
+    "owner": "Divya Das",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA71KD5601": {
+    "owner": "Ramesh Iyer",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA74WY2281": {
+    "owner": "Kavya Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA12FH0388": {
+    "owner": "Raghav Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA37RD3110": {
+    "owner": "Vikram Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA01CM1035": {
+    "owner": "Prasad Gupta",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA87PE1566": {
+    "owner": "Priya Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA80KW5875": {
+    "owner": "Kavya Verma",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA46WR4223": {
+    "owner": "Neha Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA87QY9648": {
+    "owner": "Suresh Agarwal",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA25BN7639": {
+    "owner": "Sanjay Dubey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA38WT8287": {
+    "owner": "Shanta Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA88EL0553": {
+    "owner": "Aditya Patel",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA22GY5063": {
+    "owner": "Amit Pandey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA14ZW0735": {
+    "owner": "Nikhil Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA97SR8454": {
+    "owner": "Mohan Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA91QJ8288": {
+    "owner": "Vijay Patel",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA11VV8268": {
+    "owner": "Mohan Joshi",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA66UV6736": {
+    "owner": "Aarav Khanna",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA72HO5535": {
+    "owner": "Shanta Chatterjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA33EB0641": {
+    "owner": "Arjun Nair",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA25HN0777": {
+    "owner": "Meera Mishra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA37CO7100": {
+    "owner": "Divya Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA62HY0085": {
+    "owner": "Lakshmi Malhotra",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA17MC9084": {
+    "owner": "Harish Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA24AH3465": {
+    "owner": "Shreya Patel",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA67TG2920": {
+    "owner": "Arjun Roy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA58BH2736": {
+    "owner": "Sunita Singh",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA95QN0997": {
+    "owner": "Ananya Gupta",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA12PT4202": {
+    "owner": "Ananya Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA98EX9252": {
+    "owner": "Karthik Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA41WC8832": {
+    "owner": "Sunil Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA02NV3505": {
+    "owner": "Rekha Das",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA75KJ7696": {
+    "owner": "Mohan Verma",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA40SJ3281": {
+    "owner": "Ravi Singh",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA72OD4478": {
+    "owner": "Ganesh Chatterjee",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA94VN6699": {
+    "owner": "Ganesh Kapoor",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA77DK6534": {
+    "owner": "Nikhil Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA22FV6025": {
+    "owner": "Rekha Anand",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA93FH0217": {
+    "owner": "Ravi Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA14YR9106": {
+    "owner": "Usha Mehta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA42TK0731": {
+    "owner": "Rajesh Roy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA22EV1670": {
+    "owner": "Sunita Srivastava",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA54SF1140": {
+    "owner": "Divya Malhotra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA50IY8157": {
+    "owner": "Aditya Dubey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA54VL2930": {
+    "owner": "Neha Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA96ZB4804": {
+    "owner": "Rajesh Agarwal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA85HS1577": {
+    "owner": "Sunita Menon",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA75EO4348": {
+    "owner": "Rohan Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA97WN0382": {
+    "owner": "Meera Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA86GZ5346": {
+    "owner": "Geeta Saxena",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94JD3189": {
+    "owner": "Shreya Khanna",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA55WM8942": {
+    "owner": "Mohan Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA88DH7545": {
+    "owner": "Neha Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA92MV4270": {
+    "owner": "Lakshmi Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94AV3255": {
+    "owner": "Amit Mukherjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA48HT1863": {
+    "owner": "Sunil Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA15PQ4955": {
+    "owner": "Priya Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA33JQ6023": {
+    "owner": "Pooja Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA99TK3108": {
+    "owner": "Pooja Srivastava",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA54VV6911": {
+    "owner": "Harish Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA40SG2163": {
+    "owner": "Venkat Khanna",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA49NS9106": {
+    "owner": "Rohan Nair",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA92BQ1280": {
+    "owner": "Prasad Patel",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA50VC7607": {
+    "owner": "Aarav Khanna",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA38KI8810": {
+    "owner": "Geeta Tiwari",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA79ZH5089": {
+    "owner": "Vijay Pandey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA87SS4031": {
+    "owner": "Raghav Tiwari",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA36PX3824": {
+    "owner": "Vikram Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA66JM8529": {
+    "owner": "Rohan Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA96WR1509": {
+    "owner": "Sneha Dubey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA58LJ7166": {
+    "owner": "Vikram Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA33AH1419": {
+    "owner": "Shanta Singh",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA11RX9949": {
+    "owner": "Ramesh Srivastava",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA98YY6127": {
+    "owner": "Karthik Sharma",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA47VJ1332": {
+    "owner": "Priya Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA45CT9693": {
+    "owner": "Aditya Singh",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA14WT5469": {
+    "owner": "Mohan Verma",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA76DS0428": {
+    "owner": "Ramesh Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA37FQ0863": {
+    "owner": "Geeta Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA29DJ3374": {
+    "owner": "Manish Joshi",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA85UC5652": {
+    "owner": "Rekha Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA42WX0876": {
+    "owner": "Pooja Kapoor",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA31LP2997": {
+    "owner": "Raghav Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA88WB3464": {
+    "owner": "Venkat Bose",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA02WP3424": {
+    "owner": "Rekha Dhingra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA51YQ1064": {
+    "owner": "Nikhil Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA57EE7378": {
+    "owner": "Rahul Mishra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA97IC1804": {
+    "owner": "Ramesh Kumar",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA56HV4752": {
+    "owner": "Ravi Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA01WF8038": {
+    "owner": "Sneha Nair",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA64JO3813": {
+    "owner": "Rohan Chatterjee",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA86XE1055": {
+    "owner": "Prasad Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA62EI2129": {
+    "owner": "Shanta Saxena",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA90KI3909": {
+    "owner": "Shanta Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA40RO4948": {
+    "owner": "Ramesh Nair",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA97XM9653": {
+    "owner": "Usha Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA33UI6786": {
+    "owner": "Karthik Anand",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA31NA6536": {
+    "owner": "Venkat Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA42TT7874": {
+    "owner": "Amit Menon",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA25YC0021": {
+    "owner": "Usha Mukherjee",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA19NN3243": {
+    "owner": "Prasad Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA32FQ8080": {
+    "owner": "Vijay Iyer",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA60WX5257": {
+    "owner": "Gopal Krishnan",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA30AQ5678": {
+    "owner": "Deepak Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA84GW1644": {
+    "owner": "Rekha Joshi",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA12IG4235": {
+    "owner": "Rekha Roy",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA91FY1762": {
+    "owner": "Aarav Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52OP7078": {
+    "owner": "Sunita Saxena",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA10WU1597": {
+    "owner": "Ravi Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA75EX1642": {
+    "owner": "Geeta Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA86BZ8566": {
+    "owner": "Neha Chatterjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA63DQ2313": {
+    "owner": "Rekha Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA68BO4373": {
+    "owner": "Ganesh Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA60PR5181": {
+    "owner": "Priya Pandey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA99KB6324": {
+    "owner": "Rajesh Dhingra",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA48UU8872": {
+    "owner": "Nikhil Saxena",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA12PW3863": {
+    "owner": "Mohan Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA36QR1394": {
+    "owner": "Sanjay Saxena",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA07UM3216": {
+    "owner": "Neha Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA91BX4960": {
+    "owner": "Lakshmi Bhatia",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA32UF4764": {
+    "owner": "Raghav Mishra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52DX9664": {
+    "owner": "Nikhil Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA69QN5221": {
+    "owner": "Ravi Kapoor",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA50QP5518": {
+    "owner": "Sunita Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA54YX4403": {
+    "owner": "Nikhil Joshi",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA02OV8985": {
+    "owner": "Suresh Tiwari",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA56BD0550": {
+    "owner": "Suresh Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA82TO9649": {
+    "owner": "Aarav Khanna",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA61CI3535": {
+    "owner": "Sanjay Agarwal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA49IL7286": {
+    "owner": "Shanta Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA01QH0850": {
+    "owner": "Usha Anand",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA03CS4963": {
+    "owner": "Ganesh Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA96KS6302": {
+    "owner": "Harish Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA98QR7161": {
+    "owner": "Harish Mukherjee",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA63EJ2291": {
+    "owner": "Vijay Tiwari",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA89KI6558": {
+    "owner": "Suresh Singh",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA92EB6128": {
+    "owner": "Prasad Tiwari",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA06UT2535": {
+    "owner": "Ramesh Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA95HJ8819": {
+    "owner": "Divya Bhatia",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA69EA1885": {
+    "owner": "Karthik Anand",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA78ZF8108": {
+    "owner": "Shanta Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA33XL4412": {
+    "owner": "Meera Gupta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA83YE7771": {
+    "owner": "Lakshmi Kumar",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA95OY3694": {
+    "owner": "Usha Anand",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA28WU1685": {
+    "owner": "Harish Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA90EM9789": {
+    "owner": "Geeta Bose",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA53OR5493": {
+    "owner": "Shreya Pandey",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA38OS4863": {
+    "owner": "Lakshmi Shukla",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA92LN2169": {
+    "owner": "Nikhil Shukla",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA82SN2137": {
+    "owner": "Rajesh Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA04ON7077": {
+    "owner": "Aarav Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA28RI9269": {
+    "owner": "Arjun Khanna",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA01AR2606": {
+    "owner": "Venkat Khanna",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA60XH6437": {
+    "owner": "Kavya Mehta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA21SL0617": {
+    "owner": "Ravi Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA37DP5100": {
+    "owner": "Gopal Dhingra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA53ZI2844": {
+    "owner": "Venkat Das",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA20LB2746": {
+    "owner": "Amit Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA34DQ0341": {
+    "owner": "Lakshmi Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA83OF5318": {
+    "owner": "Geeta Pandey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA78QE8800": {
+    "owner": "Priya Roy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA54QS1834": {
+    "owner": "Ananya Sharma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA91QR2380": {
+    "owner": "Kavya Mehta",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA99MG1517": {
+    "owner": "Arjun Malhotra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA25WD1544": {
+    "owner": "Lakshmi Mukherjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA01ZS7826": {
+    "owner": "Sanjay Mukherjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA48PR8193": {
+    "owner": "Geeta Dubey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA44XO0687": {
+    "owner": "Neha Menon",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA30GE2107": {
+    "owner": "Rahul Srivastava",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA06TK1239": {
+    "owner": "Divya Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA56AS7461": {
+    "owner": "Usha Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA90XV8045": {
+    "owner": "Divya Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA88BS8253": {
+    "owner": "Rajesh Anand",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA87IU1403": {
+    "owner": "Ramesh Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA98LD8512": {
+    "owner": "Vijay Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA27KD0837": {
+    "owner": "Harish Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA64ZZ8574": {
+    "owner": "Amit Gupta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA11HD0016": {
+    "owner": "Vijay Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA20WX8986": {
+    "owner": "Priya Gupta",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA09PD8768": {
+    "owner": "Sanjay Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA82SE9185": {
+    "owner": "Suresh Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA13JE2939": {
+    "owner": "Deepak Malhotra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA10HS5444": {
+    "owner": "Nikhil Roy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA76AJ0377": {
+    "owner": "Rekha Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA12TF0037": {
+    "owner": "Aditya Dubey",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA19FT4904": {
+    "owner": "Shreya Kapoor",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA04HB1085": {
+    "owner": "Ravi Singh",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA01KZ5595": {
+    "owner": "Meera Agarwal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA25HZ7840": {
+    "owner": "Shreya Anand",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA88MU6783": {
+    "owner": "Usha Khanna",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA06BG1185": {
+    "owner": "Vikram Shukla",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94PJ4310": {
+    "owner": "Raghav Bhatia",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA30HM5556": {
+    "owner": "Gopal Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA78PY7186": {
+    "owner": "Mohan Nair",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA46XR7211": {
+    "owner": "Usha Anand",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA26NG4374": {
+    "owner": "Deepak Srivastava",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA07CW8489": {
+    "owner": "Karthik Das",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA17JG2579": {
+    "owner": "Rahul Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA14ID8359": {
+    "owner": "Ganesh Joshi",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA74EK0252": {
+    "owner": "Nikhil Bhatia",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA07EV3137": {
+    "owner": "Arjun Mukherjee",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA78EV1767": {
+    "owner": "Sunil Dhingra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA82MQ1510": {
+    "owner": "Sanjay Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA76MS7573": {
+    "owner": "Rajesh Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA28SK8024": {
+    "owner": "Rahul Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA07LT5766": {
+    "owner": "Geeta Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA49MX7323": {
+    "owner": "Usha Tiwari",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA77PU1174": {
+    "owner": "Raghav Anand",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA73CI8376": {
+    "owner": "Divya Tiwari",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA44DJ7133": {
+    "owner": "Prasad Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA34DZ3865": {
+    "owner": "Rohan Pillai",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA43KG1861": {
+    "owner": "Vijay Srivastava",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA95JR7814": {
+    "owner": "Aditya Kapoor",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA54WP7652": {
+    "owner": "Ananya Pillai",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA23EA5344": {
+    "owner": "Arjun Pandey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA78DG1784": {
+    "owner": "Vijay Pandey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA74NT4524": {
+    "owner": "Priya Mehta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA73VB2223": {
+    "owner": "Sneha Joshi",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA19YV5704": {
+    "owner": "Ganesh Mukherjee",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA54KZ9233": {
+    "owner": "Suresh Singh",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA18HW8055": {
+    "owner": "Harish Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA33BB3517": {
+    "owner": "Shanta Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA76JG7902": {
+    "owner": "Arjun Pillai",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA62KC0966": {
+    "owner": "Priya Malhotra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA42GL0014": {
+    "owner": "Sunil Srivastava",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52MD5810": {
+    "owner": "Sunil Bhatia",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA75ZE9707": {
+    "owner": "Ganesh Kapoor",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA63QE6290": {
+    "owner": "Shanta Gupta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA32BQ4901": {
+    "owner": "Geeta Singh",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA40XD8014": {
+    "owner": "Geeta Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA81YK0114": {
+    "owner": "Karthik Gupta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA20DD3856": {
+    "owner": "Ravi Saxena",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA61CD8558": {
+    "owner": "Aarav Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA68LZ9098": {
+    "owner": "Priya Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA60CK3848": {
+    "owner": "Arjun Srivastava",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA26CG8120": {
+    "owner": "Rohan Saxena",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA56WP2897": {
+    "owner": "Ramesh Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA83AS2436": {
+    "owner": "Prasad Nair",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA96YA8489": {
+    "owner": "Divya Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA22XZ9388": {
+    "owner": "Kavya Pillai",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA52SF3671": {
+    "owner": "Sunita Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA49RD0871": {
+    "owner": "Sanjay Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA65GO5204": {
+    "owner": "Amit Saxena",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA57UW2406": {
+    "owner": "Raghav Bose",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA49IR0456": {
+    "owner": "Lakshmi Singh",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA96BT0295": {
+    "owner": "Pooja Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA48NN2690": {
+    "owner": "Priya Pandey",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA24YT4590": {
+    "owner": "Usha Mishra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA23XH5567": {
+    "owner": "Shreya Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA14RC5346": {
+    "owner": "Sanjay Shukla",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA92JY2376": {
+    "owner": "Ganesh Bhatia",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA94FW3256": {
+    "owner": "Sanjay Reddy",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA78EN0878": {
+    "owner": "Rajesh Shukla",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA80TU7780": {
+    "owner": "Venkat Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA21ZC8586": {
+    "owner": "Manish Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA48DW4934": {
+    "owner": "Raghav Anand",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA99UW6974": {
+    "owner": "Deepak Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA85EX3623": {
+    "owner": "Ramesh Mukherjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA01EL0168": {
+    "owner": "Rohan Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA92HP2552": {
+    "owner": "Karthik Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA86LN0740": {
+    "owner": "Manish Anand",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA88EP5486": {
+    "owner": "Prasad Sharma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA69XE0239": {
+    "owner": "Aarav Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA11AW2381": {
+    "owner": "Nikhil Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA99QI4223": {
+    "owner": "Nikhil Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA37OB8293": {
+    "owner": "Prasad Sharma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA03JE6049": {
+    "owner": "Sneha Joshi",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA42BM0405": {
+    "owner": "Ravi Joshi",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA41RV0258": {
+    "owner": "Sunita Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA09ZI3485": {
+    "owner": "Deepak Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA69YZ4944": {
+    "owner": "Sneha Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA83QR2228": {
+    "owner": "Ananya Mishra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA47AO4947": {
+    "owner": "Usha Sharma",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA90EP6948": {
+    "owner": "Priya Patel",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA16GC2589": {
+    "owner": "Nikhil Sharma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA99TG9791": {
+    "owner": "Nikhil Mehta",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA66IJ9010": {
+    "owner": "Amit Bansal",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA69CS3100": {
+    "owner": "Sneha Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA32DM7812": {
+    "owner": "Priya Singh",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA70JS0704": {
+    "owner": "Meera Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA70DQ3701": {
+    "owner": "Mohan Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA78VV6981": {
+    "owner": "Geeta Dubey",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94IC7357": {
+    "owner": "Meera Khanna",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA19SA9318": {
+    "owner": "Aditya Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA01FM4137": {
+    "owner": "Ramesh Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA13AV7318": {
+    "owner": "Sunil Das",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA16KV6673": {
+    "owner": "Rohan Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA48LD1494": {
+    "owner": "Meera Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA33MT5911": {
+    "owner": "Sneha Khanna",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA99VT2053": {
+    "owner": "Neha Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA13ZU9615": {
+    "owner": "Ravi Tiwari",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA34GM5778": {
+    "owner": "Deepak Roy",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA27XD0118": {
+    "owner": "Kavya Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA41ZQ5030": {
+    "owner": "Aarav Rao",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA84BS1195": {
+    "owner": "Karthik Kumar",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA41SA2919": {
+    "owner": "Shreya Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA03VQ2007": {
+    "owner": "Amit Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA09WE9004": {
+    "owner": "Harish Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA08EZ6506": {
+    "owner": "Rahul Khanna",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA98CW5480": {
+    "owner": "Nikhil Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA36UF5593": {
+    "owner": "Sneha Roy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA55VZ8957": {
+    "owner": "Sneha Pandey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA46WJ8146": {
+    "owner": "Raghav Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA37EP4115": {
+    "owner": "Pooja Nair",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA73SW4828": {
+    "owner": "Geeta Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA69NI3404": {
+    "owner": "Aditya Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA80AI8264": {
+    "owner": "Sanjay Anand",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52EL0410": {
+    "owner": "Sneha Kapoor",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA03DN3446": {
+    "owner": "Prasad Reddy",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA32LC6434": {
+    "owner": "Rahul Nair",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA60MB3953": {
+    "owner": "Raghav Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94CC4474": {
+    "owner": "Gopal Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA42QP3254": {
+    "owner": "Sunita Das",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA02LU0629": {
+    "owner": "Amit Pillai",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA38FG6964": {
+    "owner": "Meera Reddy",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA34DP2085": {
+    "owner": "Prasad Pandey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA89VZ5037": {
+    "owner": "Rajesh Pandey",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA80ZO0481": {
+    "owner": "Shanta Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA37HH2205": {
+    "owner": "Ramesh Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA64EF3029": {
+    "owner": "Divya Kumar",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA88SB5951": {
+    "owner": "Ravi Mishra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA89PS6758": {
+    "owner": "Geeta Pillai",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA84HC4966": {
+    "owner": "Karthik Kapoor",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA16LY6047": {
+    "owner": "Shreya Menon",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA34AL0620": {
+    "owner": "Karthik Joshi",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA70KA7739": {
+    "owner": "Sunil Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA18AC6729": {
+    "owner": "Rajesh Rao",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA59VW1063": {
+    "owner": "Sunita Shukla",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA09UX2522": {
+    "owner": "Meera Mehta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA88UI1175": {
+    "owner": "Karthik Khanna",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA99MT0065": {
+    "owner": "Arjun Shukla",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA25XR5871": {
+    "owner": "Rahul Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA69CL9455": {
+    "owner": "Ananya Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA93SY6102": {
+    "owner": "Lakshmi Malhotra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52EX7602": {
+    "owner": "Karthik Sharma",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA56AH6383": {
+    "owner": "Sanjay Agarwal",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52TX1270": {
+    "owner": "Ravi Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA35IA8319": {
+    "owner": "Ramesh Bose",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA37JB7493": {
+    "owner": "Ananya Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA51SK2110": {
+    "owner": "Harish Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA41VK6333": {
+    "owner": "Prasad Bhatia",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA90EU3083": {
+    "owner": "Ganesh Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA80DI7346": {
+    "owner": "Sanjay Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA82XS2865": {
+    "owner": "Nikhil Kapoor",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA54CC6729": {
+    "owner": "Neha Iyer",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA96FP1654": {
+    "owner": "Rohan Bhatia",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA24II5825": {
+    "owner": "Pooja Roy",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA20NX8673": {
+    "owner": "Nikhil Verma",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA92HS5260": {
+    "owner": "Usha Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA41BO3810": {
+    "owner": "Divya Gupta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA32QH7435": {
+    "owner": "Rekha Roy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA25QS8361": {
+    "owner": "Neha Iyer",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA12MR1120": {
+    "owner": "Gopal Srivastava",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA94FY9637": {
+    "owner": "Rekha Joshi",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA33ZO7050": {
+    "owner": "Priya Kumar",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA81DL8535": {
+    "owner": "Neha Nair",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA69FK9407": {
+    "owner": "Shanta Pillai",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA14GD9700": {
+    "owner": "Ananya Shukla",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA70OK7870": {
+    "owner": "Rajesh Roy",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA60GA8886": {
+    "owner": "Usha Patel",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA92GM1175": {
+    "owner": "Divya Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA43MM3437": {
+    "owner": "Amit Anand",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA98MT1382": {
+    "owner": "Rekha Krishnan",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA31GG6722": {
+    "owner": "Ramesh Singh",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA96SS4118": {
+    "owner": "Ramesh Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA65PB9386": {
+    "owner": "Rahul Saxena",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA69PX9549": {
+    "owner": "Raghav Roy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA88CP4779": {
+    "owner": "Rekha Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA43KO7311": {
+    "owner": "Shanta Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA73DK9033": {
+    "owner": "Priya Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA70GR8059": {
+    "owner": "Rajesh Chatterjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA04SG9656": {
+    "owner": "Sanjay Bhatia",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA44UK5671": {
+    "owner": "Ramesh Menon",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA23GL1239": {
+    "owner": "Ganesh Saxena",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA92WG6746": {
+    "owner": "Aarav Pandey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA75FG0890": {
+    "owner": "Geeta Kumar",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA49TE4584": {
+    "owner": "Sanjay Singh",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA55HH5423": {
+    "owner": "Deepak Iyer",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA30KW3025": {
+    "owner": "Prasad Joshi",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA55ME5152": {
+    "owner": "Rekha Mukherjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA14HA6051": {
+    "owner": "Rahul Iyer",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA38UH1025": {
+    "owner": "Rajesh Joshi",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA99HT8712": {
+    "owner": "Aarav Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA63EL9514": {
+    "owner": "Deepak Kumar",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA67OE5326": {
+    "owner": "Harish Singh",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA28PD7434": {
+    "owner": "Arjun Krishnan",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA50EQ9247": {
+    "owner": "Meera Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA16IO1158": {
+    "owner": "Sneha Chatterjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA07DV0934": {
+    "owner": "Mohan Dhingra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA05JV4563": {
+    "owner": "Usha Nair",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA13MN6333": {
+    "owner": "Rajesh Malhotra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA24JF4194": {
+    "owner": "Shreya Iyer",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA19UM9940": {
+    "owner": "Ramesh Iyer",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA08KN0564": {
+    "owner": "Shreya Saxena",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA56WH1422": {
+    "owner": "Rahul Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA25ZI3097": {
+    "owner": "Ganesh Dhingra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94SM7329": {
+    "owner": "Mohan Krishnan",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA08SS2330": {
+    "owner": "Sunita Gupta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA48FZ9559": {
+    "owner": "Usha Iyer",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA87AZ8167": {
+    "owner": "Sneha Pillai",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA41WF7414": {
+    "owner": "Vikram Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA50UB1088": {
+    "owner": "Neha Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA37SX1197": {
+    "owner": "Raghav Sharma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA36YO8092": {
+    "owner": "Shreya Pillai",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA05WG8922": {
+    "owner": "Vijay Srivastava",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA72VM1604": {
+    "owner": "Manish Dubey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA75CR5440": {
+    "owner": "Divya Roy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA13VS3767": {
+    "owner": "Prasad Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA26VN8438": {
+    "owner": "Karthik Mukherjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA50DU6520": {
+    "owner": "Gopal Saxena",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA44SJ2927": {
+    "owner": "Prasad Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA61LI2183": {
+    "owner": "Ravi Sharma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA27WV8757": {
+    "owner": "Shanta Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA90GY3410": {
+    "owner": "Geeta Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA70DJ0347": {
+    "owner": "Sneha Saxena",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA42WU3408": {
+    "owner": "Vijay Reddy",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA25OO6908": {
+    "owner": "Sunil Malhotra",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA53DX1445": {
+    "owner": "Harish Nair",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA23KH7448": {
+    "owner": "Ramesh Dubey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA78KB8345": {
+    "owner": "Ravi Krishnan",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA51ZW6745": {
+    "owner": "Ramesh Khanna",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA81TY2225": {
+    "owner": "Pooja Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA01LE5975": {
+    "owner": "Ravi Saxena",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA70QF0032": {
+    "owner": "Sunita Saxena",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA64NK1492": {
+    "owner": "Amit Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA72HB3632": {
+    "owner": "Ravi Roy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA86OZ5805": {
+    "owner": "Manish Pandey",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA02YG2986": {
+    "owner": "Priya Menon",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA03ZQ6273": {
+    "owner": "Sunita Verma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA57KG3939": {
+    "owner": "Manish Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA04EI4128": {
+    "owner": "Arjun Iyer",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA83AB5963": {
+    "owner": "Ravi Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA01QI2586": {
+    "owner": "Vijay Tiwari",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA03NF1107": {
+    "owner": "Karthik Chatterjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA71TA2665": {
+    "owner": "Geeta Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA89AM0660": {
+    "owner": "Shanta Das",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA84UQ5975": {
+    "owner": "Gopal Saxena",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA08UG8466": {
+    "owner": "Nikhil Pillai",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA02VI6387": {
+    "owner": "Arjun Khanna",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA38AX3470": {
+    "owner": "Manish Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA76IO2164": {
+    "owner": "Priya Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA04NW7639": {
+    "owner": "Raghav Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA83WS2578": {
+    "owner": "Harish Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA78JY2851": {
+    "owner": "Vijay Tiwari",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA56GP4700": {
+    "owner": "Rohan Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA50NL2276": {
+    "owner": "Harish Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA09OR3067": {
+    "owner": "Raghav Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA48UN6409": {
+    "owner": "Harish Roy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA36SP0412": {
+    "owner": "Shreya Singh",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA64EC2768": {
+    "owner": "Divya Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA12HP7121": {
+    "owner": "Manish Rao",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA92LH3520": {
+    "owner": "Pooja Mishra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA09BT8398": {
+    "owner": "Priya Singh",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA87AF9587": {
+    "owner": "Karthik Mehta",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA73NA3891": {
+    "owner": "Rahul Krishnan",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA50ZY0571": {
+    "owner": "Pooja Bansal",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA87HE9901": {
+    "owner": "Priya Srivastava",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA61JT4538": {
+    "owner": "Prasad Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA18HM8825": {
+    "owner": "Rohan Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA89GK6120": {
+    "owner": "Suresh Roy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA34SP3996": {
+    "owner": "Sunil Bhatia",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA09GU4757": {
+    "owner": "Priya Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA54PA6202": {
+    "owner": "Ananya Roy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA19HF4337": {
+    "owner": "Ganesh Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA77CV7870": {
+    "owner": "Ananya Srivastava",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA51PV3008": {
+    "owner": "Kavya Roy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA55CW7510": {
+    "owner": "Rajesh Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA37OI6203": {
+    "owner": "Manish Saxena",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA09RJ4993": {
+    "owner": "Neha Malhotra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA69ZU2699": {
+    "owner": "Sunil Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA65DP9236": {
+    "owner": "Suresh Dubey",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA51PX7924": {
+    "owner": "Shreya Iyer",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA11DH0322": {
+    "owner": "Shreya Kumar",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA63RZ7306": {
+    "owner": "Sunil Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA61YI6617": {
+    "owner": "Lakshmi Rao",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94EG2430": {
+    "owner": "Sunil Roy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA72XK2372": {
+    "owner": "Aditya Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA46LM8988": {
+    "owner": "Rajesh Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA45EH5833": {
+    "owner": "Usha Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA86CZ5607": {
+    "owner": "Usha Singh",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA56KX9916": {
+    "owner": "Sunita Roy",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52NH7083": {
+    "owner": "Manish Malhotra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA41AW9340": {
+    "owner": "Kavya Kapoor",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA69AY9897": {
+    "owner": "Manish Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA24IG2276": {
+    "owner": "Sunita Verma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA77WM5128": {
+    "owner": "Usha Roy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA31LC0810": {
+    "owner": "Harish Bhatia",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA29NX7780": {
+    "owner": "Sunil Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA63VD3226": {
+    "owner": "Sanjay Reddy",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA53XV3039": {
+    "owner": "Priya Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA95GX9000": {
+    "owner": "Deepak Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA18GL7886": {
+    "owner": "Shreya Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA92MJ2819": {
+    "owner": "Rahul Dubey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA92ZP6989": {
+    "owner": "Shanta Pillai",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA14PY4818": {
+    "owner": "Usha Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA25ZS7203": {
+    "owner": "Deepak Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA37UV6325": {
+    "owner": "Rahul Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA02ON9932": {
+    "owner": "Gopal Pillai",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA54AT9574": {
+    "owner": "Shanta Sharma",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA04RT6037": {
+    "owner": "Suresh Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA85HM8234": {
+    "owner": "Suresh Bansal",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA57KN9780": {
+    "owner": "Amit Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA92TK6687": {
+    "owner": "Mohan Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA32RW2300": {
+    "owner": "Shreya Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA85DG3696": {
+    "owner": "Shanta Kumar",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA26VW8548": {
+    "owner": "Sanjay Krishnan",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA24BQ8166": {
+    "owner": "Mohan Gupta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA26CJ9167": {
+    "owner": "Aarav Singh",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA17QB7754": {
+    "owner": "Amit Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA58AZ5540": {
+    "owner": "Prasad Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA53WX1310": {
+    "owner": "Prasad Menon",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA55AP6767": {
+    "owner": "Pooja Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA37WC7889": {
+    "owner": "Sanjay Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA54YA1168": {
+    "owner": "Sunita Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA46PJ9602": {
+    "owner": "Kavya Mukherjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA10EZ6818": {
+    "owner": "Vijay Khanna",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA37HF6275": {
+    "owner": "Venkat Nair",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA74QZ3633": {
+    "owner": "Geeta Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA14WT9591": {
+    "owner": "Deepak Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA61RJ3718": {
+    "owner": "Ganesh Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA95OQ5051": {
+    "owner": "Amit Anand",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA06VO9004": {
+    "owner": "Ganesh Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA27KI2947": {
+    "owner": "Aditya Anand",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA85IP7958": {
+    "owner": "Raghav Shukla",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA75XP4044": {
+    "owner": "Vikram Saxena",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94UH8595": {
+    "owner": "Kavya Tiwari",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA16ZQ9317": {
+    "owner": "Ravi Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA66MW2667": {
+    "owner": "Harish Rao",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA51YK8782": {
+    "owner": "Shanta Kumar",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA08FE5721": {
+    "owner": "Geeta Nair",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA22HM8947": {
+    "owner": "Lakshmi Mehta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA71OZ8454": {
+    "owner": "Ramesh Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA13BA1417": {
+    "owner": "Harish Pandey",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA78YK5442": {
+    "owner": "Divya Gupta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA24VU0619": {
+    "owner": "Amit Dhingra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA54SP7071": {
+    "owner": "Usha Pandey",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA83YU9281": {
+    "owner": "Aditya Dhingra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA59AW7323": {
+    "owner": "Vikram Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA69EK1706": {
+    "owner": "Divya Saxena",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA48OZ5936": {
+    "owner": "Sunita Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA18ZO9794": {
+    "owner": "Pooja Verma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA25SA3689": {
+    "owner": "Manish Anand",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA06CZ7482": {
+    "owner": "Ananya Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA71NQ3840": {
+    "owner": "Shreya Iyer",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA03DJ7874": {
+    "owner": "Rohan Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA49EV0413": {
+    "owner": "Kavya Sharma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA12LV8733": {
+    "owner": "Ananya Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA78DE9463": {
+    "owner": "Sunil Singh",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA87HN9622": {
+    "owner": "Nikhil Bhatia",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA79GW3100": {
+    "owner": "Nikhil Khanna",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA56RT9782": {
+    "owner": "Geeta Patel",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA64KO7083": {
+    "owner": "Harish Bhatia",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA68IT1514": {
+    "owner": "Lakshmi Das",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA46AL2441": {
+    "owner": "Shanta Mishra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA55RP7812": {
+    "owner": "Sunil Shukla",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA79QC8048": {
+    "owner": "Sneha Nair",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52VD5127": {
+    "owner": "Ganesh Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA67VM1851": {
+    "owner": "Nikhil Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA09RK5368": {
+    "owner": "Meera Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA71PB3148": {
+    "owner": "Meera Kapoor",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA45EV7566": {
+    "owner": "Shreya Bhatia",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA70ZP9163": {
+    "owner": "Harish Kapoor",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA88RP0476": {
+    "owner": "Ganesh Singh",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA96EP9435": {
+    "owner": "Lakshmi Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA97RR6578": {
+    "owner": "Pooja Srivastava",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA32OH4599": {
+    "owner": "Rohan Das",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA36QZ0848": {
+    "owner": "Ramesh Kumar",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA65PI0694": {
+    "owner": "Rohan Joshi",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA67JT5956": {
+    "owner": "Pooja Pillai",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA78RD7916": {
+    "owner": "Nikhil Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA09NY1790": {
+    "owner": "Neha Joshi",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA32VO0488": {
+    "owner": "Sunil Reddy",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA04NS8217": {
+    "owner": "Venkat Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA19RG8631": {
+    "owner": "Shanta Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA20VM8643": {
+    "owner": "Aditya Agarwal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA32SE3053": {
+    "owner": "Manish Joshi",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA21IV7067": {
+    "owner": "Mohan Pillai",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA35UX0313": {
+    "owner": "Rekha Gupta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA32HD5150": {
+    "owner": "Vikram Kapoor",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA46UW0112": {
+    "owner": "Sneha Rao",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA91QQ7352": {
+    "owner": "Divya Khanna",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA72NK7517": {
+    "owner": "Aditya Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA88WX5515": {
+    "owner": "Raghav Srivastava",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA74UF1663": {
+    "owner": "Venkat Singh",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA83JL1846": {
+    "owner": "Sneha Nair",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA48NQ6742": {
+    "owner": "Meera Sharma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA68UZ0251": {
+    "owner": "Divya Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA10US5435": {
+    "owner": "Gopal Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA94TU8311": {
+    "owner": "Vijay Singh",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA32SH0905": {
+    "owner": "Harish Mukherjee",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA33BS1218": {
+    "owner": "Ramesh Patel",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA49MU8114": {
+    "owner": "Mohan Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA77SY8773": {
+    "owner": "Sunita Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA23QY6494": {
+    "owner": "Kavya Patel",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA46DO4175": {
+    "owner": "Sunita Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA11DM7972": {
+    "owner": "Harish Iyer",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA84GO9346": {
+    "owner": "Rahul Das",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA89NT1529": {
+    "owner": "Ganesh Chatterjee",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA45JY0052": {
+    "owner": "Ganesh Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA93OL7722": {
+    "owner": "Pooja Pillai",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA22AR6720": {
+    "owner": "Divya Mishra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA33SZ7332": {
+    "owner": "Prasad Anand",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA51EQ0312": {
+    "owner": "Sanjay Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA36AL6790": {
+    "owner": "Mohan Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA52KE8360": {
+    "owner": "Rohan Saxena",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA71SZ4734": {
+    "owner": "Manish Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA78MP0338": {
+    "owner": "Sneha Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA50QV3422": {
+    "owner": "Rahul Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA95YB9574": {
+    "owner": "Lakshmi Dhingra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA90WF3114": {
+    "owner": "Manish Sharma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA35RS1285": {
+    "owner": "Divya Kumar",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA57PI8593": {
+    "owner": "Lakshmi Gupta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA31YI6801": {
+    "owner": "Ramesh Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA99IC8840": {
+    "owner": "Sneha Singh",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA80SM0912": {
+    "owner": "Deepak Singh",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA18RY6287": {
+    "owner": "Rajesh Kumar",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA34WL6052": {
+    "owner": "Sunita Rao",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA10FS3063": {
+    "owner": "Nikhil Mehta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA62YW7558": {
+    "owner": "Lakshmi Singh",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA94RW0105": {
+    "owner": "Arjun Kapoor",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA41OU0701": {
+    "owner": "Harish Chatterjee",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA91QL8554": {
+    "owner": "Ananya Verma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA97GO4235": {
+    "owner": "Aditya Khanna",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA24HI0380": {
+    "owner": "Manish Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA79RH1717": {
+    "owner": "Sanjay Shukla",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA81LE1221": {
+    "owner": "Vijay Verma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA93FE6465": {
+    "owner": "Pooja Verma",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA28PG7490": {
+    "owner": "Pooja Pillai",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA50ZB6891": {
+    "owner": "Rohan Pillai",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA39FV4308": {
+    "owner": "Amit Malhotra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA47VC0608": {
+    "owner": "Lakshmi Pillai",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA53TU2783": {
+    "owner": "Geeta Anand",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA96XT2625": {
+    "owner": "Vikram Shukla",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA97AM1153": {
+    "owner": "Karthik Dubey",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA41CI4415": {
+    "owner": "Gopal Singh",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA93UD7743": {
+    "owner": "Ramesh Verma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA71KR0080": {
+    "owner": "Vijay Patel",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA63FT8276": {
+    "owner": "Shanta Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA27VV3578": {
+    "owner": "Sunita Kapoor",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA53DU9520": {
+    "owner": "Prasad Agarwal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA48MT6120": {
+    "owner": "Gopal Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA82II4807": {
+    "owner": "Rahul Menon",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA72QU4026": {
+    "owner": "Divya Chatterjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA02FQ9289": {
+    "owner": "Arjun Bansal",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA86SL5461": {
+    "owner": "Arjun Singh",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA32KD1855": {
+    "owner": "Vijay Krishnan",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA77WF0150": {
+    "owner": "Aarav Anand",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA15GG0065": {
+    "owner": "Sneha Singh",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA47RM9708": {
+    "owner": "Suresh Srivastava",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA19WG9927": {
+    "owner": "Pooja Anand",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA01VY5698": {
+    "owner": "Gopal Patel",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA15KU8823": {
+    "owner": "Sneha Bansal",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA79PE4706": {
+    "owner": "Nikhil Roy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA29KZ4860": {
+    "owner": "Suresh Khanna",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA11VH6672": {
+    "owner": "Aditya Shukla",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA27SR3394": {
+    "owner": "Karthik Tiwari",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA39NO7526": {
+    "owner": "Priya Kapoor",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA17TR0463": {
+    "owner": "Lakshmi Malhotra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA10ET6201": {
+    "owner": "Vikram Patel",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA38AX3795": {
+    "owner": "Rohan Krishnan",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA18GC2621": {
+    "owner": "Vijay Tiwari",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA35WC5065": {
+    "owner": "Meera Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA20HX6446": {
+    "owner": "Shreya Roy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA15WH8392": {
+    "owner": "Arjun Iyer",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA20RQ1600": {
+    "owner": "Sunita Dubey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA65DX0591": {
+    "owner": "Sneha Shukla",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA93QR8646": {
+    "owner": "Pooja Singh",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA87OA5970": {
+    "owner": "Deepak Das",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA84TY1880": {
+    "owner": "Karthik Malhotra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA94WT8208": {
+    "owner": "Rohan Mishra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA36AH3625": {
+    "owner": "Aditya Dubey",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA04RD8421": {
+    "owner": "Vijay Gupta",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA05GH5123": {
+    "owner": "Nikhil Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA77KZ7791": {
+    "owner": "Amit Malhotra",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA53RN8619": {
+    "owner": "Nikhil Dhingra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA93XN3073": {
+    "owner": "Meera Krishnan",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA86TU0757": {
+    "owner": "Lakshmi Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA51OC9396": {
+    "owner": "Sunil Menon",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA66GE6532": {
+    "owner": "Arjun Das",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA23XD5775": {
+    "owner": "Sunita Dhingra",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA52BQ8136": {
+    "owner": "Deepak Bose",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA54QO7760": {
+    "owner": "Ananya Singh",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA93NJ0251": {
+    "owner": "Aarav Mehta",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA43MN7647": {
+    "owner": "Pooja Mishra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA43SE3535": {
+    "owner": "Karthik Reddy",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA03TB8538": {
+    "owner": "Mohan Sharma",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA66PM2185": {
+    "owner": "Geeta Bose",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA90HF8006": {
+    "owner": "Divya Menon",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA21JS5585": {
+    "owner": "Rahul Agarwal",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA62GT4626": {
+    "owner": "Amit Malhotra",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA53DI6203": {
+    "owner": "Sunil Bhatia",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA47VG3050": {
+    "owner": "Gopal Mishra",
+    "vehicle": "Truck",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA18RG0085": {
+    "owner": "Usha Mukherjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA96RY3372": {
+    "owner": "Kavya Gupta",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA28FM5373": {
+    "owner": "Shreya Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA35PK4321": {
+    "owner": "Deepak Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA44HT1199": {
+    "owner": "Raghav Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA78GY9602": {
+    "owner": "Vikram Verma",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA20YZ0098": {
+    "owner": "Divya Krishnan",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA27ZL0492": {
+    "owner": "Deepak Tiwari",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": false,
+    "challans": []
+  },
+  "KA21MD0345": {
+    "owner": "Vikram Kumar",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA84YZ1383": {
+    "owner": "Ananya Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA19OA2701": {
+    "owner": "Sunil Rao",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA01BM9674": {
+    "owner": "Nikhil Joshi",
+    "vehicle": "Car",
+    "rc": false,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA16BZ8476": {
+    "owner": "Ravi Iyer",
+    "vehicle": "Bike",
+    "rc": false,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA58ST0891": {
+    "owner": "Ganesh Chatterjee",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA12BQ4915": {
+    "owner": "Rekha Reddy",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA31WX6513": {
+    "owner": "Gopal Pandey",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA14OO2824": {
+    "owner": "Harish Das",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA74BM7153": {
+    "owner": "Manish Patel",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA22CL4418": {
+    "owner": "Rohan Das",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA51CQ4462": {
+    "owner": "Sneha Mukherjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  },
+  "KA37LI3008": {
+    "owner": "Sunita Mukherjee",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": false,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA93LT2215": {
+    "owner": "Karthik Iyer",
+    "vehicle": "Truck",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": true,
+    "challans": []
+  },
+  "KA52DW6034": {
+    "owner": "Rohan Nair",
+    "vehicle": "Car",
+    "rc": true,
+    "insurance": true,
+    "puc": false,
+    "dl": true,
+    "challans": []
+  },
+  "KA92PQ7334": {
+    "owner": "Sunil Kumar",
+    "vehicle": "Bike",
+    "rc": true,
+    "insurance": true,
+    "puc": true,
+    "dl": false,
+    "challans": []
+  }
+}

@@ -8,11 +8,15 @@ Team: 3 Developers
 """
 
 import os
+import random
 import re
 import time
 import math
 import queue
 import threading
+import hmac
+import hashlib
+from datetime import datetime, timezone, timedelta
 
 import cv2
 import numpy as np
@@ -29,6 +33,14 @@ from helmet_detector import HelmetDetector, draw_helmet_results
 
 load_dotenv()
 
+IST = timezone(timedelta(hours=5, minutes=30))
+
+try:
+    import razorpay as _razorpay_lib
+    _RAZORPAY_AVAILABLE = True
+except ImportError:
+    _RAZORPAY_AVAILABLE = False
+
 app = Flask(__name__)
 
 # ── CORS — applied unconditionally so /video, /detections etc always work ────
@@ -41,6 +53,11 @@ CORS(app, origins=_CORS_ORIGINS, supports_credentials=True,
 try:
     from backend.config import Config
     from backend.extensions import db
+    from backend.models import (
+        User as _DBUser,
+        ScannerChallan as _DBScannerChallan,
+        ScannerChallanItem as _DBScannerChallanItem,
+    )
     from backend.routes.users import users_bp
     from backend.routes.violations import violations_bp
     from backend.routes.payments import payments_bp
@@ -57,6 +74,9 @@ try:
 except Exception as _db_err:
     print(f"[DB] Backend modules not loaded ({_db_err}). Running without DB.")
     _DB_ENABLED = False
+    _DBUser      = None
+    _DBScannerChallan = None
+    _DBScannerChallanItem = None
 
 # ---------------------------------------------------------------------------
 # Upload Configuration
@@ -152,10 +172,30 @@ _violation_q: queue.Queue = queue.Queue(maxsize=200)
 _plate_cooldowns: dict = {}          # (plate, vtype) -> monotonic timestamp
 VIOLATION_COOLDOWN_SECS = 10         # minimum seconds between same violation/plate
 _FINE_MAP = {"helmet": 500, "triple": 1000, "overspeed": 1000}
+_VIOLATION_LABELS = {
+    "helmet":    "No Helmet",
+    "triple":    "Triple Riding",
+    "overspeed": "Overspeed",
+}
+_reporter_thread = None
+_reporter_lock = threading.Lock()
+
+
+def _start_violation_reporter_once():
+    """Start the async DB reporter, including when app.py is loaded by flask run."""
+    global _reporter_thread
+    if _reporter_thread and _reporter_thread.is_alive():
+        return
+    with _reporter_lock:
+        if _reporter_thread and _reporter_thread.is_alive():
+            return
+        _reporter_thread = threading.Thread(target=_violation_reporter_worker, daemon=True)
+        _reporter_thread.start()
 
 
 def _queue_violation(plate_text: str, vtype: str):
     """Non-blocking: add a violation to the queue if cooldown has elapsed."""
+    _start_violation_reporter_once()
     key = (plate_text, vtype)
     now = time.monotonic()
     if now - _plate_cooldowns.get(key, 0) >= VIOLATION_COOLDOWN_SECS:
@@ -167,16 +207,20 @@ def _queue_violation(plate_text: str, vtype: str):
 
 
 def _violation_reporter_worker():
-    """Background daemon thread: drains the queue and writes to PostgreSQL."""
+    """Background daemon thread: drains CV detections and writes to PostgreSQL."""
     if not _DB_ENABLED:
         return
     with app.app_context():
-        from backend.models import User, Violation
+        from backend.models import User, Violation, ScannerChallan, ScannerChallanItem
         from backend.extensions import db as _db
         while True:
             try:
                 plate, vtype = _violation_q.get(timeout=1)
                 user = User.query.filter_by(license_plate=plate).first()
+                label = _VIOLATION_LABELS.get(vtype, vtype.capitalize())
+                if label in _recent_scanner_violation_types(plate):
+                    print(f"[DB] Skipped duplicate challan: {label} | plate={plate} | within 24h")
+                    continue
                 v = Violation(
                     user_id        = user.id if user else None,
                     plate_number   = plate,
@@ -185,8 +229,26 @@ def _violation_reporter_worker():
                     status         = "PENDING",
                 )
                 _db.session.add(v)
+                user_info = _MOCK_USERS.get(plate)
+                challan_owner = user_info.get("owner") if user_info else (user.name if user else "Unknown")
+                challan_vehicle = user_info.get("vehicle") if user_info else (user.vehicle if user else "Unknown")
+                challan = ScannerChallan(
+                    id           = _next_db_challan_id(),
+                    user_id      = user.id if user else None,
+                    plate_number = plate,
+                    owner_name   = challan_owner,
+                    vehicle      = challan_vehicle or "Unknown",
+                    fine_amount  = _FINE_MAP.get(vtype, 500),
+                    status       = "UNPAID",
+                )
+                challan.items.append(ScannerChallanItem(
+                    type   = label,
+                    fine   = _FINE_MAP.get(vtype, 500),
+                    source = "violation",
+                ))
+                _db.session.add(challan)
                 _db.session.commit()
-                print(f"[DB] Violation saved: {vtype} | plate={plate}")
+                print(f"[DB] Detection saved: {vtype} | plate={plate} | challan={challan.id}")
             except queue.Empty:
                 continue
             except Exception as exc:
@@ -1255,6 +1317,499 @@ def signal_upload():
 
 
 # ---------------------------------------------------------------------------
+# Smart Police Scanner + Auto Challan System
+# ---------------------------------------------------------------------------
+
+_DEMO_USERS = {
+    "KA01AB1234": {"owner": "Raghav Dhingra", "vehicle": "Bike",  "rc": True,  "insurance": False, "puc": True,  "challans": []},
+    "MH02CD5678": {"owner": "Arjun Mehta",    "vehicle": "Car",   "rc": True,  "insurance": True,  "puc": False, "challans": []},
+    "DL03EF9012": {"owner": "Priya Sharma",   "vehicle": "Truck", "rc": True,  "insurance": False, "puc": False, "challans": []},
+    "TN04GH3456": {"owner": "Karthik Raj",    "vehicle": "Car",   "rc": True,  "insurance": True,  "puc": True,  "challans": []},
+    "GJ05IJ7890": {"owner": "Sneha Patel",    "vehicle": "Bike",  "rc": False, "insurance": False, "puc": True,  "challans": []},
+}
+
+
+def _load_mock_users() -> dict:
+    """
+    Load vehicle records from users.json and keep the demo plates available.
+    The scanner UI placeholder and quick-fill buttons depend on the demo
+    records, while generated data in users.json remains the primary dataset.
+    """
+    import json as _json
+    users_path = os.path.join(os.path.dirname(__file__), "users.json")
+    records = dict(_DEMO_USERS)
+    if os.path.exists(users_path):
+        with open(users_path, "r", encoding="utf-8") as f:
+            data = _json.load(f)
+        records.update(data)
+        print(f"[scanner] Loaded {len(data)} vehicle records from users.json (+ {len(_DEMO_USERS)} demo plates)")
+        return records
+    print("[scanner] users.json not found — using 5 hardcoded records. Run generate_mock_data.py to expand.")
+    return records
+
+_MOCK_USERS: dict = _load_mock_users()
+
+_SCANNER_CHALLANS: list = []          # fallback only when PostgreSQL is unavailable
+_CHALLAN_COUNTER:  list = [1]         # fallback id counter for in-memory challans
+_CHALLAN_LOCK             = threading.Lock()
+
+_DOC_FINES       = {"insurance": 1000, "puc": 500}
+_VIOLATION_FINES = {"helmet": 500, "triple": 1000, "overspeed": 1000}
+_CHALLAN_DUPLICATE_WINDOW = timedelta(hours=24)
+
+
+def _now_ist_iso() -> str:
+    return datetime.now(IST).replace(microsecond=0).isoformat()
+
+
+def _parse_challan_timestamp(value):
+    if not value:
+        return None
+    try:
+        dt = datetime.fromisoformat(value)
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=IST)
+    return dt.astimezone(IST)
+
+
+def _db_scanner_challans_available() -> bool:
+    return (
+        _DB_ENABLED
+        and _DBUser is not None
+        and _DBScannerChallan is not None
+        and _DBScannerChallanItem is not None
+    )
+
+
+def _list_db_challans(plate=None) -> list:
+    if not _db_scanner_challans_available():
+        return []
+
+    try:
+        query = _DBScannerChallan.query
+        if plate:
+            query = query.filter_by(plate_number=plate)
+        return [
+            challan.to_dict()
+            for challan in query.order_by(_DBScannerChallan.created_at.desc()).all()
+        ]
+    except Exception as exc:
+        print(f"[scanner] PostgreSQL challan read failed ({exc})")
+        return []
+
+
+def _next_db_challan_id() -> str:
+    latest = (
+        _DBScannerChallan.query
+        .filter(_DBScannerChallan.id.like("CH%"))
+        .order_by(_DBScannerChallan.id.desc())
+        .first()
+    )
+
+    if latest:
+        try:
+            return f"CH{int(latest.id[2:]) + 1:04d}"
+        except (TypeError, ValueError):
+            pass
+
+    return "CH0001"
+
+
+def _next_memory_challan_id() -> str:
+    """Use a separate prefix so fallback challans never collide with DB rows."""
+    challan_id = f"TMP{_CHALLAN_COUNTER[0]:04d}"
+    _CHALLAN_COUNTER[0] += 1
+    return challan_id
+
+
+def _plate_matches(challan_plate, requested_plate) -> bool:
+    return not requested_plate or (challan_plate or "").upper() == requested_plate.upper()
+
+
+def _find_scanner_challan(challan_id: str, plate=None):
+    requested_plate = plate.upper().strip() if plate else None
+
+    with _CHALLAN_LOCK:
+        for challan in _SCANNER_CHALLANS:
+            if challan["id"] == challan_id and _plate_matches(challan.get("plate"), requested_plate):
+                return "memory", challan
+
+    if _db_scanner_challans_available():
+        try:
+            challan = db.session.get(_DBScannerChallan, challan_id)
+            if challan and _plate_matches(challan.plate_number, requested_plate):
+                return "db", challan
+        except Exception as exc:
+            print(f"[scanner] PostgreSQL challan lookup failed ({exc})")
+
+    return None, None
+
+
+def _scanner_payment_client():
+    if not _RAZORPAY_AVAILABLE:
+        return None
+    key_id = app.config.get("RAZORPAY_KEY_ID", "")
+    key_secret = app.config.get("RAZORPAY_KEY_SECRET", "")
+    if not key_id or not key_secret:
+        return None
+    return _razorpay_lib.Client(auth=(key_id, key_secret))
+
+
+def _recent_scanner_violation_types(plate: str) -> set:
+    cutoff_utc = datetime.utcnow() - _CHALLAN_DUPLICATE_WINDOW
+    recent_types = set()
+
+    if _db_scanner_challans_available():
+        try:
+            rows = (
+                _DBScannerChallanItem.query
+                .join(_DBScannerChallan)
+                .filter(_DBScannerChallan.plate_number == plate)
+                .filter(_DBScannerChallan.created_at >= cutoff_utc)
+                .all()
+            )
+            recent_types.update(item.type for item in rows)
+        except Exception as exc:
+            print(f"[scanner] Duplicate challan check failed ({exc})")
+
+    cutoff_ist = datetime.now(IST) - _CHALLAN_DUPLICATE_WINDOW
+    with _CHALLAN_LOCK:
+        for challan in _SCANNER_CHALLANS:
+            if challan.get("plate") != plate:
+                continue
+            created_at = _parse_challan_timestamp(challan.get("timestamp"))
+            if created_at and created_at >= cutoff_ist:
+                recent_types.update(item.get("type") for item in challan.get("violations", []))
+
+    return {v for v in recent_types if v}
+
+
+def _scanner_payload(plate: str, user: dict, include_challans: bool = False, source: str = "users.json") -> dict:
+    payload = {
+        "found":    True,
+        "plate":    plate,
+        "owner":    user["owner"],
+        "vehicle":  user["vehicle"],
+        "documents": {
+            "rc":        user["rc"],
+            "insurance": user["insurance"],
+            "puc":       user["puc"],
+        },
+        "source": source,
+    }
+
+    if include_challans:
+        db_challans = _list_db_challans(plate)
+        if db_challans:
+            payload["challans"] = db_challans
+        else:
+            with _CHALLAN_LOCK:
+                payload["challans"] = [c for c in _SCANNER_CHALLANS if c["plate"] == plate]
+
+    return payload
+
+
+def _lookup_scanner_user(plate: str):
+    mock_user = _MOCK_USERS.get(plate)
+    if mock_user:
+        return mock_user, None, "users.json"
+
+    if _DB_ENABLED and _DBUser is not None:
+        try:
+            db_user = _DBUser.query.filter_by(license_plate=plate).first()
+            if db_user is not None:
+                return {
+                    "owner":     db_user.name,
+                    "vehicle":   db_user.vehicle or "Unknown",
+                    "rc":        db_user.rc,
+                    "insurance": db_user.insurance,
+                    "puc":       db_user.puc,
+                }, db_user, "postgresql"
+        except Exception as exc:
+            print(f"[scanner] PostgreSQL user lookup failed ({exc})")
+
+    return None, None, None
+
+
+@app.route("/scan/<plate>")
+def scan_plate(plate):
+    """
+    Look up a vehicle by plate number.
+
+    The scanner now checks users.json first, because the React scanner,
+    user challan page, quick-fill buttons, and challan creation all use that
+    same in-memory dataset. PostgreSQL remains a secondary fallback when it is
+    configured and seeded.
+    """
+    plate = plate.upper().strip()
+    print(f"[scan] Query: {plate}")
+
+    user, _db_user, source = _lookup_scanner_user(plate)
+    if user:
+        print(f"[scan] FOUND in {source}: {plate} -> {user['owner']} ({user['vehicle']})")
+        return jsonify(_scanner_payload(plate, user, source=source))
+
+    print(f"[scan] NOT FOUND: {plate}")
+    return jsonify({
+        "found":   False,
+        "message": f"No vehicle registered for plate {plate}. Try one of the quick-fill sample plates.",
+    }), 404
+
+
+@app.route("/create-challan", methods=["POST"])
+def create_challan():
+    data                = request.get_json(force=True)
+    plate               = data.get("plate", "").upper().strip()
+    selected_violations = data.get("selected_violations", [])
+
+    user, db_user, source = _lookup_scanner_user(plate)
+    if not user:
+        return jsonify({"success": False, "error": f"Vehicle not found: {plate}"}), 404
+
+    violations, total_fine = [], 0
+
+    # Auto-add document violations
+    doc_map = {"insurance": user["insurance"], "puc": user["puc"]}
+    for doc, valid in doc_map.items():
+        if not valid:
+            fine = _DOC_FINES[doc]
+            violations.append({"type": f"No {doc.upper()}", "fine": fine, "source": "document"})
+            total_fine += fine
+
+    # Add officer-selected violations
+    for v in selected_violations:
+        fine = _VIOLATION_FINES.get(v, 0)
+        if fine:
+            label = {"helmet": "No Helmet", "triple": "Triple Riding", "overspeed": "Overspeed"}.get(v, v.capitalize())
+            violations.append({"type": label, "fine": fine, "source": "violation"})
+            total_fine += fine
+
+    recent_types = _recent_scanner_violation_types(plate)
+    skipped = [item["type"] for item in violations if item["type"] in recent_types]
+    violations = [item for item in violations if item["type"] not in recent_types]
+    total_fine = sum(item["fine"] for item in violations)
+
+    if not violations:
+        return jsonify({
+            "success": False,
+            "error": "This vehicle already has challans for these violation type(s) in the last 24 hours.",
+            "skipped": skipped,
+        }), 409
+
+    if _db_scanner_challans_available():
+        try:
+            challan = _DBScannerChallan(
+                id           = _next_db_challan_id(),
+                user_id      = db_user.id if db_user else None,
+                plate_number = plate,
+                owner_name   = user["owner"],
+                vehicle      = user["vehicle"],
+                fine_amount  = total_fine,
+                status       = "UNPAID",
+            )
+            for item in violations:
+                challan.items.append(_DBScannerChallanItem(
+                    type   = item["type"],
+                    fine   = item["fine"],
+                    source = item["source"],
+                ))
+            db.session.add(challan)
+            db.session.commit()
+            return jsonify({"success": True, "challan": challan.to_dict(), "skipped": skipped})
+        except Exception as exc:
+            db.session.rollback()
+            print(f"[scanner] PostgreSQL challan write failed ({exc}); using memory fallback.")
+
+    with _CHALLAN_LOCK:
+        challan = {
+            "id":         _next_memory_challan_id(),
+            "plate":      plate,
+            "owner":      user["owner"],
+            "vehicle":    user["vehicle"],
+            "violations": violations,
+            "fine":       total_fine,
+            "status":     "UNPAID",
+            "timestamp":  _now_ist_iso(),
+        }
+
+        _SCANNER_CHALLANS.append(challan)
+
+    return jsonify({"success": True, "challan": challan, "skipped": skipped})
+
+
+@app.route("/user/<plate>")
+def get_user_challans(plate):
+    """
+    Single endpoint used by BOTH dashboards:
+      - User Dashboard  → reads owner/vehicle/challans
+      - Police Scanner  → also reads documents (rc, insurance, puc, dl)
+    Source: _MOCK_USERS (in-memory dict loaded from users.json at startup).
+    """
+    plate = plate.upper().strip()
+    user, _db_user, source = _lookup_scanner_user(plate)
+
+    if not user:
+        return jsonify({"found": False, "challans": [],
+                        "message": f"No vehicle registered for {plate}"}), 404
+
+    return jsonify(_scanner_payload(plate, user, include_challans=True, source=source))
+
+
+@app.route("/pay/<challan_id>", methods=["POST"])
+def pay_challan(challan_id):
+    data = request.get_json(silent=True) or {}
+    plate = data.get("plate")
+    source, challan = _find_scanner_challan(challan_id, plate)
+
+    if source == "db":
+        try:
+            if challan.status != "PAID":
+                challan.status = "PAID"
+                db.session.commit()
+            return jsonify({"success": True, "challan": challan.to_dict()})
+        except Exception as exc:
+            db.session.rollback()
+            print(f"[scanner] PostgreSQL challan payment failed ({exc})")
+            return jsonify({"success": False, "error": "Payment failed"}), 500
+
+    if source == "memory":
+        with _CHALLAN_LOCK:
+            if challan["status"] != "PAID":
+                challan["status"] = "PAID"
+            return jsonify({"success": True, "challan": challan})
+
+    return jsonify({"success": False, "error": "Challan not found"}), 404
+
+
+@app.route("/payments/create-scanner-order", methods=["POST"])
+def create_scanner_order():
+    data = request.get_json(silent=True) or {}
+    challan_id = data.get("challan_id", "")
+    plate = data.get("plate")
+    source, challan = _find_scanner_challan(challan_id, plate)
+
+    if not challan:
+        return jsonify({"error": "Challan not found"}), 404
+
+    status = challan.status if source == "db" else challan["status"]
+    if status == "PAID":
+        return jsonify({"error": "Already paid"}), 400
+
+    amount = challan.fine_amount if source == "db" else challan["fine"]
+    client = _scanner_payment_client()
+    if not client:
+        return jsonify({"error": "Payment gateway not configured — add Razorpay keys to .env"}), 503
+
+    try:
+        order = client.order.create({
+            "amount": amount * 100,
+            "currency": "INR",
+            "receipt": f"scanner_{challan_id}",
+            "notes": {
+                "challan_id": challan_id,
+                "plate": plate or (challan.plate_number if source == "db" else challan["plate"]),
+            },
+        })
+    except Exception as exc:
+        print(f"[scanner] Razorpay order creation failed ({exc})")
+        return jsonify({"error": "Could not open payment gateway. Please try again."}), 502
+
+    return jsonify({
+        "order_id": order["id"],
+        "amount": amount,
+        "currency": "INR",
+        "key_id": app.config.get("RAZORPAY_KEY_ID"),
+        "challan": {
+            "id": challan_id,
+            "plate": plate or (challan.plate_number if source == "db" else challan["plate"]),
+        },
+    })
+
+
+@app.route("/payments/verify-scanner", methods=["POST"])
+def verify_scanner_payment():
+    data = request.get_json(silent=True) or {}
+    order_id = data.get("razorpay_order_id", "")
+    payment_id = data.get("razorpay_payment_id", "")
+    signature = data.get("razorpay_signature", "")
+    challan_id = data.get("challan_id", "")
+    plate = data.get("plate")
+
+    key_secret = app.config.get("RAZORPAY_KEY_SECRET", "")
+    message = f"{order_id}|{payment_id}"
+    expected = hmac.new(
+        key_secret.encode("utf-8"),
+        message.encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()
+
+    if expected != signature:
+        return jsonify({"error": "Invalid payment signature"}), 400
+
+    source, challan = _find_scanner_challan(challan_id, plate)
+    if not challan:
+        return jsonify({"error": "Challan not found"}), 404
+
+    if source == "db":
+        challan.status = "PAID"
+        db.session.commit()
+        return jsonify({"success": True, "challan": challan.to_dict()})
+
+    with _CHALLAN_LOCK:
+        challan["status"] = "PAID"
+        return jsonify({"success": True, "challan": challan})
+
+
+@app.route("/all-challans")
+def all_challans():
+    db_challans = _list_db_challans()
+    if db_challans:
+        return jsonify({"challans": db_challans})
+
+    with _CHALLAN_LOCK:
+        challans = list(_SCANNER_CHALLANS)
+    return jsonify({"challans": challans})
+
+
+@app.route("/sample-plates")
+def sample_plates():
+    """
+    Return up to `n` representative plates from the scanner dataset.
+    Prioritises vehicles with at least one missing document so quick-fill
+    buttons in the UI demonstrate violations automatically.
+    """
+    n = min(int(request.args.get("n", 8)), 50)
+
+    rows = list(_MOCK_USERS.items())
+    violators = [
+        (plate, user) for plate, user in rows
+        if not all(user.get(doc, False) for doc in ("rc", "insurance", "puc"))
+    ]
+    clean = [
+        (plate, user) for plate, user in rows
+        if all(user.get(doc, False) for doc in ("rc", "insurance", "puc"))
+    ]
+
+    random.shuffle(violators)
+    random.shuffle(clean)
+    chosen = violators[:max(0, n - 1)] + clean[:max(1, n - len(violators))]
+    random.shuffle(chosen)
+
+    return jsonify([
+        {
+            "plate":   plate,
+            "owner":   user["owner"],
+            "vehicle": user.get("vehicle") or "Unknown",
+            "issues":  [d.upper() for d in ("rc", "insurance", "puc")
+                        if not user.get(d, False)],
+        }
+        for plate, user in chosen[:n]
+    ])
+
+
+# ---------------------------------------------------------------------------
 # Entry Point
 # ---------------------------------------------------------------------------
 
@@ -1269,8 +1824,7 @@ if __name__ == "__main__":
                 print(f"[DB] Could not create tables ({exc}). Is PostgreSQL running?")
 
     # Start async violation reporter
-    _reporter = threading.Thread(target=_violation_reporter_worker, daemon=True)
-    _reporter.start()
+    _start_violation_reporter_once()
 
     _start_capture(0)                               # violation detection — webcam
     _start_signal_capture(0)                        # signal system — webcam

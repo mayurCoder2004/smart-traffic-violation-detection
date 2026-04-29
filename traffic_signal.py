@@ -93,7 +93,7 @@ class TrafficSignalSystem:
     def __init__(self, model_path: str = "yolov8n.pt"):
         self.model = YOLO(model_path)
 
-        self._green_lane: str | None = None
+        self._green_lane = None
         self._green_end:  float      = 0.0
         self._green_dur:  int        = 0
 
